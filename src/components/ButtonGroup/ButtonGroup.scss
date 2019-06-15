@@ -1,0 +1,38 @@
+.ui-button-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    &.horizontal .ui-button {
+        border: 1px solid rgba(0, 0, 0, 0.23);
+        border-radius: unset;
+        &:not(:first-child) {
+            border-radius: 0px; 
+            border-left-width: 0px; 
+        }
+        &:first-child {
+            border-top-left-radius: 5px; 
+            border-bottom-left-radius: 5px; 
+        }
+        &:last-child {
+            border-top-right-radius: 5px; 
+            border-bottom-right-radius: 5px; 
+        }
+    }
+    &.full {
+        display: flex;
+        padding: 0px 3px;
+        .ui-button {
+            flex: 1;
+        }
+    }
+    &.vertical {
+        flex-direction: column;
+        .ui-button {
+            border: 1px solid rgba(0, 0, 0, 0.23);
+            border-radius: unset;
+            &:not(:first-child) {
+                border-radius: 0px; 
+                border-top-width: 0px; 
+            }
+        }
+    }
+}

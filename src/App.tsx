@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.scss';
+import { Button, ButtonGroup, Checkbox } from './components';
 
 const App: React.FC = () => {
+  const [ checkBoxHook, setChecboxCheck ] = useState(true);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button color="white" bgColor="#2196f3" id='ui-button-1' styleType='background' rounded>C</Button>
+      {/* <ButtonGroup>
+        <Button color="red" bgColor="red" id='ui-button-1' styleType='outline'>click</Button>
+        <Button disabled color="green" bgColor="red" id='ui-button-1' styleType='outline'>click</Button>
+        <Button color="blue" bgColor="red" id='ui-button-1' styleType='outline'>click</Button>
+      </ButtonGroup>
+      <Checkbox width="20px" height="20px" checked={checkBoxHook} onChange={(e:any) => {
+        setChecboxCheck(!checkBoxHook)
+      }} /> */}
     </div>
   );
 }
