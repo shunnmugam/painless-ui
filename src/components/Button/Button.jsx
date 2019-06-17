@@ -21,9 +21,12 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-exports.__esModule = true;
-var react_1 = require("react");
-require("./Button.scss");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(require("react"));
+require("./Button.css");
 ;
 /*
  * default props
@@ -49,4 +52,5 @@ var Button = function (props) {
     </button>);
 };
 Button.defaultProps = defaultProps;
-exports["default"] = Button;
+exports.default = Button;
+//# sourceMappingURL=Button.jsx.map

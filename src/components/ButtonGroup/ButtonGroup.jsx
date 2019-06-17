@@ -10,8 +10,11 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-exports.__esModule = true;
-var react_1 = require("react");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(require("react"));
 require("./ButtonGroup.scss");
 var defaultProps = {
     className: ''
@@ -26,4 +29,5 @@ var ButtonGroup = function (props) {
     </div>);
 };
 ButtonGroup.defaultProps = defaultProps;
-exports["default"] = ButtonGroup;
+exports.default = ButtonGroup;
+//# sourceMappingURL=ButtonGroup.jsx.map

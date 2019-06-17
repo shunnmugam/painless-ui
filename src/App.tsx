@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
-import { Button, ButtonGroup, Checkbox } from './components';
+import { Button, ButtonGroup, Checkbox } from './components/index';
 
 const App: React.FC = () => {
   const [ checkBoxHook, setChecboxCheck ] = useState(true);
