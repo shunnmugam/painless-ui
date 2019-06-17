@@ -15,13 +15,14 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react",
-    "module": "commonjs",
+    "jsx": "preserve",
+    "module": "esnext",
     "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
+    "noEmit": true
   },
   "include": [
     "src"
