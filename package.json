@@ -13,7 +13,7 @@
     "typescript": "3.5.1"
   },
   "scripts": {
-    "build-css": "node-sass src/ -o dist/ ",
+    "build-css": "node-sass src/ -o dist/ --output-style compressed",
     "compile-ts": "tsc -p ./tsconfig.build.json",
     "start": "node-sass src/ -o src/ -w & react-scripts start",
     "build": "npm run build-css & npm run compile-ts & react-scripts build",
