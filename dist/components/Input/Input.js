@@ -16,16 +16,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var Checkbox_1 = __importDefault(require("../Checkbox/Checkbox"));
+var InputBox_1 = __importDefault(require("../InputBox/InputBox"));
 var defaultProps = {
     className: ''
 };
 var Input = function (props) {
-    if (props.type === 'checkbox') {
-        var modifiedProps = __assign({}, props);
-        delete modifiedProps.type;
-        return react_1.default.createElement(Checkbox_1.default, __assign({}, modifiedProps));
+    switch (props.type) {
+        case 'checkbox':
+            var modifiedProps = __assign({}, props);
+            delete modifiedProps.type;
+            return react_1.default.createElement(Checkbox_1.default, __assign({}, modifiedProps));
+        default:
+            return react_1.default.createElement(InputBox_1.default, __assign({}, props));
     }
-    return react_1.default.createElement(react_1.default.Fragment, null);
 };
 Input.defaultProps = defaultProps;
 exports.default = Input;
