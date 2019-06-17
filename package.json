@@ -13,9 +13,10 @@
     "typescript": "3.5.1"
   },
   "scripts": {
-    "build-css": "node-sass src/ -o src/ -w",
-    "start": "npm run build-css & react-scripts start",
-    "build": "react-scripts build",
+    "build-css": "node-sass src/ -o dist/ ",
+    "compile-ts": "tsc -p ./tsconfig.build.json",
+    "start": "node-sass src/ -o src/ -w & react-scripts start",
+    "build": "npm run build-css & npm run compile-ts & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

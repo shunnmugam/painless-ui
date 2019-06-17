@@ -8,7 +8,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
-require("./App.scss");
+require("./App.css");
 var index_1 = require("./components/index");
 var App = function () {
     var _a = react_1.useState(true), checkBoxHook = _a[0], setChecboxCheck = _a[1];
