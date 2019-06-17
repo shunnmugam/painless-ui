@@ -9,7 +9,7 @@ var test_utils_1 = __importDefault(require("react-dom/test-utils"));
 var react_test_renderer_1 = __importDefault(require("react-test-renderer"));
 var react_dom_1 = __importDefault(require("react-dom"));
 describe('test button behaviour', function () {
-    var component = react_test_renderer_1.default.create(<Button_1.default />);
+    var component = react_test_renderer_1.default.create(react_1.default.createElement(Button_1.default, null));
     var tree = component.toJSON();
     it('test render', function () {
         expect(tree).not.toBeNull();
@@ -28,7 +28,7 @@ describe('test button events', function () {
     };
     var div = document.createElement('div');
     document.body.appendChild(div);
-    react_dom_1.default.render(<Button_1.default onClick={eventHandler}/>, div);
+    react_dom_1.default.render(react_1.default.createElement(Button_1.default, { onClick: eventHandler }), div);
     var button = div.querySelector('button');
     afterEach(function () {
         event = undefined;
@@ -45,4 +45,3 @@ describe('test button events', function () {
         react_dom_1.default.unmountComponentAtNode(div);
     });
 });
-//# sourceMappingURL=Button.test.jsx.map

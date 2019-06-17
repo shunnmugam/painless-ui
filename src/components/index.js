@@ -11,4 +11,3 @@ var Checkbox_1 = __importDefault(require("./Checkbox/Checkbox"));
 exports.Checkbox = Checkbox_1.default;
 var Input_1 = __importDefault(require("./Input/Input"));
 exports.Input = Input_1.default;
-//# sourceMappingURL=index.js.map

@@ -16,9 +16,8 @@ describe('test button group behaviour', function () {
     it('should render', function () {
         var div = document.createElement('div');
         document.body.appendChild(div);
-        react_dom_1.default.render(<ButtonGroup_1.default>dummy text</ButtonGroup_1.default>, div);
+        react_dom_1.default.render(react_1.default.createElement(ButtonGroup_1.default, null, "dummy text"), div);
         var buttonGroup = div.querySelector('ui-button-group');
         expect(1).not.toBeNull();
     });
 });
-//# sourceMappingURL=ButtonGroup.test.jsx.map

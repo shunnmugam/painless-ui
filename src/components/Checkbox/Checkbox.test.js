@@ -13,10 +13,10 @@ describe('test checkbox behaviour', function () {
     it('should render', function () {
         var shallowRenderer = shallow_1.default;
         var renderer = new shallowRenderer();
-        expect(function () { return renderer.render(<Checkbox_1.default />); }).not.toThrowError();
+        expect(function () { return renderer.render(react_1.default.createElement(Checkbox_1.default, null)); }).not.toThrowError();
     });
     it('test default props', function () {
-        var component = react_test_renderer_1.default.create(<Checkbox_1.default />);
+        var component = react_test_renderer_1.default.create(react_1.default.createElement(Checkbox_1.default, null));
         var tree = component.toJSON();
         expect(tree.props.style.backgroundColor).toBe('#2196F3');
         expect(tree.children[0].props.className).toBe('ui-checkbox ');
@@ -30,7 +30,7 @@ describe('test checkbox events', function () {
     };
     var div = document.createElement('div');
     document.body.appendChild(div);
-    react_dom_1.default.render(<Checkbox_1.default onClick={eventHandler}/>, div);
+    react_dom_1.default.render(react_1.default.createElement(Checkbox_1.default, { onClick: eventHandler }), div);
     var checkbox = div.querySelector('.ui-checkbox-container');
     afterEach(function () {
         event = undefined;
@@ -42,4 +42,3 @@ describe('test checkbox events', function () {
         test_utils_1.default.Simulate.touchStart(checkbox);
     });
 });
-//# sourceMappingURL=Checkbox.test.jsx.map

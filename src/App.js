@@ -12,10 +12,7 @@ require("./App.scss");
 var index_1 = require("./components/index");
 var App = function () {
     var _a = react_1.useState(true), checkBoxHook = _a[0], setChecboxCheck = _a[1];
-    return (<div className="App">
-      <index_1.Button color="white" bgColor="#2196f3" id='ui-button-1' styleType='background' rounded>C</index_1.Button>
-      
-    </div>);
+    return (react_1.default.createElement("div", { className: "App" },
+        react_1.default.createElement(index_1.Button, { color: "white", bgColor: "#2196f3", id: 'ui-button-1', styleType: 'background', rounded: true }, "C")));
 };
 exports.default = App;
-//# sourceMappingURL=App.jsx.map

@@ -26,31 +26,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
-require("./Button.css");
-;
-/*
- * default props
- */
+require("./ButtonGroup.scss");
 var defaultProps = {
-    bgColor: 'transparent',
-    className: '',
-    color: 'black',
-    styleType: 'background'
+    className: ''
 };
-var onClickHandler = function ($e, props) {
-    if (props.onClick !== undefined && typeof props.onClick === 'function') {
-        props.onClick($e);
+var ButtonGroup = function (props) {
+    if (props.children === undefined) {
+        throw new Error('children is mandatory for button group');
     }
+    var children = props.children, className = props.className, fullWidth = props.fullWidth, vertical = props.vertical, customProps = __rest(props, ["children", "className", "fullWidth", "vertical"]);
+    return (react_1.default.createElement("div", __assign({ className: 'ui-button-group ' + className + (fullWidth ? 'full' : '') + (vertical ? 'vertical' : 'horizontal') }, customProps), children));
 };
-var Button = function (props) {
-    var bgColor = props.bgColor, className = props.className, color = props.color, text = props.text, style = props.style, styleType = props.styleType, onClick = props.onClick, children = props.children, rounded = props.rounded, customProps = __rest(props, ["bgColor", "className", "color", "text", "style", "styleType", "onClick", "children", "rounded"]);
-    return (<button data-style-type={styleType} className={'ui-button ripple ' + className + (rounded ? 'rounded' : '')} onClick={function (e) { return onClickHandler(e, props); }} {...customProps} style={__assign({
-        backgroundColor: styleType === 'background' ? bgColor : 'transparent',
-        color: color
-    }, style)}>
-        {text ? text : children}
-    </button>);
-};
-Button.defaultProps = defaultProps;
-exports.default = Button;
-//# sourceMappingURL=Button.jsx.map
+ButtonGroup.defaultProps = defaultProps;
+exports.default = ButtonGroup;

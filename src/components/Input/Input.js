@@ -10,9 +10,12 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-exports.__esModule = true;
-var react_1 = require("react");
-var Checkbox_1 = require("../Checkbox/Checkbox");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(require("react"));
+var Checkbox_1 = __importDefault(require("../Checkbox/Checkbox"));
 var defaultProps = {
     className: ''
 };
@@ -20,9 +23,9 @@ var Input = function (props) {
     if (props.type === 'checkbox') {
         var modifiedProps = __assign({}, props);
         delete modifiedProps.type;
-        return <Checkbox_1["default"] {...modifiedProps}/>;
+        return react_1.default.createElement(Checkbox_1.default, __assign({}, modifiedProps));
     }
-    return <></>;
+    return react_1.default.createElement(react_1.default.Fragment, null);
 };
 Input.defaultProps = defaultProps;
-exports["default"] = Input;
+exports.default = Input;

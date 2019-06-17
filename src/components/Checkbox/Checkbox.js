@@ -39,13 +39,11 @@ var onChangeHandler = function ($e, props) {
 };
 var Checkbox = function (props) {
     var bgColor = props.bgColor, height = props.height, width = props.width, className = props.className, style = props.style, onClick = props.onClick, customProps = __rest(props, ["bgColor", "height", "width", "className", "style", "onClick"]);
-    return (<label className="ui-checkbox-container" style={__assign({
-        backgroundColor: bgColor
-    }, style)} {...customProps}>
-        <input onClick={function ($e) { return onChangeHandler($e, props); }} className={'ui-checkbox ' + className} type="checkbox" {...customProps}/>
-        <span className={'checkmark '} style={{ width: width, height: height }}></span>
-    </label>);
+    return (react_1.default.createElement("label", __assign({ className: "ui-checkbox-container", style: __assign({
+            backgroundColor: bgColor
+        }, style) }, customProps),
+        react_1.default.createElement("input", __assign({ onClick: function ($e) { return onChangeHandler($e, props); }, className: 'ui-checkbox ' + className, type: "checkbox" }, customProps)),
+        react_1.default.createElement("span", { className: 'checkmark ', style: { width: width, height: height } })));
 };
 Checkbox.defaultProps = defaultProps;
 exports.default = Checkbox;
-//# sourceMappingURL=Checkbox.jsx.map

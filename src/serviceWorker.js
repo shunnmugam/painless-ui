@@ -116,4 +116,3 @@ function unregister() {
     }
 }
 exports.unregister = unregister;
-//# sourceMappingURL=serviceWorker.js.map
