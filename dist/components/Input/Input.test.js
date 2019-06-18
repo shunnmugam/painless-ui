@@ -22,4 +22,19 @@ describe('test input type', function () {
         var checkbox = div.querySelector('[type=checkbox]');
         expect(checkbox).not.toBeNull();
     });
+    it('test radio', function () {
+        react_dom_1.default.render(react_1.default.createElement(Input_1.default, { type: 'radio' }), div);
+        var checkbox = div.querySelector('[type=radio]');
+        expect(checkbox).not.toBeNull();
+    });
+    it('test submit', function () {
+        react_dom_1.default.render(react_1.default.createElement(Input_1.default, { type: 'submit' }), div);
+        var checkbox = div.querySelector('button[type=submit]');
+        expect(checkbox).not.toBeNull();
+    });
+    it('test reset', function () {
+        react_dom_1.default.render(react_1.default.createElement(Input_1.default, { type: 'reset' }), div);
+        var checkbox = div.querySelector('button[type=reset]');
+        expect(checkbox).not.toBeNull();
+    });
 });

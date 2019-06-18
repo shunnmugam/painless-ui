@@ -26,27 +26,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
-require("./Checkbox.scss");
+require("./Switch.css");
 var defaultProps = {
-    bgColor: '#2196F3',
     className: '',
-    rounded: false,
-    height: '25px',
-    width: '25px'
+    height: '23px',
+    width: '20px',
+    style: {}
 };
-var onChangeHandler = function ($e, props) {
-    if (props.onClick)
-        props.onClick($e);
-};
-var Checkbox = function (props) {
-    var bgColor = props.bgColor, height = props.height, rounded = props.rounded, width = props.width, className = props.className, style = props.style, onClick = props.onClick, customProps = __rest(props, ["bgColor", "height", "rounded", "width", "className", "style", "onClick"]);
-    return (react_1.default.createElement("label", __assign({ className: 'ui-checkbox-container' + (rounded ? ' rounded' : ''), style: __assign({
-            backgroundColor: bgColor,
+var Switch = function (props) {
+    var className = props.className, style = props.style, height = props.height, width = props.width, customProps = __rest(props, ["className", "style", "height", "width"]);
+    return (react_1.default.createElement("label", __assign({ className: "ui-switch" + className }, __assign({ style: {
             width: width,
             height: height
-        }, style) }, customProps),
-        react_1.default.createElement("input", __assign({ onClick: function ($e) { return onChangeHandler($e, props); }, className: 'ui-checkbox', type: "checkbox" }, customProps)),
-        react_1.default.createElement("span", { className: 'checkmark ' + className + (rounded ? ' rounded' : '') })));
+        } }, style)),
+        react_1.default.createElement("input", __assign({ type: "checkbox", className: "ui-switch-input" }, customProps)),
+        react_1.default.createElement("div", { className: "ui-switch-toggle " },
+            react_1.default.createElement("div", { className: "ui-switch-handle" }))));
 };
-Checkbox.defaultProps = defaultProps;
-exports.default = Checkbox;
+Switch.defaultProps = defaultProps;
+exports.default = Switch;

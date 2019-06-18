@@ -18,7 +18,7 @@
     "start": "node-sass src/ -o src/ -w & react-scripts start",
     "build": "npm run build-css & npm run compile-ts & react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
   },
   "pre-commit": [ "test" ],
   "eslintConfig": {

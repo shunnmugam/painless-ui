@@ -11,3 +11,7 @@ var Checkbox_1 = __importDefault(require("./Checkbox/Checkbox"));
 exports.Checkbox = Checkbox_1.default;
 var Input_1 = __importDefault(require("./Input/Input"));
 exports.Input = Input_1.default;
+var Radio_1 = __importDefault(require("./Radio/Radio"));
+exports.Radio = Radio_1.default;
+var Switch_1 = __importDefault(require("./Switch/Switch"));
+exports.Switch = Switch_1.default;

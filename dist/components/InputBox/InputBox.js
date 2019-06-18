@@ -40,6 +40,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var Validator_1 = __importDefault(require("../../utills/Validator"));
+require("./InputBox.css");
+var Button_1 = __importDefault(require("../Button/Button"));
+var noValidateField = ['submit', 'reset', 'button', 'file'];
 var InputBox = /** @class */ (function (_super) {
     __extends(InputBox, _super);
     function InputBox() {
@@ -47,50 +50,97 @@ var InputBox = /** @class */ (function (_super) {
         _this.state = {
             isValid: true,
         };
+        _this.inputElement = null;
         return _this;
     }
-    InputBox.prototype.onBlurHandler = function (e) {
+    InputBox.prototype.onValidationHandler = function (v, e) {
+        if (e === void 0) { e = undefined; }
         if (this.props.validation === true) {
-            var rules = {};
+            var rules = '';
             //validation based on type
             switch (this.props.type) {
                 case 'email':
-                    rules = {
-                        'input': 'email'
-                    };
+                    rules = 'email';
                     break;
                 case 'number':
-                    rules = {
-                        'input': 'number'
-                    };
+                    rules = 'number';
                     break;
             }
+            if (this.props.validationOptions && this.props.validationOptions.rules) {
+                rules += '|' + this.props.validationOptions.rules;
+            }
             var validaterObj = new Validator_1.default({
-                input: e.target.value
-            }, rules);
-            var isValid = validaterObj.validate();
-            this.setState({
-                isValid: isValid
+                input: v
+            }, {
+                'input': rules
             });
+            var isValid = validaterObj.validate();
+            if (this.state.isValid !== isValid) {
+                this.setState({
+                    isValid: isValid
+                });
+            }
+            var message = validaterObj.getMessage();
+            if (this.props.validationOptions && typeof this.props.validationOptions.validationCallback === "function") {
+                this.props.validationOptions.validationCallback({
+                    isValid: isValid,
+                    message: message
+                }, e);
+            }
         }
     };
     InputBox.prototype.makeClassName = function () {
         var className = '';
-        className += this.state.isValid ? ' valid ' : ' not-valid';
+        className += this.state.isValid ? ' valid' : ' not-valid';
         return className;
+    };
+    InputBox.prototype.componentDidUpdate = function (prevProps) {
+        if (prevProps.validationOptions
+            && prevProps.validationOptions.validateNow === false
+            && this.props.validationOptions
+            && this.props.validationOptions.validateNow === true
+            && noValidateField.indexOf(this.props.type) === -1) {
+            this.onValidationHandler(this.inputElement.value);
+        }
     };
     /*
      * render
      */
     InputBox.prototype.render = function () {
+        var _a;
         var _this = this;
-        var _a = this.props, type = _a.type, className = _a.className, validation = _a.validation, customProps = __rest(_a, ["type", "className", "validation"]);
+        var _b = this.props, type = _b.type, className = _b.className, validation = _b.validation, validationOptions = _b.validationOptions, rounded = _b.rounded, customProps = __rest(_b, ["type", "className", "validation", "validationOptions", "rounded"]);
         var customClassName = this.makeClassName();
-        return react_1.default.createElement("input", __assign({ type: type, onBlur: function (e) { return _this.onBlurHandler(e); }, className: 'ui-input ' + customClassName + className }, customProps));
+        var validationEventName = (validationOptions && validationOptions.event) ? validationOptions.event : "onBlur";
+        var validationEvent = (_a = {},
+            _a[validationEventName] = function (e) { return _this.onValidationHandler(e.target.value, e); },
+            _a);
+        if (type === 'file') {
+            return (react_1.default.createElement("label", { className: "file-input-container" },
+                react_1.default.createElement("input", __assign({ className: 'ui-input file ' + className, type: "file", "aria-label": "File browser" }, customProps)),
+                react_1.default.createElement("span", { className: "file-custom" })));
+        }
+        else if (type === 'submit') {
+            return react_1.default.createElement(Button_1.default, __assign({ type: 'submit', text: "Submit" }, customProps, { className: className, rounded: rounded }));
+        }
+        else if (type === 'reset') {
+            return react_1.default.createElement(Button_1.default, __assign({ type: 'reset', text: "Reset" }, customProps, { className: className, rounded: rounded }));
+        }
+        else if (type === 'button') {
+            return react_1.default.createElement(Button_1.default, __assign({ type: 'button', text: "Click" }, customProps, { className: className, rounded: rounded }));
+        }
+        return react_1.default.createElement("input", __assign({ ref: function (input) { return _this.inputElement = input; }, type: type }, validationEvent, { className: 'ui-input ' + type + ' ' + customClassName + className + (rounded ? ' rounded' : '') }, customProps));
+    };
+    InputBox.prototype.componentDidMount = function () {
+        if (this.props.validationOptions && this.props.validationOptions.validateNow === true
+            && noValidateField.indexOf(this.props.type) === -1) {
+            this.onValidationHandler(this.inputElement.value);
+        }
     };
     InputBox.defaultProps = {
         className: '',
         type: 'text',
+        rounded: false,
         validation: true
     };
     return InputBox;

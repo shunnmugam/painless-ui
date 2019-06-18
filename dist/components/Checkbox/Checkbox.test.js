@@ -19,8 +19,8 @@ describe('test checkbox behaviour', function () {
         var component = react_test_renderer_1.default.create(react_1.default.createElement(Checkbox_1.default, null));
         var tree = component.toJSON();
         expect(tree.props.style.backgroundColor).toBe('#2196F3');
-        expect(tree.children[0].props.className).toBe('ui-checkbox ');
-        expect(tree.children[1].props.style.height).toBe('25px');
+        expect(tree.children[0].props.className).toBe('ui-checkbox');
+        //  expect(tree.children[1].props.style.height).toBe('25px');
     });
 });
 describe('test checkbox events', function () {

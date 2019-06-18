@@ -17,6 +17,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var Checkbox_1 = __importDefault(require("../Checkbox/Checkbox"));
 var InputBox_1 = __importDefault(require("../InputBox/InputBox"));
+var __1 = require("..");
+var Radio_1 = __importDefault(require("../Radio/Radio"));
 var defaultProps = {
     className: ''
 };
@@ -26,6 +28,12 @@ var Input = function (props) {
             var modifiedProps = __assign({}, props);
             delete modifiedProps.type;
             return react_1.default.createElement(Checkbox_1.default, __assign({}, modifiedProps));
+        case 'radio':
+            return react_1.default.createElement(Radio_1.default, __assign({}, props));
+        case 'submit':
+            return react_1.default.createElement(__1.Button, __assign({ text: "submit" }, props, { styleType: "outline" }));
+        case 'reset':
+            return react_1.default.createElement(__1.Button, __assign({ text: "reset" }, props, { styleType: "outline" }));
         default:
             return react_1.default.createElement(InputBox_1.default, __assign({}, props));
     }

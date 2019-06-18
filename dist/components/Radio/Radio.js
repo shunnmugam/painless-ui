@@ -26,11 +26,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
-require("./Checkbox.scss");
+require("./Radio.css");
 var defaultProps = {
     bgColor: '#2196F3',
     className: '',
-    rounded: false,
     height: '25px',
     width: '25px'
 };
@@ -38,15 +37,15 @@ var onChangeHandler = function ($e, props) {
     if (props.onClick)
         props.onClick($e);
 };
-var Checkbox = function (props) {
-    var bgColor = props.bgColor, height = props.height, rounded = props.rounded, width = props.width, className = props.className, style = props.style, onClick = props.onClick, customProps = __rest(props, ["bgColor", "height", "rounded", "width", "className", "style", "onClick"]);
-    return (react_1.default.createElement("label", __assign({ className: 'ui-checkbox-container' + (rounded ? ' rounded' : ''), style: __assign({
-            backgroundColor: bgColor,
-            width: width,
-            height: height
-        }, style) }, customProps),
-        react_1.default.createElement("input", __assign({ onClick: function ($e) { return onChangeHandler($e, props); }, className: 'ui-checkbox', type: "checkbox" }, customProps)),
-        react_1.default.createElement("span", { className: 'checkmark ' + className + (rounded ? ' rounded' : '') })));
+var Radio = function (props) {
+    var bgColor = props.bgColor, height = props.height, width = props.width, className = props.className, style = props.style, onClick = props.onClick, label = props.label, customProps = __rest(props, ["bgColor", "height", "width", "className", "style", "onClick", "label"]);
+    return (react_1.default.createElement("label", { className: "ui-radio-container" },
+        react_1.default.createElement("label", __assign({ style: __assign({
+                backgroundColor: bgColor
+            }, style) }, customProps),
+            react_1.default.createElement("input", __assign({ onClick: function ($e) { return onChangeHandler($e, props); }, className: 'ui-radio ' + className, type: "radio" }, customProps)),
+            react_1.default.createElement("span", { className: 'checkmark ', style: { width: width, height: height } })),
+        label !== undefined ? label : ''));
 };
-Checkbox.defaultProps = defaultProps;
-exports.default = Checkbox;
+Radio.defaultProps = defaultProps;
+exports.default = Radio;
