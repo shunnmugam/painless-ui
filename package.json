@@ -19,8 +19,9 @@
     "build": "npm run build-css & npm run compile-ts & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "test:staged": "CI=true react-scripts test"
   },
-  "pre-commit": [ "test" ],
+  "pre-commit": [ "test:staged" ],
   "eslintConfig": {
     "extends": "react-app"
   },
