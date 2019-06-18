@@ -22,4 +22,22 @@ describe('test input type',() => {
         const checkbox:any = div.querySelector('[type=checkbox]');
         expect(checkbox).not.toBeNull();
     })
+
+    it('test radio',() => {
+        ReactDOM.render(<Input type='radio' />, div);
+        const checkbox:any = div.querySelector('[type=radio]');
+        expect(checkbox).not.toBeNull();
+    })
+
+    it('test submit',() => {
+        ReactDOM.render(<Input type='submit' />, div);
+        const checkbox:any = div.querySelector('button[type=submit]');
+        expect(checkbox).not.toBeNull();
+    })
+
+    it('test reset',() => {
+        ReactDOM.render(<Input type='reset' />, div);
+        const checkbox:any = div.querySelector('button[type=reset]');
+        expect(checkbox).not.toBeNull();
+    })
 })

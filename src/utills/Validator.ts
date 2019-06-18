@@ -26,6 +26,19 @@ export default class Validater {
         this.message = {};
     }
 
+    private email(value, ruleOptions): validationResult {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const result:validationResult = {
+            isValid: true,
+            msg: ''
+        };
+        if(re.test(String(value).toLowerCase()) === false) {
+            result.isValid = false;
+            result.msg = '${input} is not valid email';
+        }
+        return result;
+    }
+
     private min(value,ruleOptions): validationResult {
         if(ruleOptions === undefined) {
             throw new Error('minimum is required one parameter');
@@ -56,21 +69,8 @@ export default class Validater {
         return result;
     }
 
-    private email(value, ruleOptioons): validationResult {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const result:validationResult = {
-            isValid: true,
-            msg: ''
-        };
-        if(re.test(String(value).toLowerCase()) === false) {
-            result.isValid = false;
-            result.msg = '${input} is not valid email';
-        }
-        return result;
-    }
-
     private number(value, ruleOptioons): validationResult {
-        const re = /[0-9]/;
+        const re = /^\d+$/;
         const result:validationResult = {
             isValid: true,
             msg: ''
@@ -78,6 +78,33 @@ export default class Validater {
         if(re.test(String(value).toLowerCase()) === false) {
             result.isValid = false;
             result.msg = '${input} is not valid number';
+        }
+        return result;
+    }
+
+    private required(value, ruleOptions): validationResult {
+        const result:validationResult = {
+            isValid: true,
+            msg: ''
+        };
+        if(value == undefined || value == '') {
+            result.isValid = false;
+            result.msg = '${input} is required';
+        }
+        return result;
+    }
+
+    private type(value, ruleOptions): validationResult {
+        if(ruleOptions[0] === undefined) {
+            throw new Error('type is required');
+        }
+        const result:validationResult = {
+            isValid: true,
+            msg: ''
+        };
+        if(typeof value !== ruleOptions[0]) {
+            result.isValid = false;
+            result.msg = '${input} is wrong type, expected type is '+ruleOptions[0];
         }
         return result;
     }
@@ -91,11 +118,16 @@ export default class Validater {
                if(ruleOptions !== undefined) {
                     ruleOptions = ruleOptions.split(',');
                }
-               const result: validationResult = this[ruleName](this.value[key],ruleOptions);
-               if(result.isValid === false) {
-                    this.message[key] = result.msg;
-                    isValid = false;
-               }
+               if(ruleName !== '') {
+                const result: validationResult = this[ruleName](this.value[key],ruleOptions);
+                if(result.isValid === false) {
+                        if(this.message[key] === undefined)
+                            this.message[key] = [];
+                        const msg = result.msg ? result.msg.replace('${input}',key) : ''
+                        this.message[key].push(msg);
+                        isValid = false;
+                }
+                }
             });
         }
         return isValid;

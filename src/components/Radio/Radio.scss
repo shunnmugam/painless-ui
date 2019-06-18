@@ -1,0 +1,60 @@
+/* The container */
+.ui-radio-container {
+    display: inline-flex;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+     /* Hide the browser's default radio button */
+    input.ui-radio {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        left: 0;
+         /* When the radio button is checked, add a blue background */
+        &:checked ~ .checkmark {
+            background-color: inherit;
+             /* Show the indicator (dot/circle) when checked */
+            &:after {
+                display: block;
+            }
+        }
+
+       
+    }
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 30%;
+            left: 30%;
+            width: 40%;
+            height: 40%;
+            border-radius: 50%;
+            background: white;
+        }
+    }
+
+    /* On mouse-over, add a grey background color */
+    &:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+   
+  }
