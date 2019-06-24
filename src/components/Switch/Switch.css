@@ -77,7 +77,3 @@
   opacity: 0.3;
   cursor: default;
   pointer-events: none; }
-itch :disabled + .ui-switch-toggle {
-    opacity: 0.3;
-    cursor: default;
-    pointer-events: none; }
