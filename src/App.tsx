@@ -1,7 +1,9 @@
 import React, { useState, Suspense } from 'react';
 import './App.css';
-import { Button, ButtonGroup, Checkbox, Input, Badge, TabGroup, Tab, TabWrapper, Accordion, AccordionGroup } from './components/index';
+// import Modal from './Modal';
+import { Button, ButtonGroup, Checkbox, Input, Badge, TabGroup, Tab, TabWrapper, Accordion, AccordionGroup, Tag, Breadcrumb, Select, Option, Modal } from './components/index';
 import TabContainer from './components/TabContainer/TabContainer';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const Switch = React.lazy(() => import('./components/Switch/Switch'));
 
@@ -11,6 +13,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
+      <Router>
       <Input rounded={false} type="text" placeholder="Email id" onChange={ (e) => {
           console.log(e.target.value)
         }}
@@ -22,7 +25,8 @@ const App: React.FC = () => {
           console.log(res);
         }
       }} />
-      <Input type="radio" width="20px" height="20px" />
+      <Input type="radio" width="20px" height="20px" name="a" />
+      <Input type="radio" width="20px" height="20px" name="a" />
       <Button  color="white" bgColor="#2196f3" id='ui-button-1' styleType='background' rounded>C</Button>
       <ButtonGroup>
         <Button color="red" bgColor="red" id='ui-button-1' styleType='outline'>click</Button>
@@ -61,6 +65,29 @@ const App: React.FC = () => {
         </p>
       </Accordion>
       </AccordionGroup>
+      <Breadcrumb>
+        <Link to={''}>Home</Link>
+        <span>hai</span>
+        <span>hai2</span>
+      </Breadcrumb>
+      <Tag addons={<span>addons</span>}/>
+
+      <Select multiple={true} label={<label>Choose</label>}>
+        <Option value="1">male</Option>
+        <Option text="female" value="2">Fe Male</Option>
+        {/* <Option value="3">Male Male MaleMaleMale MaleMale  Male Male Male</Option>
+        <Option value="4">Fe Male</Option>
+        <Option value="5">Male Male MaleMaleMale MaleMale  Male Male Male</Option>
+        <Option value="6">Fe Male</Option>
+        <Option value="7">Male Male MaleMaleMale MaleMale  Male Male Male</Option>
+        <Option value="8">Fe Male</Option> */}
+        {checkBoxHook ? <Option value="8">Fe Male</Option> : <></>}
+      </Select>
+
+      <Modal open={true}>
+        <p>Some text in the Modal..</p>
+      </Modal> 
+      </Router>
     </div>
   );
 }
