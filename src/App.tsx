@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from 'react';
 import './App.css';
-// import Modal from './Modal';
+//import Modal from './Modal/Modal';
 import { Button, ButtonGroup, Checkbox, Input, Badge, TabGroup, Tab, TabWrapper, Accordion, AccordionGroup, Tag, Breadcrumb, Select, Option, Modal } from './components/index';
 import TabContainer from './components/TabContainer/TabContainer';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";

@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build-css": "node-sass src/ -o dist/ --output-style compressed",
-    "compile-ts": "tsc -p ./tsconfig.build.json",
+    "compile-ts": "tsc -p ./tsconfig.package.json",
     "start": "node-sass src/ -o src/ -w & react-scripts start",
     "build-package": "npm run build-css & npm run compile-ts",
     "build": "react-scripts build",

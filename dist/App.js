@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 require("./App.css");
-// import Modal from './Modal';
+//import Modal from './Modal/Modal';
 var index_1 = require("./components/index");
 var TabContainer_1 = __importDefault(require("./components/TabContainer/TabContainer"));
 var react_router_dom_1 = require("react-router-dom");

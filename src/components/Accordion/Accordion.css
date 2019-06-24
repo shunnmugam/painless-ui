@@ -31,3 +31,4 @@
 .ui-accordion .ui-accordion-panel.open {
   max-height: 100vh;
   transition: max-height .5s ease-in-out; }
+ ease-in-out; }
