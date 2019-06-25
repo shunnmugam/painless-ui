@@ -58,7 +58,7 @@ class AccordionGroup extends React.Component<AccordionGroupProps> {
             
             {this.props.collapsible && this.props.children ? (
                React.Children.map(this.props.children, (accordion:any,i) => {
-                   const isOpen = (this.state.activeIndex == i);
+                   const isOpen = (this.state.activeIndex === i);
                    const onToggle = (open) => {
                         //if(open) {
                         this.collapseChange(i,open,accordion.props.onToggle); 

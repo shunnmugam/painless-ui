@@ -1,0 +1,29 @@
+/*
+ * string split
+ * @params $string
+ * @params $seperator
+ * @return list
+ */
+.ui-toast-container {
+  position: fixed;
+  /*  */ }
+  .ui-toast-container.top-center {
+    top: 30px;
+    left: 0;
+    right: 0; }
+  .ui-toast-container.top-left {
+    top: 30px;
+    left: 30px; }
+  .ui-toast-container.top-right {
+    top: 30px;
+    right: 30px; }
+  .ui-toast-container.bottom-center {
+    bottom: 30px;
+    left: 0;
+    right: 0; }
+  .ui-toast-container.bottom-left {
+    bottom: 30px;
+    left: 30px; }
+  .ui-toast-container.bottom-right {
+    bottom: 30px;
+    right: 30px; }

@@ -1,0 +1,20 @@
+@import '../../scss/_functions';
+@import '../../scss/_variables';
+
+.ui-toast-container {
+    position: fixed;
+    /*  */
+    @each $p in $toastPosition {
+        $l: split-str($p,'-');
+        &.#{$p} {
+            #{nth($l, 1)} : 30px;
+            @if nth($l, 2) == 'center' {
+                left: 0;
+                right: 0;
+            }
+            @if nth($l, 2) != 'center' {
+                #{nth($l, 2)} : 30px;
+            }
+        }
+    }
+}

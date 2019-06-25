@@ -1,37 +1,28 @@
 .ui-button-group {
   display: inline-flex;
   flex-wrap: wrap; }
-
-.ui-button-group.horizontal .ui-button {
-  border: 1px solid rgba(0, 0, 0, 0.23);
-  border-radius: unset; }
-
-.ui-button-group.horizontal .ui-button:not(:first-child) {
-  border-radius: 0px;
-  border-left-width: 0px; }
-
-.ui-button-group.horizontal .ui-button:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px; }
-
-.ui-button-group.horizontal .ui-button:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px; }
-
-.ui-button-group.full {
-  display: flex;
-  padding: 0px 3px; }
-
-.ui-button-group.full .ui-button {
-  flex: 1; }
-
-.ui-button-group.vertical {
-  flex-direction: column; }
-
-.ui-button-group.vertical .ui-button {
-  border: 1px solid rgba(0, 0, 0, 0.23);
-  border-radius: unset; }
-
-.ui-button-group.vertical .ui-button:not(:first-child) {
-  border-radius: 0px;
-  border-top-width: 0px; }
+  .ui-button-group.horizontal .ui-button {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: unset; }
+    .ui-button-group.horizontal .ui-button:not(:first-child) {
+      border-radius: 0px;
+      border-left-width: 0px; }
+    .ui-button-group.horizontal .ui-button:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px; }
+    .ui-button-group.horizontal .ui-button:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px; }
+  .ui-button-group.full {
+    display: flex;
+    padding: 0px 3px; }
+    .ui-button-group.full .ui-button {
+      flex: 1; }
+  .ui-button-group.vertical {
+    flex-direction: column; }
+    .ui-button-group.vertical .ui-button {
+      border: 1px solid rgba(0, 0, 0, 0.23);
+      border-radius: unset; }
+      .ui-button-group.vertical .ui-button:not(:first-child) {
+        border-radius: 0px;
+        border-top-width: 0px; }

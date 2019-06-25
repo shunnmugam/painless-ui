@@ -16,64 +16,58 @@
   text-align: left;
   /* switch toggle background */
   /* switch toggle circle */ }
-
-.ui-switch .ui-switch-input {
-  position: absolute;
-  right: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
-  z-index: 1;
-  vertical-align: top;
-  outline: none;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  z-index: 0; }
-
-.ui-switch .ui-switch-toggle {
-  background-color: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 30px;
-  transition-property: all;
-  transition-duration: 0.35s;
-  transition-timing-function: ease-out;
-  box-shadow: inset 0 0 0 2px #e5e5e5; }
-
-.ui-switch .ui-switch-handle {
-  box-sizing: border-box;
-  background-clip: padding-box;
-  position: absolute;
-  content: '';
-  border-radius: 28px;
-  height: 90%;
-  width: 45%;
-  background-color: white;
-  left: 1px;
-  transition-property: all;
-  transition-duration: 0.35s;
-  transition-timing-function: cubic-bezier(0.59, 0.01, 0.5, 0.99);
-  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25); }
-
-.ui-switch :checked + .ui-switch-toggle {
-  box-shadow: inset 0 0 0 2px #44db5e;
-  background-color: #44db5e; }
-
-.ui-switch :checked + .ui-switch-toggle > .ui-switch-handle {
-  left: 57%;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.25); }
-
-.ui-switch :disabled + .ui-switch-toggle {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none; }
+  .ui-switch .ui-switch-input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    z-index: 1;
+    vertical-align: top;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    z-index: 0; }
+  .ui-switch .ui-switch-toggle {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 30px;
+    transition-property: all;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-out;
+    box-shadow: inset 0 0 0 2px #e5e5e5; }
+  .ui-switch .ui-switch-handle {
+    box-sizing: border-box;
+    background-clip: padding-box;
+    position: absolute;
+    content: '';
+    border-radius: 28px;
+    height: 90%;
+    width: 45%;
+    background-color: white;
+    left: 1px;
+    transition-property: all;
+    transition-duration: 0.35s;
+    transition-timing-function: cubic-bezier(0.59, 0.01, 0.5, 0.99);
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25); }
+  .ui-switch :checked + .ui-switch-toggle {
+    box-shadow: inset 0 0 0 2px #44db5e;
+    background-color: #44db5e; }
+  .ui-switch :checked + .ui-switch-toggle > .ui-switch-handle {
+    left: 57%;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.25); }
+  .ui-switch :disabled + .ui-switch-toggle {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none; }

@@ -144,7 +144,7 @@ class Select extends React.PureComponent<SelectProps> {
                 selectedDetails
             });
             if (this.props.onChange !== undefined && typeof this.props.onChange === 'function') {
-                this.props.onChange(selectedDetails);
+                this.props.onChange(selectedDetails[0]);
             }
             this.toggle();
         }
@@ -153,23 +153,25 @@ class Select extends React.PureComponent<SelectProps> {
     }
 
     private onKeyPressed = (e) => {
-        this.searchKeyword += e.key;
-        if (this.searchTimer) {
-            clearTimeout(this.searchTimer);
-        }
-        this.searchTimer = setTimeout(() => {
-            let selected: boolean = false;
-            React.Children.forEach(this.props.children, (child: any, i) => {
-                if (child.type === Option) {
-                    const { value, children, text } = child.props;
-                    if (text && text.toLowerCase().includes(this.searchKeyword) && selected === false) {
-                        this.onClick(value, children, text);
-                        selected = true;
+        if(e.target.className === 'ui-select-container') {
+            this.searchKeyword += e.key;
+            if (this.searchTimer) {
+                clearTimeout(this.searchTimer);
+            }
+            this.searchTimer = setTimeout(() => {
+                let selected: boolean = false;
+                React.Children.forEach(this.props.children, (child: any, i) => {
+                    if (child.type === Option) {
+                        const { value, children, text } = child.props;
+                        if (text && text.toLowerCase().includes(this.searchKeyword) && selected === false) {
+                            this.onClick(value, children, text);
+                            selected = true;
+                        }
                     }
-                }
-            })
-            this.searchKeyword = '';
-        }, 500)
+                })
+                this.searchKeyword = '';
+            }, 500);
+        }
     }
 
     private onMouseEnter = () => {
@@ -254,6 +256,22 @@ class Select extends React.PureComponent<SelectProps> {
     }
 
     /*
+     * clear selected items
+     * @params e: $event
+     * @return void
+     */
+    private clearAll = (e): void => {
+        e.stopPropagation();
+        this.setState({
+            selectedDetails : []
+        },() => {
+            if(this.props.onChange) {
+                this.props.onChange(this.props.multiple === true ? this.state.selectedDetails : {});
+            }
+        });
+    }
+
+    /*
      * component will mount (lifecycle)
      * @params -
      * @return void
@@ -305,13 +323,25 @@ class Select extends React.PureComponent<SelectProps> {
      * @return void
      */
     componentDidUpdate(prevProps): void {
-        if (prevProps.children !== this.props.children) {
-            if (this.state.menuClassName !== 'closed') {
-                this.eventScheduler = {
-                    onClose: this.setHeight
-                }
+        const asyncFunc = () => {
+            let timer:any = null;
+            if(this.state.menuClassName === 'toggle') {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    this.setHeight();
+                },500);
             } else {
                 this.setHeight();
+            }
+        }
+        
+        if (React.Children.toArray(this.props.children).length !== React.Children.toArray(prevProps.children).length ) {
+            if (this.state.menuClassName !== 'closed') {
+                this.eventScheduler = {
+                    onClose: asyncFunc
+                }
+            } else {
+                asyncFunc();
             }
 
         }
@@ -327,7 +357,8 @@ class Select extends React.PureComponent<SelectProps> {
                     tabIndex={0} className="ui-select-container" style={{ maxWidth: this.props.width || '300px' }}>
                     <label className="ui-select-label">{this.props.label}</label>
                     <div onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} className="dropdown" style={{ height: this.props.height || 'auto' }}>
-                        <div onClick={() => this.toggle()} className="select">
+                        <div onClick={() => this.toggle()} className={"select " + (this.state.selectedDetails.length === 0 ? 'empty ' : 'non-empty ') 
+                     + (this.props.multiple === true ? 'multiple ' : 'single ') }>
                             {this.state.selectedDetails.length === 0 ? <span className="ui-select-placeholder">
                                 {this.state.placeholder || 'Please select'}
                             </span> :
@@ -350,7 +381,7 @@ class Select extends React.PureComponent<SelectProps> {
                                         }
                                     </div>
                                 )}
-                            <i className="fa fa-chevron-left"></i>
+                            <i className="fa fa-chevron-left" onClick={this.clearAll}>x</i>
                         </div>
                         <div className={"dropdown-menu " + this.state.menuClassName} ref={this.dropDownMenuRef} style={this.state.menuStyle}>
                             <div className="ui-select-search">
@@ -364,7 +395,7 @@ class Select extends React.PureComponent<SelectProps> {
                                             if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword))) {
 
                                                 return (<li className={(className ? className : '') +
-                                                    (this.props.multiple !== true && this.state.selectedDetails[0].value === value ? ' selected' : '')
+                                                    (this.props.multiple !== true && this.state.selectedDetails[0] !== undefined && this.state.selectedDetails[0].value === value ? ' selected' : '')
                                                     + (this.props.multiple === true && this.findValue(value) !== undefined ? ' selected' : '')
                                                 }
                                                     onClick={() => this.onClick(value, children, text)} {...customProps}>

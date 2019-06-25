@@ -10,6 +10,7 @@ const TabWrapper:React.FC = (props:any) => {
                     if(child.type === TabGroup) {
                         return child;
                     }
+                    return false;
                 })}
                 <div className="ui-card-body">
                     <div className="tab-content">
@@ -17,6 +18,7 @@ const TabWrapper:React.FC = (props:any) => {
                             if(child.type === TabContainer) {
                                return child
                             }
+                            return false;
                         })}
                     </div>
                 </div>
