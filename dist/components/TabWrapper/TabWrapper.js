@@ -12,12 +12,14 @@ var TabWrapper = function (props) {
             if (child.type === TabGroup_1.default) {
                 return child;
             }
+            return false;
         }),
         react_1.default.createElement("div", { className: "ui-card-body" },
             react_1.default.createElement("div", { className: "tab-content" }, react_1.default.Children.toArray(props.children).map(function (child) {
                 if (child.type === TabContainer_1.default) {
                     return child;
                 }
+                return false;
             })))));
 };
 exports.default = TabWrapper;

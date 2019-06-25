@@ -15,4 +15,6 @@ import TabGroup from './TabGroup/TabGroup';
 import Tab from './Tab/Tab';
 import TabWrapper from './TabWrapper/TabWrapper';
 import Tag from './Tag/Tag';
-export { Accordion, AccordionGroup, Badge, Breadcrumb, Button, ButtonGroup, Checkbox, Input, Modal, Option, Radio, Select, Switch, Tab, TabGroup, TabWrapper, Tag };
+import Toast from './Toast/Toast';
+import ToastContainer from './ToastContainer/ToastContainer';
+export { Accordion, AccordionGroup, Badge, Breadcrumb, Button, ButtonGroup, Checkbox, Input, Modal, Option, Radio, Select, Switch, Tab, TabGroup, TabWrapper, Tag, Toast, ToastContainer };

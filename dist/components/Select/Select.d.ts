@@ -30,6 +30,7 @@ declare class Select extends React.PureComponent<SelectProps> {
     private unSelect;
     private setHeight;
     private search;
+    private clearAll;
     componentWillMount(): void;
     componentDidMount(): void;
     componentDidUpdate(prevProps: any): void;

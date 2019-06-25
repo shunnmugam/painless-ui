@@ -63,7 +63,7 @@ var AccordionGroup = /** @class */ (function (_super) {
     AccordionGroup.prototype.render = function () {
         var _this = this;
         return (react_1.default.createElement("div", { className: "ui-accordion-group" }, this.props.collapsible && this.props.children ? (react_1.default.Children.map(this.props.children, function (accordion, i) {
-            var isOpen = (_this.state.activeIndex == i);
+            var isOpen = (_this.state.activeIndex === i);
             var onToggle = function (open) {
                 //if(open) {
                 _this.collapseChange(i, open, accordion.props.onToggle);

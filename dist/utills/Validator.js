@@ -12,6 +12,7 @@ var Validater = /** @class */ (function () {
         this.message = {};
     }
     Validater.prototype.email = function (value, ruleOptions) {
+        // eslint-disable-next-line
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var result = {
             isValid: true,
@@ -19,6 +20,7 @@ var Validater = /** @class */ (function () {
         };
         if (re.test(String(value).toLowerCase()) === false) {
             result.isValid = false;
+            // eslint-disable-next-line
             result.msg = '${input} is not valid email';
         }
         return result;
@@ -33,6 +35,7 @@ var Validater = /** @class */ (function () {
         };
         if (value.length < ruleOptions[0]) {
             result.isValid = false;
+            // eslint-disable-next-line
             result.msg = '${input} should minimum ' + ruleOptions[0] + ' charecters';
         }
         return result;
@@ -47,11 +50,13 @@ var Validater = /** @class */ (function () {
         };
         if (value.length > ruleOptions[0]) {
             result.isValid = false;
+            // eslint-disable-next-line
             result.msg = '${input} should minimum ' + ruleOptions[0] + ' charecters';
         }
         return result;
     };
     Validater.prototype.number = function (value, ruleOptioons) {
+        // eslint-disable-next-line
         var re = /^\d+$/;
         var result = {
             isValid: true,
@@ -59,6 +64,7 @@ var Validater = /** @class */ (function () {
         };
         if (re.test(String(value).toLowerCase()) === false) {
             result.isValid = false;
+            // eslint-disable-next-line
             result.msg = '${input} is not valid number';
         }
         return result;
@@ -68,8 +74,9 @@ var Validater = /** @class */ (function () {
             isValid: true,
             msg: ''
         };
-        if (value == undefined || value == '') {
+        if (value === undefined || value === '') {
             result.isValid = false;
+            // eslint-disable-next-line
             result.msg = '${input} is required';
         }
         return result;
@@ -84,6 +91,7 @@ var Validater = /** @class */ (function () {
         };
         if (typeof value !== ruleOptions[0]) {
             result.isValid = false;
+            // eslint-disable-next-line
             result.msg = '${input} is wrong type, expected type is ' + ruleOptions[0];
         }
         return result;
@@ -91,23 +99,27 @@ var Validater = /** @class */ (function () {
     Validater.prototype.validate = function () {
         var _this = this;
         var isValid = true;
+        var cb = function (rule, key) {
+            var _a = rule.split(':'), ruleName = _a[0], ruleOptions = _a[1];
+            if (ruleOptions !== undefined) {
+                ruleOptions = ruleOptions.split(',');
+            }
+            if (ruleName !== '') {
+                var result = _this[ruleName](_this.value[key], ruleOptions);
+                if (result.isValid === false) {
+                    if (_this.message[key] === undefined)
+                        _this.message[key] = [];
+                    // eslint-disable-next-line
+                    var msg = result.msg ? result.msg.replace('${input}', key) : '';
+                    _this.message[key].push(msg);
+                    isValid = false;
+                }
+            }
+        };
         var _loop_1 = function (key) {
             var rules = this_1.rules[key];
             rules.split('|').forEach(function (rule) {
-                var _a = rule.split(':'), ruleName = _a[0], ruleOptions = _a[1];
-                if (ruleOptions !== undefined) {
-                    ruleOptions = ruleOptions.split(',');
-                }
-                if (ruleName !== '') {
-                    var result = _this[ruleName](_this.value[key], ruleOptions);
-                    if (result.isValid === false) {
-                        if (_this.message[key] === undefined)
-                            _this.message[key] = [];
-                        var msg = result.msg ? result.msg.replace('${input}', key) : '';
-                        _this.message[key].push(msg);
-                        isValid = false;
-                    }
-                }
+                cb(rule, key);
             });
         };
         var this_1 = this;

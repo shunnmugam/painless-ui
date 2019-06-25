@@ -165,29 +165,31 @@ var Select = /** @class */ (function (_super) {
                     selectedDetails: selectedDetails
                 });
                 if (_this.props.onChange !== undefined && typeof _this.props.onChange === 'function') {
-                    _this.props.onChange(selectedDetails);
+                    _this.props.onChange(selectedDetails[0]);
                 }
                 _this.toggle();
             }
         };
         _this.onKeyPressed = function (e) {
-            _this.searchKeyword += e.key;
-            if (_this.searchTimer) {
-                clearTimeout(_this.searchTimer);
-            }
-            _this.searchTimer = setTimeout(function () {
-                var selected = false;
-                react_1.default.Children.forEach(_this.props.children, function (child, i) {
-                    if (child.type === Option_1.default) {
-                        var _a = child.props, value = _a.value, children = _a.children, text = _a.text;
-                        if (text && text.toLowerCase().includes(_this.searchKeyword) && selected === false) {
-                            _this.onClick(value, children, text);
-                            selected = true;
+            if (e.target.className === 'ui-select-container') {
+                _this.searchKeyword += e.key;
+                if (_this.searchTimer) {
+                    clearTimeout(_this.searchTimer);
+                }
+                _this.searchTimer = setTimeout(function () {
+                    var selected = false;
+                    react_1.default.Children.forEach(_this.props.children, function (child, i) {
+                        if (child.type === Option_1.default) {
+                            var _a = child.props, value = _a.value, children = _a.children, text = _a.text;
+                            if (text && text.toLowerCase().includes(_this.searchKeyword) && selected === false) {
+                                _this.onClick(value, children, text);
+                                selected = true;
+                            }
                         }
-                    }
-                });
-                _this.searchKeyword = '';
-            }, 500);
+                    });
+                    _this.searchKeyword = '';
+                }, 500);
+            }
         };
         _this.onMouseEnter = function () {
             if (_this.props.hover && _this.state.isOpen === false) {
@@ -263,6 +265,21 @@ var Select = /** @class */ (function (_super) {
                 searchKeyword: e.target.value
             });
         };
+        /*
+         * clear selected items
+         * @params e: $event
+         * @return void
+         */
+        _this.clearAll = function (e) {
+            e.stopPropagation();
+            _this.setState({
+                selectedDetails: []
+            }, function () {
+                if (_this.props.onChange) {
+                    _this.props.onChange(_this.props.multiple === true ? _this.state.selectedDetails : {});
+                }
+            });
+        };
         return _this;
     }
     /*
@@ -316,14 +333,27 @@ var Select = /** @class */ (function (_super) {
      * @return void
      */
     Select.prototype.componentDidUpdate = function (prevProps) {
-        if (prevProps.children !== this.props.children) {
+        var _this = this;
+        var asyncFunc = function () {
+            var timer = null;
+            if (_this.state.menuClassName === 'toggle') {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    _this.setHeight();
+                }, 500);
+            }
+            else {
+                _this.setHeight();
+            }
+        };
+        if (react_1.default.Children.toArray(this.props.children).length !== react_1.default.Children.toArray(prevProps.children).length) {
             if (this.state.menuClassName !== 'closed') {
                 this.eventScheduler = {
-                    onClose: this.setHeight
+                    onClose: asyncFunc
                 };
             }
             else {
-                this.setHeight();
+                asyncFunc();
             }
         }
     };
@@ -336,7 +366,8 @@ var Select = /** @class */ (function (_super) {
             react_1.default.createElement("div", { onKeyDown: this.onKeyPressed, tabIndex: 0, className: "ui-select-container", style: { maxWidth: this.props.width || '300px' } },
                 react_1.default.createElement("label", { className: "ui-select-label" }, this.props.label),
                 react_1.default.createElement("div", { onMouseLeave: this.onMouseLeave, onMouseEnter: this.onMouseEnter, className: "dropdown", style: { height: this.props.height || 'auto' } },
-                    react_1.default.createElement("div", { onClick: function () { return _this.toggle(); }, className: "select" },
+                    react_1.default.createElement("div", { onClick: function () { return _this.toggle(); }, className: "select " + (this.state.selectedDetails.length === 0 ? 'empty ' : 'non-empty ')
+                            + (this.props.multiple === true ? 'multiple ' : 'single ') },
                         this.state.selectedDetails.length === 0 ? react_1.default.createElement("span", { className: "ui-select-placeholder" }, this.state.placeholder || 'Please select') :
                             (this.props.multiple !== true ?
                                 react_1.default.createElement("span", null, this.state.selectedDetails[0].text || this.state.selectedDetails[0].child) :
@@ -348,7 +379,7 @@ var Select = /** @class */ (function (_super) {
                                                 _this.unSelect(o.value);
                                             }, className: "close-btn" }, "x"));
                                 }))),
-                        react_1.default.createElement("i", { className: "fa fa-chevron-left" })),
+                        react_1.default.createElement("i", { className: "fa fa-chevron-left", onClick: this.clearAll }, "x")),
                     react_1.default.createElement("div", { className: "dropdown-menu " + this.state.menuClassName, ref: this.dropDownMenuRef, style: this.state.menuStyle },
                         react_1.default.createElement("div", { className: "ui-select-search" },
                             react_1.default.createElement("input", { onClick: function (e) { return e.stopPropagation(); }, onChange: this.search, type: "text" })),
@@ -357,7 +388,7 @@ var Select = /** @class */ (function (_super) {
                                 var _a = child.props, value_1 = _a.value, children_1 = _a.children, text_1 = _a.text, className = _a.className, customProps = __rest(_a, ["value", "children", "text", "className"]);
                                 if (_this.state.searchKeyword === '' || (text_1 && text_1.toLowerCase().includes(_this.state.searchKeyword))) {
                                     return (react_1.default.createElement("li", __assign({ className: (className ? className : '') +
-                                            (_this.props.multiple !== true && _this.state.selectedDetails[0].value === value_1 ? ' selected' : '')
+                                            (_this.props.multiple !== true && _this.state.selectedDetails[0] !== undefined && _this.state.selectedDetails[0].value === value_1 ? ' selected' : '')
                                             + (_this.props.multiple === true && _this.findValue(value_1) !== undefined ? ' selected' : ''), onClick: function () { return _this.onClick(value_1, children_1, text_1); } }, customProps), children_1));
                                 }
                                 else {

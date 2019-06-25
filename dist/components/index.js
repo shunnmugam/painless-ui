@@ -37,3 +37,7 @@ var TabWrapper_1 = __importDefault(require("./TabWrapper/TabWrapper"));
 exports.TabWrapper = TabWrapper_1.default;
 var Tag_1 = __importDefault(require("./Tag/Tag"));
 exports.Tag = Tag_1.default;
+var Toast_1 = __importDefault(require("./Toast/Toast"));
+exports.Toast = Toast_1.default;
+var ToastContainer_1 = __importDefault(require("./ToastContainer/ToastContainer"));
+exports.ToastContainer = ToastContainer_1.default;
