@@ -1,0 +1,27 @@
+*,
+*:after,
+*:before {
+    // margin: 0;
+    // padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+    }
+.pull-right {
+    float: right;
+}
+.pull-left {
+    float: left;
+}
+/* column 1-12 */
+@for $i from 1 through 12 {
+    .ui-col-#{$i} { 
+        width: 100% / 12 * $i;
+    }
+}
+/* width 5,10,15,20...100 */
+@for $i from 1 through 20 {
+    .ui-w-#{$i*5} {
+        width: $i*5%;
+    }
+}

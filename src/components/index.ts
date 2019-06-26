@@ -12,11 +12,15 @@ import Radio from './Radio/Radio';
 import Select from './Select/Select';
 import Switch from './Switch/Switch';
 import TabGroup from './TabGroup/TabGroup';
+import Table from './Table/Table';
 import Tab from './Tab/Tab';
 import TabWrapper from './TabWrapper/TabWrapper';
 import Tag from './Tag/Tag';
 import Toast from './Toast/Toast';
 import ToastContainer from './ToastContainer/ToastContainer';
+
+
+import './index.scss';
 
 export {
     Accordion,
@@ -34,6 +38,7 @@ export {
     Switch,
     Tab,
     TabGroup,
+    Table,
     TabWrapper,
     Tag,
     Toast,

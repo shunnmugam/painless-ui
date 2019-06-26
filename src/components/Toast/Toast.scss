@@ -60,7 +60,7 @@ $positions: (
                 -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
                 animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
                 &.auto-close {
-                    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 2s, fade-out 0.5s 2.5s;
+                    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
                     animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
                 }
             }
