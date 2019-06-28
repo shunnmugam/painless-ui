@@ -5,6 +5,7 @@ interface ToastProps {
     show?: boolean;
     title?: string;
     options?: ToastOptions;
+    style?: object;
     onClose?: Function;
     [key: string]: any;
 }
@@ -25,6 +26,7 @@ declare class Toast extends React.PureComponent<ToastProps> {
         show: any;
         prevShow: any;
     };
+    generateAnimationCss(): string;
     componentDidUpdate(prevProps: any, prevState: any): void;
     componentDidMount(): void;
     render(): JSX.Element;

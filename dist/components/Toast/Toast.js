@@ -85,6 +85,11 @@ var Toast = /** @class */ (function (_super) {
         }
         return null;
     };
+    Toast.prototype.generateAnimationCss = function () {
+        var toasterOptions = __assign({}, defaultToastOptions, this.props.options || {});
+        var time = ((toasterOptions.time || 5000) - 2000) / 1000;
+        return "fade-in 0.5s, expand 0.5s 0.5s, stay " + time + "s 1s, shrink 0.5s " + (time + 1) + "s, fade-out 0.5s " + (time + 1.5) + "s";
+    };
     // eslint-disable-next-line
     Toast.prototype.componentDidUpdate = function (prevProps, prevState) {
         if (this.state.show === true && prevState.show !== true) {
@@ -98,15 +103,19 @@ var Toast = /** @class */ (function (_super) {
     };
     Toast.prototype.render = function () {
         var _this = this;
-        var _a = this.props, className = _a.className, show = _a.show, title = _a.title, options = _a.options, customProps = __rest(_a, ["className", "show", "title", "options"]);
+        var _a = this.props, className = _a.className, show = _a.show, title = _a.title, options = _a.options, style = _a.style, customProps = __rest(_a, ["className", "show", "title", "options", "style"]);
         var toasterOptions = __assign({}, defaultToastOptions, options || {});
         if (show === true) {
+            var animationCss = this.generateAnimationCss();
             return (react_1.default.createElement("div", __assign({ onClick: function () {
                     if (toasterOptions.closeOnClick === true)
                         _this.clear(true);
                 }, className: 'ui-toast ' + (this.state.show === true ? 'show ' : '')
                     + (toasterOptions.autoClose === true ? ' auto-close ' : ' ')
-                    + (className || '') }, customProps),
+                    + (className || ''), style: __assign({
+                    WebkitAnimation: animationCss,
+                    animation: animationCss
+                }, style) }, customProps),
                 react_1.default.createElement("div", { className: "ui-toast-img" }, title || 'Alert'),
                 react_1.default.createElement("div", { className: "ui-toast-desc" }, this.props.children)));
         }

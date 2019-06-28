@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 require("./Accordion.scss");
+var ThemeProvider_1 = require("../../providers/ThemeProvider");
 var Accordion = /** @class */ (function (_super) {
     __extends(Accordion, _super);
     function Accordion() {
@@ -79,4 +80,4 @@ var Accordion = /** @class */ (function (_super) {
     };
     return Accordion;
 }(react_1.default.Component));
-exports.default = Accordion;
+exports.default = ThemeProvider_1.withTheme(Accordion, 'Accordion');

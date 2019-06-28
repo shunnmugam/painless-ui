@@ -7,6 +7,7 @@ import ButtonGroup from './ButtonGroup/ButtonGroup';
 import Checkbox from './Checkbox/Checkbox';
 import Input from './Input/Input';
 import Modal from './Modal/Modal';
+import NavBar from './NavBar/NavBar';
 import Option from './Option/Option';
 import Radio from './Radio/Radio';
 import Select from './Select/Select';
@@ -32,6 +33,7 @@ export {
     Checkbox,
     Input,
     Modal,
+    NavBar,
     Option,
     Radio,
     Select,

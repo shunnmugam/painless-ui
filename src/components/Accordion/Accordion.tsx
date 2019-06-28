@@ -1,5 +1,6 @@
 import React from 'react';
 import './Accordion.scss';
+import { withTheme } from '../../providers/ThemeProvider';
 
 interface AccordionProps {
     className?: string,
@@ -53,4 +54,4 @@ class Accordion extends React.Component<AccordionProps>  {
 }
 
 
-export default Accordion;
+export default withTheme(Accordion,'Accordion');
