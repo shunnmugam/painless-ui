@@ -19,9 +19,9 @@ import TabWrapper from './TabWrapper/TabWrapper';
 import Tag from './Tag/Tag';
 import Toast from './Toast/Toast';
 import ToastContainer from './ToastContainer/ToastContainer';
+import TabContainer from './TabContainer/TabContainer';
 
-
-import './index.scss';
+import './index.css';
 
 export {
     Accordion,
@@ -39,6 +39,7 @@ export {
     Select,
     Switch,
     Tab,
+    TabContainer,
     TabGroup,
     Table,
     TabWrapper,

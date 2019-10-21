@@ -1,5 +1,5 @@
 import React from 'react';
-import './Select.scss';
+import './Select.css';
 interface SelectProps {
     className?: string;
     label?: any;

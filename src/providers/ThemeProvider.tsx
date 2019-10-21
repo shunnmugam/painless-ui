@@ -9,7 +9,12 @@ export const withTheme = (Component,componentName:string | undefined = undefined
     return function WrapperComponent(props) {
         return (
             <ThemeContext.Consumer>
-                {(state:any) => <Component {...props} theme={componentName!== undefined ? state.components[componentName] : state} />}
+                {(state:any) => {
+                    if(componentName === undefined || state.components === undefined) {
+                        return <Component {...props} />
+                    }
+                    return <Component {...props} theme={componentName!== undefined ? state.components[componentName] : state} colors={state.colors} />
+                }}
             </ThemeContext.Consumer>
         );
     };

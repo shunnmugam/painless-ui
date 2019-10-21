@@ -1,25 +1,20 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var TabGroup_1 = __importDefault(require("../TabGroup/TabGroup"));
-var TabContainer_1 = __importDefault(require("../TabContainer/TabContainer"));
-var TabWrapper = function (props) {
-    return (react_1.default.createElement("div", { style: { width: props.width || '100%' }, className: "ui-card ui-z-depth " + props.className },
-        react_1.default.Children.toArray(props.children).find(function (child) {
-            if (child.type === TabGroup_1.default) {
+import React from 'react';
+import TabGroup from '../TabGroup/TabGroup';
+import TabContainer from '../TabContainer/TabContainer';
+const TabWrapper = (props) => {
+    return (React.createElement("div", { style: { width: props.width || '100%' }, className: "ui-card ui-z-depth " + props.className },
+        React.Children.toArray(props.children).find((child) => {
+            if (child.type === TabGroup) {
                 return child;
             }
             return false;
         }),
-        react_1.default.createElement("div", { className: "ui-card-body" },
-            react_1.default.createElement("div", { className: "tab-content" }, react_1.default.Children.toArray(props.children).map(function (child) {
-                if (child.type === TabContainer_1.default) {
+        React.createElement("div", { className: "ui-card-body" },
+            React.createElement("div", { className: "tab-content" }, React.Children.toArray(props.children).map((child) => {
+                if (child.type === TabContainer) {
                     return child;
                 }
                 return false;
             })))));
 };
-exports.default = TabWrapper;
+export default TabWrapper;

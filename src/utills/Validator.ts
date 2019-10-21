@@ -2,9 +2,9 @@ interface validationResult {
     isValid: boolean,
     msg?: string
 }
-export default class Validater {
+export default class Validator {
     /*
-     * validation condtion
+     * validation condition
      */
     private rules: object;
     /*
@@ -52,7 +52,7 @@ export default class Validater {
         if(value.length < ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
-            result.msg = '${input} should minimum '+ruleOptions[0]+' charecters';
+            result.msg = '${input} should minimum '+ruleOptions[0]+' characters';
         }
         return result;
     }
@@ -68,7 +68,7 @@ export default class Validater {
         if(value.length > ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
-            result.msg = '${input} should minimum '+ruleOptions[0]+' charecters';
+            result.msg = '${input} should minimum '+ruleOptions[0]+' characters';
         }
         return result;
     }

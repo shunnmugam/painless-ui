@@ -1,9 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import './Breadcrumb.css';
-interface BreadcrumbProps {
-    className?: string;
-    seperator?: any;
-    [key: string]: any;
-}
-declare const Breadcrumb: React.FC<BreadcrumbProps>;
-export default Breadcrumb;
+declare const _default: (props: any) => JSX.Element;
+export default _default;

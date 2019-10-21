@@ -45,7 +45,7 @@ interface SortOptions {
     onSort?: Function
 }
 
-const defaultPAginationOptions:PaginationOptions = {
+const defaultPaginationOptions:PaginationOptions = {
     currentPage: 1,
     limit: 10
 }
@@ -58,7 +58,7 @@ const defaultProps:TableProps = {
     loading: false,
     serverSide: false,
     responsive: false,
-    paginationOptions: defaultPAginationOptions
+    paginationOptions: defaultPaginationOptions
 };
 
 class Table extends React.PureComponent<TableProps> {
@@ -185,7 +185,7 @@ class Table extends React.PureComponent<TableProps> {
     }
 
     /*
-     * on page change event it will call when pagenation button is click
+     * on page change event it will call when pagination button is click
      */
     pageChange(page) {
         if(this.props.paginationOptions && this.props.paginationOptions.onChange 
@@ -200,7 +200,7 @@ class Table extends React.PureComponent<TableProps> {
     }
 
     /*
-     * get erived state from props
+     * get derived state from props
      */
     static getDerivedStateFromProps(nextProps,state) {
         
@@ -263,6 +263,7 @@ class Table extends React.PureComponent<TableProps> {
         
         return (<div className={'ui-table-container '} style={this.props.containerStyle || {}}>
             <div className='ui-table-toolbar-wrapper pull-left ui-w-100'>
+                {(this.props.searchOptions!== undefined && this.props.searchOptions.searchable === true) ? 
                 <div className="ui-table-search-container pull-right">
                 <Input type="text" placeholder="Type something..." style={{
                     width : "150px"
@@ -276,7 +277,7 @@ class Table extends React.PureComponent<TableProps> {
                     }
                 }}
                 />
-                </div>
+                </div> : <></>}
             </div>
             <div className={'ui-table-wrapper' + (props.responsive ? 'responsive ': '')}>
                 <table className={'ui-table '+ (props.className || '')} style={this.props.style || {}}>

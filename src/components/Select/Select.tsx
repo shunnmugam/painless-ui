@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Select.scss';
+import './Select.css';
 import Option from '../Option/Option';
 import WatchClickOutside from '../WatchClickOutside/WatchClickOutside';
 

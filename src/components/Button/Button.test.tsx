@@ -14,8 +14,8 @@ describe('test button behaviour',() => {
         expect(tree).not.toBeNull();
     })
     it('test default props', () => {
-        expect(tree.props.style.backgroundColor).toBe('transparent');
-        expect(tree.props.style.color).toBe('black');
+        expect(tree.props.style.backgroundColor).toBe(null);
+        expect(tree.props.style.color).toBe(null);
         expect(tree.props.className).toBe('ui-button ripple ');
         expect(tree.props['data-style-type']).toBe('background');
     });

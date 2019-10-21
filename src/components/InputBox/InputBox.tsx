@@ -1,5 +1,5 @@
 import React from 'react';
-import Validater from '../../utills/Validator';
+import Validator from '../../utills/Validator';
 
 import './InputBox.css';
 import Button from '../Button/Button';
@@ -51,19 +51,19 @@ class InputBox extends React.Component<InputBoxProps> {
             if(this.props.validationOptions && this.props.validationOptions.rules) {
                 rules+='|'+this.props.validationOptions.rules;
             }
-            const validaterObj = new Validater({
+            const validatorObj = new Validator({
                 input : v
             },{
                 'input' : rules
             });
-            const isValid:boolean = validaterObj.validate();
+            const isValid:boolean = validatorObj.validate();
             if(this.state.isValid !== isValid) {
                 this.setState({
                     isValid : isValid
                 })
             }
             
-            const message = validaterObj.getMessage();
+            const message = validatorObj.getMessage();
 
             if(this.props.validationOptions && typeof this.props.validationOptions.validationCallback === "function") {
                 this.props.validationOptions.validationCallback(

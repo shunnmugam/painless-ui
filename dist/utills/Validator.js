@@ -1,20 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Validater = /** @class */ (function () {
+export default class Validater {
     /*
      * constructor method
      * @params value: any
      * @params rules: object
      */
-    function Validater(value, rules) {
+    constructor(value, rules) {
         this.value = value;
         this.rules = rules;
         this.message = {};
     }
-    Validater.prototype.email = function (value, ruleOptions) {
+    email(value, ruleOptions) {
         // eslint-disable-next-line
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var result = {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const result = {
             isValid: true,
             msg: ''
         };
@@ -24,12 +22,12 @@ var Validater = /** @class */ (function () {
             result.msg = '${input} is not valid email';
         }
         return result;
-    };
-    Validater.prototype.min = function (value, ruleOptions) {
+    }
+    min(value, ruleOptions) {
         if (ruleOptions === undefined) {
             throw new Error('minimum is required one parameter');
         }
-        var result = {
+        const result = {
             isValid: true,
             msg: ''
         };
@@ -39,12 +37,12 @@ var Validater = /** @class */ (function () {
             result.msg = '${input} should minimum ' + ruleOptions[0] + ' charecters';
         }
         return result;
-    };
-    Validater.prototype.max = function (value, ruleOptions) {
+    }
+    max(value, ruleOptions) {
         if (ruleOptions === undefined) {
             throw new Error('maximum is required one parameter');
         }
-        var result = {
+        const result = {
             isValid: true,
             msg: ''
         };
@@ -54,11 +52,11 @@ var Validater = /** @class */ (function () {
             result.msg = '${input} should minimum ' + ruleOptions[0] + ' charecters';
         }
         return result;
-    };
-    Validater.prototype.number = function (value, ruleOptioons) {
+    }
+    number(value, ruleOptioons) {
         // eslint-disable-next-line
-        var re = /^\d+$/;
-        var result = {
+        const re = /^\d+$/;
+        const result = {
             isValid: true,
             msg: ''
         };
@@ -68,9 +66,9 @@ var Validater = /** @class */ (function () {
             result.msg = '${input} is not valid number';
         }
         return result;
-    };
-    Validater.prototype.required = function (value, ruleOptions) {
-        var result = {
+    }
+    required(value, ruleOptions) {
+        const result = {
             isValid: true,
             msg: ''
         };
@@ -80,12 +78,12 @@ var Validater = /** @class */ (function () {
             result.msg = '${input} is required';
         }
         return result;
-    };
-    Validater.prototype.type = function (value, ruleOptions) {
+    }
+    type(value, ruleOptions) {
         if (ruleOptions[0] === undefined) {
             throw new Error('type is required');
         }
-        var result = {
+        const result = {
             isValid: true,
             msg: ''
         };
@@ -95,42 +93,35 @@ var Validater = /** @class */ (function () {
             result.msg = '${input} is wrong type, expected type is ' + ruleOptions[0];
         }
         return result;
-    };
-    Validater.prototype.validate = function () {
-        var _this = this;
-        var isValid = true;
-        var cb = function (rule, key) {
-            var _a = rule.split(':'), ruleName = _a[0], ruleOptions = _a[1];
+    }
+    validate() {
+        let isValid = true;
+        const cb = (rule, key) => {
+            let [ruleName, ruleOptions] = rule.split(':');
             if (ruleOptions !== undefined) {
                 ruleOptions = ruleOptions.split(',');
             }
             if (ruleName !== '') {
-                var result = _this[ruleName](_this.value[key], ruleOptions);
+                const result = this[ruleName](this.value[key], ruleOptions);
                 if (result.isValid === false) {
-                    if (_this.message[key] === undefined)
-                        _this.message[key] = [];
+                    if (this.message[key] === undefined)
+                        this.message[key] = [];
                     // eslint-disable-next-line
-                    var msg = result.msg ? result.msg.replace('${input}', key) : '';
-                    _this.message[key].push(msg);
+                    const msg = result.msg ? result.msg.replace('${input}', key) : '';
+                    this.message[key].push(msg);
                     isValid = false;
                 }
             }
         };
-        var _loop_1 = function (key) {
-            var rules = this_1.rules[key];
-            rules.split('|').forEach(function (rule) {
+        for (const key in this.rules) {
+            const rules = this.rules[key];
+            rules.split('|').forEach((rule) => {
                 cb(rule, key);
             });
-        };
-        var this_1 = this;
-        for (var key in this.rules) {
-            _loop_1(key);
         }
         return isValid;
-    };
-    Validater.prototype.getMessage = function () {
+    }
+    getMessage() {
         return this.message;
-    };
-    return Validater;
-}());
-exports.default = Validater;
+    }
+}

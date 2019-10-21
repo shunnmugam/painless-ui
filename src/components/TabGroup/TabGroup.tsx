@@ -46,23 +46,25 @@ class TabGroup extends React.Component<TabGroupProps> {
     }
 
     calculateDimonsions = () => {
-        const tabContainer = this.containerRef.current.querySelector('.ui-tabs');
-        const visibleWidth = tabContainer.getBoundingClientRect().width;
-        let isScrollable = false;
-        let isNext = false;
-        if(visibleWidth < this.state.ul.width) { 
-            isScrollable = true;
-            isNext = true; 
+        if(this.containerRef.current) {
+            const tabContainer = this.containerRef.current.querySelector('.ui-tabs');
+            const visibleWidth = tabContainer.getBoundingClientRect().width;
+            let isScrollable = false;
+            let isNext = false;
+            if(visibleWidth < this.state.ul.width) { 
+                isScrollable = true;
+                isNext = true; 
+            }
+            this.setState({
+                visibleWidth,
+                isScrollable,
+                isNext
+            },() => {
+                this.setNext();
+                this.setPrev();
+                this.setActiveTab(this.state.activeIndex);
+            })
         }
-        this.setState({
-            visibleWidth,
-            isScrollable,
-            isNext
-        },() => {
-            this.setNext();
-            this.setPrev();
-            this.setActiveTab(this.state.activeIndex);
-        })
     }
 
 
@@ -216,7 +218,7 @@ class TabGroup extends React.Component<TabGroupProps> {
                 this.setState({
                     visibleStatus : true
                 })
-            },1000);
+            },0);
         })
 
         this.setActiveTab(this.state.activeIndex);

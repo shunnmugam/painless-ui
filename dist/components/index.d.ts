@@ -19,5 +19,6 @@ import TabWrapper from './TabWrapper/TabWrapper';
 import Tag from './Tag/Tag';
 import Toast from './Toast/Toast';
 import ToastContainer from './ToastContainer/ToastContainer';
-import './index.scss';
-export { Accordion, AccordionGroup, Badge, Breadcrumb, Button, ButtonGroup, Checkbox, Input, Modal, NavBar, Option, Radio, Select, Switch, Tab, TabGroup, Table, TabWrapper, Tag, Toast, ToastContainer };
+import TabContainer from './TabContainer/TabContainer';
+import './index.css';
+export { Accordion, AccordionGroup, Badge, Breadcrumb, Button, ButtonGroup, Checkbox, Input, Modal, NavBar, Option, Radio, Select, Switch, Tab, TabContainer, TabGroup, Table, TabWrapper, Tag, Toast, ToastContainer };

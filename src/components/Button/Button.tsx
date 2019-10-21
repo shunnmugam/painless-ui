@@ -1,26 +1,29 @@
 import React from 'react';
-
+import { withTheme } from '../../providers/ThemeProvider';
+import { componentTheme, themeColors } from "../../providers/theme";
 import './Button.css';
 
 interface ButtonProps {
-    bgColor? : string;
-    className?: string;
-    color? : string;
-    text?: string;
-    style?: object,
-    onClick?: Function,
-    rounded?: boolean,
-    styleType? : string, //background, text, outline
-    [key: string]: any;
+    bgColor? : string
+    className?: string
+    color? : string
+    text?: string
+    style?: object
+    onClick?: Function
+    rounded?: boolean
+    styleType? : string //background, text, outline
+    theme?: componentTheme,
+    colors? : themeColors
+    [key: string]: any
 };
 
 /*
  * default props
  */
 const defaultProps: object = {
-    bgColor: 'transparent',
+    bgColor: null,
     className: '',
-    color: 'black',
+    color: null,
     styleType: 'background'
 };
 
@@ -41,21 +44,41 @@ const Button:React.FC<ButtonProps> = (props) => {
         onClick,
         children,
         rounded,
+        theme,
+        colors,
         ...customProps
     } = props;
 
-    return (<button data-style-type={styleType} className={'ui-button ripple ' + className + (rounded ? 'rounded' : '')}
+    let defaultButtonStyle: any= {
+        backgroundColor : styleType === 'background' ? (colors ? (colors.primary ? colors.primary : null) : null) : 'transparent',
+        borderColor : styleType === 'outline' ? (colors ? (colors.primary ? colors.primary : null) : null) : 'transparent',
+        color : styleType === 'background' ? (colors ? (colors.secondary ? colors.secondary : null) : null) : (colors ? (colors.primary ? colors.primary : null) : null)
+
+    }
+    if(theme && theme.style && styleType && theme.style[styleType]) {
+        defaultButtonStyle = {...defaultButtonStyle,...theme.style[styleType]}
+    }
+
+    if(bgColor && styleType === 'background') {
+        defaultButtonStyle.backgroundColor = bgColor;
+    }
+    if(bgColor && styleType === 'outline') {
+        defaultButtonStyle.borderColor = bgColor;
+    }
+    if(color) {
+        defaultButtonStyle.color = color;
+    }
+
+    return (<button data-style-type={styleType} className={'ui-button ripple ' + className + (rounded ? 'rounded' : '') + 
+    (theme && theme.className ? " " + theme.className : '') }
         onClick={(e) => onClickHandler(e,props)}
         {...customProps}
         style={
-            {...{
-                backgroundColor: styleType === 'background' ? bgColor : 'transparent',
-                color:color
-            },...style}
+            {...defaultButtonStyle,...style}
         }>
         {text ? text : children }
     </button>)
 
 }
 Button.defaultProps = defaultProps;
-export default Button;
+export default withTheme(Button,'Button');

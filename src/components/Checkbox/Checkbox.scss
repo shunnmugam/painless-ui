@@ -8,7 +8,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin: 0px;
+    margin: 0px 3px;
     &.rounded {
         border-radius: 50%;
         &:after {
@@ -41,21 +41,16 @@
             position: absolute;
             display: none;
             left: 25%;
-            top: 17%;
-            width: 36%;
-            height: 65%;
+            top: 3%;
+            width: 46%;
+            height: 83%;
             border: solid white;
             border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
             transform: rotate(45deg);
         }
         &.rounded {
             border-radius: 50%;
-            &:after {
-                left: 32%;
-                top: 15%;
-            }
+            
         }
     }
   

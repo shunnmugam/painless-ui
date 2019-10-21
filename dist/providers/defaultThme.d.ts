@@ -1,17 +1,3 @@
-declare const defaultTheme: {
-    components: {
-        Accordion: {
-            className: string;
-            style: {
-                container: {
-                    backgroundColor: string;
-                };
-            };
-        };
-    };
-    colors: {
-        primary: string;
-        secondary: string;
-    };
-};
+import theme from "./theme";
+declare const defaultTheme: theme;
 export default defaultTheme;

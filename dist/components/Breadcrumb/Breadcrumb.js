@@ -1,20 +1,22 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-require("./Breadcrumb.css");
-var Breadcrumb = function (props) {
-    return (react_1.default.createElement("ul", { className: "ui-breadcrumb" }, react_1.default.Children.map(props.children, function (child, i) {
-        return (react_1.default.createElement(react_1.default.Fragment, null,
-            (i !== 0) ? (react_1.default.createElement("li", { className: "ui-breadcrumb-item ui-breadcrumb-seperator" }, props.seperator)) : react_1.default.createElement(react_1.default.Fragment, null),
-            react_1.default.createElement("li", { className: "ui-breadcrumb-item" }, child)));
+import React from 'react';
+import { withTheme } from '../../providers/ThemeProvider';
+import './Breadcrumb.css';
+const Breadcrumb = (props) => {
+    const { className, separator, style, theme, colors, ...customProps } = { ...props };
+    let defaultBreadcrumbStyle = style ? style : {};
+    if (theme && theme.style && theme.style.container) {
+        defaultBreadcrumbStyle = { ...theme.style.container, ...defaultBreadcrumbStyle };
+    }
+    return (React.createElement("ul", Object.assign({ className: "ui-breadcrumb " + className + ((theme && theme.className) ? +" " + theme.className : "") }, customProps, { style: defaultBreadcrumbStyle }), React.Children.map(props.children, (child, i) => {
+        return (React.createElement(React.Fragment, null,
+            (i !== 0) ? (React.createElement("li", { className: "ui-breadcrumb-item ui-breadcrumb-separator" }, separator)) : React.createElement(React.Fragment, null),
+            React.createElement("li", { className: "ui-breadcrumb-item" }, child)));
     })));
 };
-var defaultProps = {
+const defaultProps = {
     className: '',
-    seperator: ' / '
+    separator: ' / ',
+    style: {}
 };
 Breadcrumb.defaultProps = defaultProps;
-exports.default = Breadcrumb;
+export default withTheme(Breadcrumb, "Breadcrumb");

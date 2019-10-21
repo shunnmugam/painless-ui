@@ -1,47 +1,42 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var Button_1 = __importDefault(require("./Button"));
-var test_utils_1 = __importDefault(require("react-dom/test-utils"));
-var react_test_renderer_1 = __importDefault(require("react-test-renderer"));
-var react_dom_1 = __importDefault(require("react-dom"));
-describe('test button behaviour', function () {
-    var component = react_test_renderer_1.default.create(react_1.default.createElement(Button_1.default, null));
-    var tree = component.toJSON();
-    it('test render', function () {
+import React from 'react';
+import Button from './Button';
+import ReactTestUtils from 'react-dom/test-utils';
+import renderer from 'react-test-renderer';
+import ReactDOM from 'react-dom';
+describe('test button behaviour', () => {
+    const component = renderer.create(React.createElement(Button, null));
+    let tree = component.toJSON();
+    it('test render', () => {
         expect(tree).not.toBeNull();
     });
-    it('test default props', function () {
+    it('test default props', () => {
         expect(tree.props.style.backgroundColor).toBe('transparent');
         expect(tree.props.style.color).toBe('black');
         expect(tree.props.className).toBe('ui-button ripple ');
         expect(tree.props['data-style-type']).toBe('background');
     });
 });
-describe('test button events', function () {
-    var event;
-    var eventHandler = function (e) {
+describe('test button events', () => {
+    let event;
+    const eventHandler = (e) => {
         event = e;
     };
     var div = document.createElement('div');
     document.body.appendChild(div);
-    react_dom_1.default.render(react_1.default.createElement(Button_1.default, { onClick: eventHandler }), div);
-    var button = div.querySelector('button');
-    afterEach(function () {
+    ReactDOM.render(React.createElement(Button, { onClick: eventHandler }), div);
+    const button = div.querySelector('button');
+    afterEach(() => {
         event = undefined;
     });
-    it('check on click event', function () {
-        test_utils_1.default.Simulate.click(button);
+    it('check on click event', () => {
+        ReactTestUtils.Simulate.click(button);
         expect(event).not.toBeUndefined;
     });
-    it('check on touch start event', function () {
-        test_utils_1.default.Simulate.touchStart(button);
+    it('check on touch start event', () => {
+        ReactTestUtils.Simulate.touchStart(button);
         expect(event).not.toBeUndefined;
     });
-    afterAll(function () {
-        react_dom_1.default.unmountComponentAtNode(div);
+    afterAll(() => {
+        ReactDOM.unmountComponentAtNode(div);
     });
 });

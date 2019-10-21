@@ -1,126 +1,84 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-require("./Select.scss");
-var Option_1 = __importDefault(require("../Option/Option"));
-var WatchClickOutside_1 = __importDefault(require("../WatchClickOutside/WatchClickOutside"));
-var Select = /** @class */ (function (_super) {
-    __extends(Select, _super);
-    function Select() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+import React from 'react';
+import './Select.css';
+import Option from '../Option/Option';
+import WatchClickOutside from '../WatchClickOutside/WatchClickOutside';
+class Select extends React.PureComponent {
+    constructor() {
+        super(...arguments);
         /*
          * state
          */
-        _this.state = {
+        this.state = {
             isOpen: false,
             menuStyle: {},
             menuClassName: 'closed',
             selectedDetails: [],
             searchKeyword: '',
-            placeholder: _this.props.placeholder
+            placeholder: this.props.placeholder
         };
         /*
          * dropdown referance
          */
-        _this.dropDownMenuRef = react_1.default.createRef();
+        this.dropDownMenuRef = React.createRef();
         /*
          * height of menu
          */
-        _this.heightOfMenu = 0;
+        this.heightOfMenu = 0;
         /*
          * event remember
          */
-        _this.eventScheduler = {};
+        this.eventScheduler = {};
         /*
          * search timer
          */
-        _this.searchTimer = null;
+        this.searchTimer = null;
         /*
          * search keyword
          */
-        _this.searchKeyword = '';
+        this.searchKeyword = '';
         /*
          * toggle event for open/close
          * @params -
          * @return void
          */
-        _this.toggle = function (status) {
-            if (status === void 0) { status = undefined; }
-            if (status === undefined || _this.state.isOpen !== status) {
-                var isOpen_1 = status !== undefined ? !status : _this.state.isOpen;
-                var menuStyle = __assign({}, _this.state.menuStyle);
-                if (isOpen_1 === false) { //open
+        this.toggle = (status = undefined) => {
+            if (status === undefined || this.state.isOpen !== status) {
+                const isOpen = status !== undefined ? !status : this.state.isOpen;
+                let menuStyle = { ...this.state.menuStyle };
+                if (isOpen === false) { //open
                     menuStyle.display = 'block';
-                    menuStyle.maxHeight = _this.heightOfMenu;
+                    menuStyle.maxHeight = this.heightOfMenu;
                     menuStyle.visibility = 'visible';
-                    if (_this.props.onOpen !== undefined && typeof _this.props.onOpen === 'function') {
-                        _this.props.onOpen();
+                    if (this.props.onOpen !== undefined && typeof this.props.onOpen === 'function') {
+                        this.props.onOpen();
                     }
                 }
                 else { //close
                     menuStyle.maxHeight = 0;
                     menuStyle.visibility = 'visible';
-                    if (_this.props.onClose !== undefined && typeof _this.props.onClose === 'function') {
-                        _this.props.onClose();
+                    if (this.props.onClose !== undefined && typeof this.props.onClose === 'function') {
+                        this.props.onClose();
                     }
                 }
-                _this.setState({
+                this.setState({
                     menuClassName: 'toggle',
                     menuStyle: menuStyle,
-                    isOpen: !isOpen_1
-                }, function () {
-                    setTimeout(function () {
-                        _this.setState({
-                            menuClassName: isOpen_1 ? 'closed' : 'open'
+                    isOpen: !isOpen
+                }, () => {
+                    setTimeout(() => {
+                        this.setState({
+                            menuClassName: isOpen ? 'closed' : 'open'
                         });
-                        if (!isOpen_1) {
-                            if (_this.eventScheduler.onOpen !== undefined) {
-                                _this.eventScheduler.onOpen();
-                                _this.eventScheduler.onOpen = undefined;
+                        if (!isOpen) {
+                            if (this.eventScheduler.onOpen !== undefined) {
+                                this.eventScheduler.onOpen();
+                                this.eventScheduler.onOpen = undefined;
                             }
                         }
                         else {
-                            if (_this.eventScheduler.onClose !== undefined) {
-                                _this.eventScheduler.onClose();
-                                _this.eventScheduler.onClose = undefined;
+                            if (this.eventScheduler.onClose !== undefined) {
+                                this.eventScheduler.onClose();
+                                this.eventScheduler.onClose = undefined;
                             }
                         }
                     }, 500);
@@ -134,79 +92,78 @@ var Select = /** @class */ (function (_super) {
          * @params text:any
          * @return void
          */
-        _this.onClick = function (value, child, text) {
-            if (text === void 0) { text = undefined; }
-            if (_this.props.multiple === true) {
-                var isRemoved_1 = _this.unSelect(value);
-                setTimeout(function () {
-                    var selectedDetails = _this.state.selectedDetails.slice();
-                    if (isRemoved_1 === false) {
+        this.onClick = (value, child, text = undefined) => {
+            if (this.props.multiple === true) {
+                const isRemoved = this.unSelect(value);
+                setTimeout(() => {
+                    const selectedDetails = [...this.state.selectedDetails];
+                    if (isRemoved === false) {
                         selectedDetails.push({
-                            value: value,
-                            child: child,
-                            text: text
+                            value,
+                            child,
+                            text
                         });
-                        _this.setState({
-                            selectedDetails: selectedDetails
+                        this.setState({
+                            selectedDetails
                         });
                     }
-                    if (_this.props.onChange !== undefined && typeof _this.props.onChange === 'function') {
-                        _this.props.onChange(selectedDetails);
+                    if (this.props.onChange !== undefined && typeof this.props.onChange === 'function') {
+                        this.props.onChange(selectedDetails);
                     }
                 }, 0);
             }
             else {
-                var selectedDetails = [{
-                        value: value,
-                        child: child,
-                        text: text
+                const selectedDetails = [{
+                        value,
+                        child,
+                        text
                     }];
-                _this.setState({
-                    selectedDetails: selectedDetails
+                this.setState({
+                    selectedDetails
                 });
-                if (_this.props.onChange !== undefined && typeof _this.props.onChange === 'function') {
-                    _this.props.onChange(selectedDetails[0]);
+                if (this.props.onChange !== undefined && typeof this.props.onChange === 'function') {
+                    this.props.onChange(selectedDetails[0]);
                 }
-                _this.toggle();
+                this.toggle();
             }
         };
-        _this.onKeyPressed = function (e) {
+        this.onKeyPressed = (e) => {
             if (e.target.className === 'ui-select-container') {
-                _this.searchKeyword += e.key;
-                if (_this.searchTimer) {
-                    clearTimeout(_this.searchTimer);
+                this.searchKeyword += e.key;
+                if (this.searchTimer) {
+                    clearTimeout(this.searchTimer);
                 }
-                _this.searchTimer = setTimeout(function () {
-                    var selected = false;
-                    react_1.default.Children.forEach(_this.props.children, function (child, i) {
-                        if (child.type === Option_1.default) {
-                            var _a = child.props, value = _a.value, children = _a.children, text = _a.text;
-                            if (text && text.toLowerCase().includes(_this.searchKeyword) && selected === false) {
-                                _this.onClick(value, children, text);
+                this.searchTimer = setTimeout(() => {
+                    let selected = false;
+                    React.Children.forEach(this.props.children, (child, i) => {
+                        if (child.type === Option) {
+                            const { value, children, text } = child.props;
+                            if (text && text.toLowerCase().includes(this.searchKeyword) && selected === false) {
+                                this.onClick(value, children, text);
                                 selected = true;
                             }
                         }
                     });
-                    _this.searchKeyword = '';
+                    this.searchKeyword = '';
                 }, 500);
             }
         };
-        _this.onMouseEnter = function () {
-            if (_this.props.hover && _this.state.isOpen === false) {
-                _this.toggle();
+        this.onMouseEnter = () => {
+            if (this.props.hover && this.state.isOpen === false) {
+                this.toggle();
             }
         };
-        _this.onMouseLeave = function () {
-            if (_this.props.hover && _this.state.isOpen === true) {
-                _this.toggle();
+        this.onMouseLeave = () => {
+            if (this.props.hover && this.state.isOpen === true) {
+                this.toggle();
             }
         };
         /*
          * find value from selected array
          * @params value:string
          */
-        _this.findValue = function (value) {
-            return _this.state.selectedDetails.find(function (s) {
+        this.findValue = (value) => {
+            return this.state.selectedDetails.find((s) => {
                 return s.value === value;
             });
         };
@@ -215,15 +172,15 @@ var Select = /** @class */ (function (_super) {
          * @params value:any
          * @return isRemoved: boolean
          */
-        _this.unSelect = function (value) {
-            var i = _this.state.selectedDetails.findIndex(function (s) {
+        this.unSelect = (value) => {
+            const i = this.state.selectedDetails.findIndex((s) => {
                 return s.value === value;
             });
             if (i !== -1) {
-                var selectedDetails = _this.state.selectedDetails.slice();
+                const selectedDetails = [...this.state.selectedDetails];
                 selectedDetails.splice(i, 1);
-                _this.setState({
-                    selectedDetails: selectedDetails
+                this.setState({
+                    selectedDetails
                 });
                 return true;
             }
@@ -234,18 +191,18 @@ var Select = /** @class */ (function (_super) {
          * @params -
          * @return void
          */
-        _this.setHeight = function () {
-            _this.setState({
+        this.setHeight = () => {
+            this.setState({
                 menuStyle: {
                     display: 'block',
                     maxHeight: 'auto',
                     visibility: 'hidden'
                 }
-            }, function () {
-                var height = _this.dropDownMenuRef.current.getBoundingClientRect().height;
+            }, () => {
+                let height = this.dropDownMenuRef.current.getBoundingClientRect().height;
                 if (height !== 0)
-                    _this.heightOfMenu = height;
-                _this.setState({
+                    this.heightOfMenu = height;
+                this.setState({
                     menuStyle: {
                         display: 'none',
                         // maxHeight: 0,
@@ -259,9 +216,9 @@ var Select = /** @class */ (function (_super) {
          * @params e: $event
          * @return void
          */
-        _this.search = function (e) {
+        this.search = (e) => {
             e.stopPropagation();
-            _this.setState({
+            this.setState({
                 searchKeyword: e.target.value
             });
         };
@@ -270,83 +227,80 @@ var Select = /** @class */ (function (_super) {
          * @params e: $event
          * @return void
          */
-        _this.clearAll = function (e) {
+        this.clearAll = (e) => {
             e.stopPropagation();
-            _this.setState({
+            this.setState({
                 selectedDetails: []
-            }, function () {
-                if (_this.props.onChange) {
-                    _this.props.onChange(_this.props.multiple === true ? _this.state.selectedDetails : {});
+            }, () => {
+                if (this.props.onChange) {
+                    this.props.onChange(this.props.multiple === true ? this.state.selectedDetails : {});
                 }
             });
         };
-        return _this;
     }
     /*
      * component will mount (lifecycle)
      * @params -
      * @return void
      */
-    Select.prototype.componentWillMount = function () {
-        var _this = this;
+    componentWillMount() {
         if (this.props.value !== undefined) {
             if (this.props.multiple === true) {
-                var childrens = react_1.default.Children.toArray(this.props.children).filter(function (child) {
-                    return _this.props.value && -1 !== _this.props.value.indexOf(child.props.value);
+                const childrens = React.Children.toArray(this.props.children).filter((child) => {
+                    return this.props.value && -1 !== this.props.value.indexOf(child.props.value);
                 });
-                var selectedDetails_1 = [];
-                childrens.forEach(function (children) {
-                    selectedDetails_1.push({
+                const selectedDetails = [];
+                childrens.forEach(children => {
+                    selectedDetails.push({
                         value: children.props.value,
                         text: children.props.text || children.props.value,
                     });
                 });
                 this.setState({
-                    selectedDetails: selectedDetails_1
+                    selectedDetails
                 });
             }
             else {
-                var children = react_1.default.Children.toArray(this.props.children).find(function (child) {
-                    return child.props.value === _this.props.value;
+                const children = React.Children.toArray(this.props.children).find((child) => {
+                    return child.props.value === this.props.value;
                 });
-                var selectedDetails = [{
+                const selectedDetails = [{
                         value: children.props.value,
                         text: children.props.text || children.props.value,
                     }];
                 this.setState({
-                    selectedDetails: selectedDetails
+                    selectedDetails
                 });
             }
         }
-    };
+    }
     /*
      * component did mount (lifecycle)
      * @params -
      * @return void
      */
-    Select.prototype.componentDidMount = function () {
+    componentDidMount() {
         this.setHeight();
-    };
+    }
     /*
      * component did update (lifecycle)
      * @params preveProps:object
      * @return void
      */
-    Select.prototype.componentDidUpdate = function (prevProps) {
-        var _this = this;
-        var asyncFunc = function () {
-            var timer = null;
-            if (_this.state.menuClassName === 'toggle') {
+    componentDidUpdate(prevProps) {
+        const asyncFunc = () => {
+            let timer = null;
+            if (this.state.menuClassName === 'toggle') {
                 clearTimeout(timer);
-                timer = setTimeout(function () {
-                    _this.setHeight();
+                timer = setTimeout(() => {
+                    this.setHeight();
                 }, 500);
             }
             else {
-                _this.setHeight();
+                this.setHeight();
             }
         };
-        if (react_1.default.Children.toArray(this.props.children).length !== react_1.default.Children.toArray(prevProps.children).length) {
+        if (React.Children.toArray(this.props.children).length !== React.Children.toArray(prevProps.children).length) {
             if (this.state.menuClassName !== 'closed') {
                 this.eventScheduler = {
                     onClose: asyncFunc
@@ -356,47 +310,45 @@ var Select = /** @class */ (function (_super) {
                 asyncFunc();
             }
         }
-    };
+    }
     /*
      * render
      */
-    Select.prototype.render = function () {
-        var _this = this;
-        return (react_1.default.createElement(WatchClickOutside_1.default, { style: { display: "initial" }, onClickOutside: function () { return _this.toggle(false); } },
-            react_1.default.createElement("div", { onKeyDown: this.onKeyPressed, tabIndex: 0, className: "ui-select-container", style: { maxWidth: this.props.width || '300px' } },
-                react_1.default.createElement("label", { className: "ui-select-label" }, this.props.label),
-                react_1.default.createElement("div", { onMouseLeave: this.onMouseLeave, onMouseEnter: this.onMouseEnter, className: "dropdown", style: { height: this.props.height || 'auto' } },
-                    react_1.default.createElement("div", { onClick: function () { return _this.toggle(); }, className: "select " + (this.state.selectedDetails.length === 0 ? 'empty ' : 'non-empty ')
+    render() {
+        return (React.createElement(WatchClickOutside, { style: { display: "initial" }, onClickOutside: () => this.toggle(false) },
+            React.createElement("div", { onKeyDown: this.onKeyPressed, tabIndex: 0, className: "ui-select-container", style: { maxWidth: this.props.width || '300px' } },
+                React.createElement("label", { className: "ui-select-label" }, this.props.label),
+                React.createElement("div", { onMouseLeave: this.onMouseLeave, onMouseEnter: this.onMouseEnter, className: "dropdown", style: { height: this.props.height || 'auto' } },
+                    React.createElement("div", { onClick: () => this.toggle(), className: "select " + (this.state.selectedDetails.length === 0 ? 'empty ' : 'non-empty ')
                             + (this.props.multiple === true ? 'multiple ' : 'single ') },
-                        this.state.selectedDetails.length === 0 ? react_1.default.createElement("span", { className: "ui-select-placeholder" }, this.state.placeholder || 'Please select') :
+                        this.state.selectedDetails.length === 0 ? React.createElement("span", { className: "ui-select-placeholder" }, this.state.placeholder || 'Please select') :
                             (this.props.multiple !== true ?
-                                react_1.default.createElement("span", null, this.state.selectedDetails[0].text || this.state.selectedDetails[0].child) :
-                                react_1.default.createElement("div", { className: "ui-select-multiple-select-container" }, this.state.selectedDetails.map(function (o, i) {
-                                    return react_1.default.createElement("span", { key: 'ui-multi-select-' + i, className: "ui-multi-select-wrapper" },
-                                        react_1.default.createElement("span", { className: "ui-multi-select-text" }, o.text || o.child),
-                                        react_1.default.createElement("span", { onClick: function (e) {
+                                React.createElement("span", null, this.state.selectedDetails[0].text || this.state.selectedDetails[0].child) :
+                                React.createElement("div", { className: "ui-select-multiple-select-container" }, this.state.selectedDetails.map((o, i) => {
+                                    return React.createElement("span", { key: 'ui-multi-select-' + i, className: "ui-multi-select-wrapper" },
+                                        React.createElement("span", { className: "ui-multi-select-text" }, o.text || o.child),
+                                        React.createElement("span", { onClick: (e) => {
                                                 e.stopPropagation();
-                                                _this.unSelect(o.value);
+                                                this.unSelect(o.value);
                                             }, className: "close-btn" }, "x"));
                                 }))),
-                        react_1.default.createElement("i", { className: "fa fa-chevron-left", onClick: this.clearAll }, "x")),
-                    react_1.default.createElement("div", { className: "dropdown-menu " + this.state.menuClassName, ref: this.dropDownMenuRef, style: this.state.menuStyle },
-                        react_1.default.createElement("div", { className: "ui-select-search" },
-                            react_1.default.createElement("input", { onClick: function (e) { return e.stopPropagation(); }, onChange: this.search, type: "text" })),
-                        react_1.default.createElement("ul", null, react_1.default.Children.map(this.props.children, function (child, i) {
-                            if (child.type === Option_1.default) {
-                                var _a = child.props, value_1 = _a.value, children_1 = _a.children, text_1 = _a.text, className = _a.className, customProps = __rest(_a, ["value", "children", "text", "className"]);
-                                if (_this.state.searchKeyword === '' || (text_1 && text_1.toLowerCase().includes(_this.state.searchKeyword))) {
-                                    return (react_1.default.createElement("li", __assign({ className: (className ? className : '') +
-                                            (_this.props.multiple !== true && _this.state.selectedDetails[0] !== undefined && _this.state.selectedDetails[0].value === value_1 ? ' selected' : '')
-                                            + (_this.props.multiple === true && _this.findValue(value_1) !== undefined ? ' selected' : ''), onClick: function () { return _this.onClick(value_1, children_1, text_1); } }, customProps), children_1));
+                        React.createElement("i", { className: "fa fa-chevron-left", onClick: this.clearAll }, "x")),
+                    React.createElement("div", { className: "dropdown-menu " + this.state.menuClassName, ref: this.dropDownMenuRef, style: this.state.menuStyle },
+                        React.createElement("div", { className: "ui-select-search" },
+                            React.createElement("input", { onClick: (e) => e.stopPropagation(), onChange: this.search, type: "text" })),
+                        React.createElement("ul", null, React.Children.map(this.props.children, (child, i) => {
+                            if (child.type === Option) {
+                                const { value, children, text, className, ...customProps } = child.props;
+                                if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword))) {
+                                    return (React.createElement("li", Object.assign({ className: (className ? className : '') +
+                                            (this.props.multiple !== true && this.state.selectedDetails[0] !== undefined && this.state.selectedDetails[0].value === value ? ' selected' : '')
+                                            + (this.props.multiple === true && this.findValue(value) !== undefined ? ' selected' : ''), onClick: () => this.onClick(value, children, text) }, customProps), children));
                                 }
                                 else {
-                                    return react_1.default.createElement(react_1.default.Fragment, null);
+                                    return React.createElement(React.Fragment, null);
                                 }
                             }
                         })))))));
-    };
-    return Select;
-}(react_1.default.PureComponent));
-exports.default = Select;
+    }
+}
+export default Select;

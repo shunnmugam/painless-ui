@@ -3,32 +3,40 @@
   border: 1px solid #ccc;
   width: 96%;
   margin: 0 auto; }
-  .ui-table .ui-table-header tr {
-    border-bottom: 1px solid #ccc; }
-  .ui-table th,
-  .ui-table td {
-    text-align: left;
-    padding: 8px; }
-  .ui-table .ui-table-header .sort-column {
-    position: relative;
-    padding-right: 30px;
-    cursor: pointer; }
-    .ui-table .ui-table-header .sort-column::before {
-      content: "\2191";
-      position: absolute;
-      right: 20px;
-      color: gray; }
-    .ui-table .ui-table-header .sort-column::after {
-      content: "\2193";
-      position: absolute;
-      right: 13px;
-      color: gray; }
-    .ui-table .ui-table-header .sort-column.sorting.asc::before {
-      color: black; }
-    .ui-table .ui-table-header .sort-column.sorting.desc::after {
-      color: black; }
-  .ui-table tr:nth-child(even) {
-    background-color: #f2f2f2; }
+
+.ui-table .ui-table-header tr {
+  border-bottom: 1px solid #ccc; }
+
+.ui-table th,
+.ui-table td {
+  text-align: left;
+  padding: 8px; }
+
+.ui-table .ui-table-header .sort-column {
+  position: relative;
+  padding-right: 30px;
+  cursor: pointer; }
+
+.ui-table .ui-table-header .sort-column::before {
+  content: "\2191";
+  position: absolute;
+  right: 20px;
+  color: gray; }
+
+.ui-table .ui-table-header .sort-column::after {
+  content: "\2193";
+  position: absolute;
+  right: 13px;
+  color: gray; }
+
+.ui-table .ui-table-header .sort-column.sorting.asc::before {
+  color: black; }
+
+.ui-table .ui-table-header .sort-column.sorting.desc::after {
+  color: black; }
+
+.ui-table tr:nth-child(even) {
+  background-color: #f2f2f2; }
 
 .ui-table-toolbar-wrapper, .ui-table-pagination-control {
   padding: 5px 2%; }
@@ -37,6 +45,7 @@
   margin: 0px;
   list-style: none;
   padding: 0px; }
-  .ui-table-pagination-control ul li {
-    float: left;
-    margin: 2px 5px; }
+
+.ui-table-pagination-control ul li {
+  float: left;
+  margin: 2px 5px; }

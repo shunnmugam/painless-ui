@@ -1,19 +1,47 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var defaultTheme = {
+const defaultTheme = {
     components: {
         Accordion: {
             className: 'theme-default-accordion ',
             style: {
-                container: {
-                    backgroundColor: 'gray'
+                title: {
+                    backgroundColor: '#eeeeeeb8',
+                    color: 'black',
+                    fontSize: '1.5rem'
+                },
+                panel: {
+                    // backgroundColor: 'red',
+                    color: 'white'
                 }
+            }
+        },
+        AccordionGroup: {
+            className: 'theme-default-accordion-group',
+            style: {
+                container: {
+                    padding: '10px'
+                }
+            }
+        },
+        Badge: {
+            className: 'theme-default-badge',
+            style: {
+                container: {
+                    backgroundColor: '#23d160',
+                    color: 'white',
+                    borderColor: '#23d160',
+                }
+            }
+        },
+        Breadcrumb: {
+            className: 'theme-default-breadcrumb',
+            style: {
+                container: {}
             }
         }
     },
     colors: {
-        primary: '',
-        secondary: ''
+        primary: '#1976d2',
+        secondary: 'white'
     }
 };
-exports.default = defaultTheme;
+export default defaultTheme;

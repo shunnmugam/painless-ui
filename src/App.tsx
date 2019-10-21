@@ -2,9 +2,9 @@ import React, { useState, Suspense } from 'react';
 import './App.css';
 //import Modal from './Modal/Modal';
 import { Button, ButtonGroup, Checkbox, Input, Badge, TabGroup, Tab, TabWrapper, Accordion, AccordionGroup, Tag, Breadcrumb, Select, Option, Modal, Toast, ToastContainer, Table } from './components/index';
-// import TabContainer from './components/TabContainer/TabContainer';
+import TabContainer from './components/TabContainer/TabContainer';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import DataTableExample from './examples/DataTable/DataTable';
+import DataTableExample from './docs/DataTable/DataTable';
 import { NavBar } from './components';
 import ThemeProvider from './providers/ThemeProvider';
 
@@ -16,30 +16,17 @@ let tableData = {
 
 
 const App: React.FC = (props) => {
-  // const [ checkBoxHook, setChecboxCheck ] = useState(false);
-  // const [ activeTab, changeActiveTab ] = useState(0);
-  // const [toastPosition,changeToastPosition] = useState('top-center');
-  // const [toastShow,changeToastShow] = useState(false);
-  // const [toastShow2,changeToastShow2] = useState(false);
+  const [ checkBoxHook, setChecboxCheck ] = useState(false);
+  const [ activeTab, changeActiveTab ] = useState(0);
+  const [toastPosition,changeToastPosition] = useState('top-center');
+  const [toastShow,changeToastShow] = useState(false);
+  const [toastShow2,changeToastShow2] = useState(false);
   return (
     <ThemeProvider >
-      {console.log(props)}
-      <AccordionGroup collapsible onToggle={(s,i) => console.log(s,i)}>
-      <Accordion title="section 1">
-        <p>
-        Test
-        </p>
-      </Accordion>
-      <Accordion title="sectiocontainern 1">
-        <p>
-        Test
-        </p>
-      </Accordion>
-      </AccordionGroup>
     <div className="App">
       <Router>
-        <NavBar />
-      {/* <Input rounded={false} type="email" placeholder="Email id" onChange={ (e) => {
+        {/* <NavBar /> */}
+       <Input rounded={false} type="email" placeholder="Email id" onChange={ (e) => {
           console.log(e.target.value)
         }}
          validationOptions={{
@@ -67,7 +54,7 @@ const App: React.FC = (props) => {
       <Switch />
       </Suspense>
        <Button  color="white" bgColor="#2196f3" id='ui-button-1' styleType='background'>C</Button>
-      <Badge>10</Badge>
+      <Badge animation={false}>10</Badge>
       <TabWrapper>
         <TabGroup onClick={changeActiveTab}>
           <Tab>
@@ -192,7 +179,7 @@ const App: React.FC = (props) => {
        limit: 15
      }}>
 
-     </Table> */}
+     </Table> 
       {/* <Switch> */}
         <Route path='/examples/data-table' component={DataTableExample} />
       {/* </Switch> */}

@@ -1,10 +1,13 @@
 import React from 'react';
 import Accordion from '../Accordion/Accordion';
+import { withTheme } from '../../providers/ThemeProvider';
+import { componentTheme } from "../../providers/theme";
 
 interface AccordionGroupProps {
     className?: string,
     collapsible?: boolean,
     onToggle?: Function,
+    theme?: componentTheme,
     [key:string]: any
 }
 
@@ -54,7 +57,9 @@ class AccordionGroup extends React.Component<AccordionGroupProps> {
     }
 
     render() {
-        return (<div className="ui-accordion-group">
+        const theme = this.props.theme;
+        return (<div className={"ui-accordion-group "+ (theme ? theme.className : '' )} 
+        style={theme ? theme.style ?  theme.style.container : {} : {} }>
             
             {this.props.collapsible && this.props.children ? (
                React.Children.map(this.props.children, (accordion:any,i) => {
@@ -71,4 +76,4 @@ class AccordionGroup extends React.Component<AccordionGroupProps> {
     }
 }
 
-export default AccordionGroup;
+export default withTheme(AccordionGroup,'AccordionGroup');

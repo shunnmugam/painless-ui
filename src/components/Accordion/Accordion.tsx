@@ -1,12 +1,14 @@
 import React from 'react';
-import './Accordion.scss';
+import './Accordion.css';
 import { withTheme } from '../../providers/ThemeProvider';
-
+import { componentTheme, themeColors } from "../../providers/theme";
 interface AccordionProps {
-    className?: string,
-    open?: boolean,
-    title: any,
-    children: any,
+    className?: string
+    open?: boolean
+    title: any
+    children: any
+    theme?: componentTheme
+    colors?: themeColors
     [key:string] : any
 }
 
@@ -43,10 +45,28 @@ class Accordion extends React.Component<AccordionProps>  {
     }
 
     render() {
-        const { className, open, children, title, ...customProps} = this.props;
-        return (<div className={'ui-accordion ' + (this.state.isOpen ? 'open ' : 'closed ') + (className || '') } {...customProps}>
-            <button className="ui-accordion-button" onClick={() => this.toggle()}>{this.props.title || ''}</button>
-            <div className={'ui-accordion-panel ' + (this.state.isOpen ? 'open' : 'closed')}>
+        const { className, open, children, title, theme, colors, ...customProps} = this.props;
+        let defaultButtonStyle: any= {
+            backgroundColor : colors ? (colors.primary ? colors.primary : null) : null,
+            color : colors ? (colors.secondary ? colors.secondary : null) : null
+        }
+        if(theme && theme.style && theme.style.title) {
+            defaultButtonStyle = {...defaultButtonStyle,...theme.style.title}
+        }
+
+        let defaultPanelStyle: any= {
+            backgroundColor : colors ? (colors.primary ? colors.primary : null) : null,
+            color : colors ? (colors.secondary ? colors.secondary : null) : null
+        }
+        if(theme && theme.style && theme.style.panel) {
+            defaultPanelStyle = {...defaultPanelStyle,...theme.style.panel}
+        }
+
+        return (<div className={'ui-accordion ' + (this.state.isOpen ? 'open ' : 'closed ') + (className || '') + 
+        (' '+ (theme ? theme.className : ' ') + ' ')} 
+        {...customProps}>
+            <button style={defaultButtonStyle} className="ui-accordion-button" onClick={() => this.toggle()}>{this.props.title || ''}</button>
+            <div style={defaultPanelStyle} className={'ui-accordion-panel ' + (this.state.isOpen ? 'open' : 'closed')}>
                 {children || ''}
             </div>
         </div>);

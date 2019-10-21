@@ -1,5 +1,5 @@
 import React from 'react';
-import './ButtonGroup.scss';
+import './ButtonGroup.css';
 interface ButtonGroupProps {
     children: any;
     className?: string;

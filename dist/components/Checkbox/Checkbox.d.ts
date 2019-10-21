@@ -1,5 +1,5 @@
 import React from 'react';
-import './Checkbox.scss';
+import './Checkbox.css';
 interface CheckboxProps {
     bgColor?: string;
     height?: string;
