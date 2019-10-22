@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.bccbcbf2.chunk.css",
-    "main.js": "/static/js/main.54877543.chunk.js",
-    "main.js.map": "/static/js/main.54877543.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.ad339639.chunk.js": "/static/js/2.ad339639.chunk.js",
-    "static/js/2.ad339639.chunk.js.map": "/static/js/2.ad339639.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.cd5dd702ffc90746483d0ec4ab8b3113.js": "/precache-manifest.cd5dd702ffc90746483d0ec4ab8b3113.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.bccbcbf2.chunk.css.map": "/static/css/main.bccbcbf2.chunk.css.map"
+    "main.css": "painless-ui/static/css/main.bccbcbf2.chunk.css",
+    "main.js": "painless-ui/static/js/main.114da280.chunk.js",
+    "main.js.map": "painless-ui/static/js/main.114da280.chunk.js.map",
+    "runtime~main.js": "painless-ui/static/js/runtime~main.500d14a2.js",
+    "runtime~main.js.map": "painless-ui/static/js/runtime~main.500d14a2.js.map",
+    "static/js/2.ad339639.chunk.js": "painless-ui/static/js/2.ad339639.chunk.js",
+    "static/js/2.ad339639.chunk.js.map": "painless-ui/static/js/2.ad339639.chunk.js.map",
+    "index.html": "painless-ui/index.html",
+    "precache-manifest.61c4d00ec5c8fe78e1146f42016ce676.js": "painless-ui/precache-manifest.61c4d00ec5c8fe78e1146f42016ce676.js",
+    "service-worker.js": "painless-ui/service-worker.js",
+    "static/css/main.bccbcbf2.chunk.css.map": "painless-ui/static/css/main.bccbcbf2.chunk.css.map"
   }
 }
