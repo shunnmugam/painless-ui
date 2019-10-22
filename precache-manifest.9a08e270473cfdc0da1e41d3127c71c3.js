@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0db222d4d7887d19591eb48a0836db70",
+    "revision": "70411ba5b8bddb0d11341542543e2b7f",
     "url": "/painless-ui/index.html"
   },
   {
-    "revision": "0e2fc55181678c64df89",
+    "revision": "faadf0887e1285801cf7",
     "url": "/painless-ui/static/css/main.bccbcbf2.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/painless-ui/static/js/2.ad339639.chunk.js"
   },
   {
-    "revision": "0e2fc55181678c64df89",
-    "url": "/painless-ui/static/js/main.ef7338b0.chunk.js"
+    "revision": "faadf0887e1285801cf7",
+    "url": "/painless-ui/static/js/main.21f3b067.chunk.js"
   },
   {
     "revision": "57e6eeb2aa9b9d3a2da5",
