@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
 import ThemeProvider from '../providers/ThemeProvider';
 import DataTable from './DataTable/DataTable';
 import { NavBar } from '../components';
