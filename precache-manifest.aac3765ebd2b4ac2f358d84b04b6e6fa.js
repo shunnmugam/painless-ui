@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7afc35dfa37b78e6eb6bd606aad4ef73",
+    "revision": "0db222d4d7887d19591eb48a0836db70",
     "url": "/painless-ui/index.html"
   },
   {
-    "revision": "226a6d9eb91c80ba7d7c",
+    "revision": "0e2fc55181678c64df89",
     "url": "/painless-ui/static/css/main.bccbcbf2.chunk.css"
   },
   {
-    "revision": "cef138601948ded82fec",
-    "url": "/painless-ui/static/js/2.48421b18.chunk.js"
+    "revision": "a8fb0f84c4d1a2aa69f1",
+    "url": "/painless-ui/static/js/2.ad339639.chunk.js"
   },
   {
-    "revision": "226a6d9eb91c80ba7d7c",
-    "url": "/painless-ui/static/js/main.7c2e7476.chunk.js"
+    "revision": "0e2fc55181678c64df89",
+    "url": "/painless-ui/static/js/main.ef7338b0.chunk.js"
   },
   {
     "revision": "57e6eeb2aa9b9d3a2da5",
