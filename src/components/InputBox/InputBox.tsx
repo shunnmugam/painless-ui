@@ -1,5 +1,7 @@
 import React from 'react';
 import Validator from '../../utills/Validator';
+import { withTheme } from '../../providers/ThemeProvider';
+import { componentTheme, themeColors } from "../../providers/theme";
 
 import './InputBox.css';
 import Button from '../Button/Button';
@@ -15,6 +17,9 @@ interface InputBoxProps {
     className?: string,
     type: string,
     rounded?: boolean
+    theme?: componentTheme
+    style?:object
+    colors?: themeColors 
     validation?: boolean,
     validationOptions?: ValidationOptions,
     [key:string]: any
@@ -98,29 +103,45 @@ class InputBox extends React.Component<InputBoxProps> {
      * render
      */       
     render(): JSX.Element {
-        const { type, className, validation, validationOptions, rounded, ...customProps} = this.props;
+        const { type, className, validation, validationOptions, rounded, style, theme, colors, ...customProps} = this.props;
         const customClassName = this.makeClassName();
         const validationEventName:string = (validationOptions && validationOptions.event) ? validationOptions.event : "onBlur";
         const validationEvent:object = {
             [validationEventName] : (e) => this.onValidationHandler(e.target.value,e)
         }
+        let defaultClassName = "";
+        if(className) {
+            defaultClassName = className;
+        }
+        if(theme && theme.className) {
+            defaultClassName+=" " + theme.className;
+        }
+        let customStyle = {};
+        if(theme && theme.style && theme.style.input) {
+            customStyle = theme.style.input;
+        }
+        if(style) {
+            customStyle = {...customStyle,...style}
+        }
+
         if(type === 'file') {
 
             return (
                 <label className="file-input-container">
-                <input className={'ui-input file ' + className} type="file" aria-label="File browser"  {...customProps} />
+                <input className={'ui-input file ' + defaultClassName} type="file" aria-label="File browser" style={customStyle}  {...customProps} />
                 <span className="file-custom"></span>
                 </label>
             );
         } else if(type === 'submit') {
-            return <Button type='submit' text={"Submit"} {...customProps} className={className} rounded={rounded} />
+            return <Button type='submit' text={"Submit"} {...customProps} className={defaultClassName} rounded={rounded} />
         } else if(type === 'reset') {
-            return <Button type='reset' text={"Reset"} {...customProps} className={className} rounded={rounded} />
+            return <Button type='reset' text={"Reset"} {...customProps} className={defaultClassName} rounded={rounded} />
         } else if(type === 'button') {
-            return <Button type='button' text={"Click"} {...customProps} className={className} rounded={rounded} />
+            return <Button type='button' text={"Click"} {...customProps} className={defaultClassName} rounded={rounded} />
         }
         return <input ref={input => this.inputElement = input} type={type} {...validationEvent}
-            className={'ui-input '+ type + ' '+ customClassName + className + (rounded ? ' rounded' : '') }  {...customProps} 
+            className={'ui-input '+ type + ' '+ customClassName + defaultClassName + (rounded ? ' rounded' : '') }  {...customProps} 
+            style={customStyle}
         />
     }
 
@@ -132,4 +153,4 @@ class InputBox extends React.Component<InputBoxProps> {
     }
 }
 
-export default InputBox;
+export default withTheme(InputBox,"Input");

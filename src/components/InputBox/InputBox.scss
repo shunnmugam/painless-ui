@@ -23,6 +23,8 @@
     }
     &.file {
         width: inherit !important;
+        top: 5px;
+        position: relative;
     }
 }
 .file-input-container {

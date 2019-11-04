@@ -23,7 +23,9 @@
   border-color: red; }
 
 .ui-input.file {
-  width: inherit !important; }
+  width: inherit !important;
+  top: 5px;
+  position: relative; }
 
 .file-input-container {
   position: relative;

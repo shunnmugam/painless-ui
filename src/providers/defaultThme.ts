@@ -62,6 +62,9 @@ const defaultTheme:theme = {
         },
         Checkbox : {
             className : 'theme-default-checkbox'
+        },
+        Input: {
+            className: 'theme-default-input'
         }
     },
     colors: {

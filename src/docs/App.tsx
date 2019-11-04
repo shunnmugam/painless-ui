@@ -10,6 +10,9 @@ import BreadcrumbExample from './Breadcrumb/Breadcrumb';
 import ButtonExample from './Button/Button';
 import ButtonGroupExample from './ButtonGroup/ButtonGroup';
 import CheckboxExample from './Checkbox/Checkbox';
+import InputExample from './Input/InputExample';
+import ModalExample from './Modal/ModalExample';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -50,6 +53,12 @@ class App extends React.Component {
                             <li>
                                 <Link to="/checkbox">Checkbox</Link>
                             </li>
+                            <li>
+                                <Link to="/input">Input</Link>
+                            </li>
+                            <li>
+                                <Link to="/modal">Modal</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="col-12 col-sm-8 col-md-10">
@@ -62,6 +71,8 @@ class App extends React.Component {
                                 <Route path='/button' component={ButtonExample} />
                                 <Route path='/button-group' component={ButtonGroupExample} />
                                 <Route path='/checkbox' component={CheckboxExample} />
+                                <Route path='/input' component={InputExample} />
+                                <Route path='/modal' component={ModalExample} />
                                 <Route path='/data-table' component={DataTable} />
                             </Switch>
                     </div>

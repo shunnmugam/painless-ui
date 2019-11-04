@@ -1,5 +1,6 @@
 {
-  "name": "painless-ui",
+  "name": "@react-ui",
+  "description": "React ui kit",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

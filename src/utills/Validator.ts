@@ -117,6 +117,24 @@ export default class Validator {
         return result;
     }
 
+    private regex(value, ruleOptions): validationResult {
+        if(ruleOptions[0] === undefined) {
+            throw new Error('regex statement is required');
+        }
+        const result:validationResult = {
+            isValid: true,
+            msg: ''
+        };
+        const regex = ruleOptions.join(",")
+        console.log(regex, new RegExp(regex).test(value));
+        if(new RegExp(regex).test(value) === false) {
+            result.isValid = false;
+            // eslint-disable-next-line
+            result.msg = '${input} is invalid ';
+        }
+        return result;
+    }
+
     public validate(): boolean {
         let isValid = true; 
         const cb = (rule,key) => {

@@ -32,7 +32,7 @@
 
 .ui-radio-container .checkmark {
   position: absolute;
-  top: 0;
+  top: -19px;
   left: 0;
   height: 25px;
   width: 25px;
