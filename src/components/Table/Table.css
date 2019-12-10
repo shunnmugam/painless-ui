@@ -21,13 +21,15 @@
   content: "\2191";
   position: absolute;
   right: 20px;
-  color: gray; }
+  color: gray;
+  top: 25%; }
 
 .ui-table .ui-table-header .sort-column::after {
   content: "\2193";
   position: absolute;
   right: 13px;
-  color: gray; }
+  color: gray;
+  top: 25%; }
 
 .ui-table .ui-table-header .sort-column.sorting.asc::before {
   color: black; }

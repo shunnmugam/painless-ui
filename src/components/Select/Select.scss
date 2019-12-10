@@ -21,6 +21,10 @@
             cursor: pointer;
             display: block;
             padding: 10px;
+            &.disabled {
+                color: #a7a7a7;
+                cursor: not-allowed;
+            }
 
             &.non-empty {
                 &.multiple {
@@ -64,7 +68,7 @@
             width: 100%;
             left: 0;
             margin-top: 1px;
-            box-shadow: 0 1px 2px rgb(204, 204, 204);
+            // box-shadow: 0 1px 2px rgb(204, 204, 204);
             border-radius: 0 1px 5px 5px;
             overflow: hidden;
             visibility: hidden;
@@ -72,6 +76,9 @@
             overflow-y: auto;
             z-index: 9;
             transition: all 0.5s ease-in-out;
+            &:not(.closed) {
+                box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12);
+            }
 
             &.toggle {
                 overflow: hidden !important;
@@ -111,6 +118,10 @@
         display: block;
         margin-bottom: 10px;
     }
+    .ui-select-multiple-select-container {
+        max-height: 70px;
+        overflow-y: auto;
+    }
 
     .ui-multi-select-wrapper {
         background-color: #eeeeee;
@@ -133,11 +144,29 @@
 
     .ui-select-search {
         text-align: center;
+        position: relative;
 
         input {
             width: 94%;
             min-height: 27px;
             padding: 0px 5px;
+            margin: 5px 0;
+            border: 1px solid #c5c5c5;
+            border-radius: 7px;
+            &:focus {
+                outline-width: 0;
+            }
+        }
+        svg, .search-icon {
+            position: absolute;
+            right: 9px;
+            width: 22px;
+            top: 7px;
+            fill: #c5c5c5;
+            color: #c5c5c5;
+        }
+        .search-icon {
+            cursor: pointer;
         }
     }
 }

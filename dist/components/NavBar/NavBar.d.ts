@@ -1,9 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import './NavBar.css';
-interface NavBarProps {
-    className?: string;
-    position?: string;
-    [key: string]: any;
-}
-declare const NavBar: React.FC<NavBarProps>;
-export default NavBar;
+declare const _default: (props: any) => JSX.Element;
+export default _default;

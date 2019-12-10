@@ -14,6 +14,7 @@
   height: 32px;
   z-index: 0;
   text-align: left;
+  border-radius: 28px;
   /* switch toggle background */
   /* switch toggle circle */ }
 
@@ -66,14 +67,12 @@
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25); }
 
 .ui-switch :checked + .ui-switch-toggle {
-  box-shadow: inset 0 0 0 2px #44db5e;
-  background-color: #44db5e; }
+  box-shadow: inset 0 0 0 2px;
+  background-color: inherit; }
 
 .ui-switch :checked + .ui-switch-toggle > .ui-switch-handle {
   left: 57%;
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.25); }
 
 .ui-switch :disabled + .ui-switch-toggle {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none; }
+  cursor: not-allowed; }

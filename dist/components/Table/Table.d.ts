@@ -1,11 +1,11 @@
 import React from 'react';
-import './Table.scss';
+import './Table.css';
 interface TableProps {
     className?: string;
     containerStyle?: object;
     data: Array<object> | any;
     dataType?: string;
-    columns: Array<Columns>;
+    columns: Array<typeArrayColumns | typeObjectColumns>;
     responsive?: boolean;
     serverSide?: boolean;
     style?: object;
@@ -13,14 +13,22 @@ interface TableProps {
     paginationOptions?: PaginationOptions;
     searchOptions?: SearchOptions;
     sortOptions?: SortOptions;
+    noHeader?: boolean;
+    [key: string]: any;
 }
 interface Columns {
     name: string;
-    selector?: string;
     sortable?: boolean;
     searchable?: boolean;
+    filter?: boolean;
     render?: Function;
     onSort?: Function;
+}
+interface typeArrayColumns extends Columns {
+    selector?: string;
+}
+interface typeObjectColumns extends Columns {
+    selector: string;
 }
 interface PaginationOptions {
     paginagtion?: boolean;
@@ -44,10 +52,12 @@ declare class Table extends React.PureComponent<TableProps> {
         loading: boolean;
         order: string;
         searchKeyword: string;
+        filterColumnData: {};
     };
     setSortController(sortBy: any): void;
     search(d: Array<any>): Array<any>;
     sort(d: Array<any>): Array<any>;
+    filter(d: Array<any>): Array<any>;
     paginate(d: Array<any>): any;
     pageChange(page: any): void;
     static getDerivedStateFromProps(nextProps: any, state: any): {

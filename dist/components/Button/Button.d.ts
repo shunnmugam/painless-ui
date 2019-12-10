@@ -1,15 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import './Button.css';
-interface ButtonProps {
-    bgColor?: string;
-    className?: string;
-    color?: string;
-    text?: string;
-    style?: object;
-    onClick?: Function;
-    rounded?: boolean;
-    styleType?: string;
-    [key: string]: any;
-}
-declare const Button: React.FC<ButtonProps>;
-export default Button;
+declare const _default: (props: any) => JSX.Element;
+export default _default;

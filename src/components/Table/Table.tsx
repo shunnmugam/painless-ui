@@ -1,14 +1,16 @@
 import React from 'react';
-import './Table.scss';
-import { Input } from '..';
+import './Table.css';
+import Input from '../InputBox/InputBox';
 import Button from '../Button/Button';
+import Select from '../Select/Select';
+import Option from '../Option/Option';
 
 interface TableProps {
     className?: string
     containerStyle?: object
     data: Array<object> | any
     dataType?: string
-    columns: Array<Columns>
+    columns: Array<typeArrayColumns | typeObjectColumns>
     responsive?: boolean
     serverSide?: boolean
     style?: object
@@ -16,15 +18,26 @@ interface TableProps {
     paginationOptions?: PaginationOptions
     searchOptions?: SearchOptions
     sortOptions?: SortOptions
+    noHeader?: boolean
+    [key:string]: any
 }
 
 interface Columns {
     name: string
-    selector?: string
     sortable?: boolean
     searchable?: boolean
+    filter?: boolean
     render?: Function
     onSort?: Function
+}
+
+
+interface typeArrayColumns extends Columns {
+    selector?: string
+}
+
+interface typeObjectColumns extends Columns {
+    selector: string
 }
 
 interface PaginationOptions {
@@ -69,6 +82,7 @@ class Table extends React.PureComponent<TableProps> {
         loading: this.props.loading,
         order: 'asc',
         searchKeyword: '',
+        filterColumnData : {}
     }
 
     setSortController(sortBy) {
@@ -108,7 +122,7 @@ class Table extends React.PureComponent<TableProps> {
         })
         return data.filter((row,i) => {
             const f: Array<any> = [];
-            searchColumns.map((s) => {
+            searchColumns.forEach((s) => {
                 if(row[s] !== undefined && (''+row[s]).toLowerCase().includes(this.state.searchKeyword.toLowerCase())) {
                     f.push(row[s]);
                 }
@@ -155,14 +169,42 @@ class Table extends React.PureComponent<TableProps> {
     }
 
     /*
+     * filter
+     * @params d: Array<any>
+     * @return data: Array<any>
+     */
+    filter(d: Array<any>): Array<any> {
+        if(Object.keys(this.state.filterColumnData).length === 0)
+            return d;
+        
+        return d.filter((data) => {
+            for (const key in this.state.filterColumnData) {
+                let index: string|number = key;
+                if (this.state.filterColumnData.hasOwnProperty(key)) {
+                    const element = this.state.filterColumnData[key];
+                    if(this.props.dataType !== 'array') {
+                        index = key;
+                    } else {
+                        index = key
+                    }
+                    if(data[index] !== element)
+                        return false;
+
+                }
+            }
+            return true;
+        })
+    }
+
+    /*
      * pagination
      * @params d:Array<any>
      * @return details:object
      */
     paginate(d: Array<any>): any {
-        const limit = this.props.paginationOptions !== undefined && this.props.paginationOptions.limit || 10;
+        const limit = this.props.paginationOptions !== undefined && this.props.paginationOptions.limit ? this.props.paginationOptions.limit : 10;
         const currentPage = this.state.currentPage;
-        const totalNoOfData = this.props.paginationOptions !== undefined && this.props.paginationOptions.totalNoOfData || d.length;
+        const totalNoOfData = this.props.paginationOptions !== undefined && this.props.paginationOptions.totalNoOfData ? this.props.paginationOptions.totalNoOfData : d.length;
         const totalPage = Math.ceil(totalNoOfData/limit);
         let data = d;
         if(this.props.serverSide === false)
@@ -210,7 +252,7 @@ class Table extends React.PureComponent<TableProps> {
             };
         }
 
-        if(nextProps.loading != state.loading) {
+        if(nextProps.loading !== state.loading) {
             return {
                 loading: nextProps.loading
             }
@@ -225,6 +267,8 @@ class Table extends React.PureComponent<TableProps> {
         if(this.props.searchOptions!== undefined && this.props.searchOptions.searchable === true) {
             data = this.search(this.props.data);
         }
+        //filter
+        data = this.filter(data)
         //sort
         data = this.sort(data);
         //pagination
@@ -243,19 +287,33 @@ class Table extends React.PureComponent<TableProps> {
                 {from} to {to > totalNoOfData ? totalNoOfData : to} of {totalNoOfData}
                 </span>
                 <ul className="pull-right">
-                    <li className="ui-table-pagination-prev">
-                    <Button rounded onClick={() => {
+                    <li className="ui-table-pagination-next" onClick={() => {
+                        if(this.state.currentPage > 1) {
+                            this.pageChange(1);
+                        }
+                    }}>
+                        <Button disabled={!(this.state.currentPage > 1)} styleType="text" rounded>|&#8249;</Button>
+                    </li>
+                    <li className="ui-table-pagination-prev" onClick={() => {
                             if(this.state.currentPage > 1) {
                                 this.pageChange(this.state.currentPage-1);
                             }
-                    }}>&#8249;</Button>
+                    }}>
+                    <Button styleType="text" rounded>&#8249;</Button>
                     </li>
                     <li className="ui-table-pagination-next" onClick={() => {
                         if(this.state.currentPage < totalPage) {
                             this.pageChange(this.state.currentPage+1);
                         }
                     }}>
-                        <Button rounded>&#8250;</Button>
+                        <Button styleType="text" rounded>&#8250;</Button>
+                    </li>
+                    <li className="ui-table-pagination-next" onClick={() => {
+                        if(this.state.currentPage < totalPage) {
+                            this.pageChange(totalPage);
+                        }
+                    }}>
+                        <Button disabled={!(this.state.currentPage < totalPage)} styleType="text" rounded>&#8250;|</Button>
                     </li>
                 </ul>
             </div>)
@@ -281,6 +339,7 @@ class Table extends React.PureComponent<TableProps> {
             </div>
             <div className={'ui-table-wrapper' + (props.responsive ? 'responsive ': '')}>
                 <table className={'ui-table '+ (props.className || '')} style={this.props.style || {}}>
+                {this.props.noHeader === true ? <></> :
                 <thead className="ui-table-header">
                 {
                     <tr>
@@ -297,11 +356,67 @@ class Table extends React.PureComponent<TableProps> {
                                 this.setSortController(selector)
                         }} key={'th-'+i} className={(column.sortable === true ? 'sort-column' : '') + sortClassName}>
                             {column.name}
+                            {column.filter ? <>
+                                <Select searchable style={{width : '100%',display : 'block'}} onClick={(e) => e.stopPropagation()} onChange ={(e) => {
+
+                                        const t = {...this.state.filterColumnData}
+                                        let index:number|string = i
+                                        if(this.props.dataType !== 'array' && column.selector)
+                                            index = column.selector
+
+                                        if(e.value === '' || e.value === undefined){
+                                            delete t[index]
+                                        } else
+                                            t[index] = e.value;
+                                        this.setState({
+                                            filterColumnData: t
+                                        });
+                                    }}>
+                                    {/* <Option value=""> </Option> */}
+                                    {
+                                        this.props.data.map((row,i) => {
+                                            if(props.dataType === 'array') {
+                                                row.map((d,c) => {
+                                                    const tempFilterData = new Set();
+                                                    if(!tempFilterData.has(d)) {
+                                                        tempFilterData.add(d);
+                                                        return <Option value={d} key={'filter-option-'+c+'-'+column.name}>{d}</Option>
+                                                    }
+                                                    return <></>
+                                                })
+                                            } else {
+                                                if(column.selector){
+                                                    const d = row[column.selector];
+                                                    const tempFilterData = new Set();
+                                                    if(!tempFilterData.has(d)) {
+                                                        tempFilterData.add(d);
+                                                        return <Option value={d} 
+                                                        key={'filter-option-'+i+'-'+column.name}>{d}</Option>
+                                                    }
+                                                    return <></>
+                                                }
+                                                else
+                                                    return <></>
+                                            }
+                                            return <></>
+                                            // (column.selector)  ? (
+                                            //     console.log(column.selector)
+                                            //     const d = row[column.selector];
+                                            //     const tempFilterData = new Set();
+                                            //     if(!tempFilterData.has(d)) {
+                                            //         tempFilterData.add(d);
+                                            //         return <option value={d} key={'filter-option-'+c+'-'+column.name}>{d}</option>
+                                            //     }
+                                            // }) : <></>
+                                        })
+                                    }
+                                    </Select>
+                            </> : <></>}
                         </th>)
                     })}
                     </tr>
                 }
-                </thead>
+                </thead> }
                 {
                     this.state.loading === true ? (<tbody>
                         <tr><td colSpan={this.props.columns.length}>Loading...</td></tr>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from '../../components'
-import { withTheme } from '../../providers/ThemeProvider';
+
 class DataTableExample extends React.Component {
 
     state = {
@@ -16,12 +16,14 @@ class DataTableExample extends React.Component {
             {
                 name: "email",
                 selector: "email",
-                sortable: true
+                sortable: true,
+                filter: true
             },
             {
                 name: "first_name",
                 selector: "first_name",
-                sortable: true
+                sortable: true,
+                filter: true
             },
             {
                 name: "last_name",
@@ -88,4 +90,4 @@ class DataTableExample extends React.Component {
     }
 }
 
-export default withTheme(DataTableExample);
+export default DataTableExample;

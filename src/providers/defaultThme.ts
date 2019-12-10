@@ -65,6 +65,12 @@ const defaultTheme:theme = {
         },
         Input: {
             className: 'theme-default-input'
+        },
+        NavBar: {
+            className: 'theme-default-navbar'
+        },
+        Radio: {
+            className: 'theme-default-radio'
         }
     },
     colors: {

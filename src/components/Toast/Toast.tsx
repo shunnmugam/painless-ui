@@ -8,6 +8,7 @@ interface ToastProps {
     options?: ToastOptions
     style?: object
     onClose?: Function
+    titleStyle?: object
     [key: string]: any
 }
 
@@ -25,22 +26,14 @@ const defaultToastOptions: ToastOptions = {
 
 class Toast extends React.PureComponent<ToastProps> {
 
+    static defaultProps;
+
     private timer: any = null;
 
-    state = {
-        show: this.props.show || false,
-        prevShow: undefined
-    }
-
     clear = (forceClick = false) => {
-        if (forceClick === true || (this.props.options && this.props.options.autoClose === true)) {
-            this.setState({
-                show: false,
-                prevShow: this.state.show
-            });
-
+        if (forceClick === true || (this.props.options && this.props.options.autoClose === true)) {        
             if (this.props.onClose && typeof this.props.onClose === 'function') {
-                this.props.onClose(false);
+                this.props.onClose(this.props.toastId);
             }
         }
     }
@@ -54,60 +47,46 @@ class Toast extends React.PureComponent<ToastProps> {
         }, time);
     }
 
-    static getDerivedStateFromProps(nextProps, state) {
-        if (nextProps.show !== state.show) {
-            return {
-                show: nextProps.show,
-                prevShow: state.show
-            }
-        }
-        return null;
-    }
-
     generateAnimationCss(): string {
         const toasterOptions = { ...defaultToastOptions, ...this.props.options || {} };
         const time: number = ((toasterOptions.time || 5000) - 2000) / 1000;
         return `fade-in 0.5s, expand 0.5s 0.5s, stay ${time}s 1s, shrink 0.5s ${time + 1}s, fade-out 0.5s ${time + 1.5}s`
     }
-    // eslint-disable-next-line
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.show === true && prevState.show !== true) {
-            this.setTimer(this.clear);
-        }
-    }
 
     componentDidMount() {
-        if (this.state.show === true) {
+        if (this.props.options && this.props.options.autoClose === true) {
             this.setTimer(this.clear);
         }
     }
 
 
     render() {
-        const { className, show, title, options, style, ...customProps } = this.props;
+        const { className, toastId, title, options, style, titleStyle, ...customProps } = this.props;
         const toasterOptions = { ...defaultToastOptions, ...options || {} };
-        if (show === true) {
-            const animationCss = this.generateAnimationCss();
-            return (<div onClick={() => {
-                if (toasterOptions.closeOnClick === true)
-                    this.clear(true);
-                }} className={'ui-toast ' + (this.state.show === true ? 'show ' : '')
-                + (toasterOptions.autoClose === true ? ' auto-close ' : ' ')
-                + (className || '')}
-                style={{
-                    ...{
-                        WebkitAnimation: animationCss,
-                        animation: animationCss
-                    }, ...style
-                }}
-                {...customProps}>
-                <div className="ui-toast-img">{title || 'Alert'}</div>
-                <div className="ui-toast-desc">{this.props.children}</div>
-            </div>)
-        } else {
-            return <></>;
-        }
+        const animationCss = this.generateAnimationCss();
+        return (<div onClick={() => {
+            if(this.props.options && this.props.options.closeOnClick)
+                this.clear(true);
+            if(this.props.onClick)
+                this.props.onClick()
+        }} className={'ui-toast show '
+            + (toasterOptions.autoClose === true ? ' auto-close ' : ' ')
+            + (className || '')}
+            style={{
+                ...{
+                    WebkitAnimation: animationCss,
+                    animation: animationCss
+                }, ...style
+            }}
+            {...customProps}>
+            <div style={titleStyle || {}} className="ui-toast-img">{title || 'Alert'}</div>
+            <div className="ui-toast-desc">{this.props.children}</div>
+        </div>)
+        
     }
 }
 
+Toast.defaultProps = {
+    options: defaultToastOptions
+}
 export default Toast;

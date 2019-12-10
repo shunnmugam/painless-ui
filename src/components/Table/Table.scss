@@ -24,12 +24,14 @@
                 position: absolute;
                 right: 20px;
                 color: gray;
+                top: 25%;
             }
             &::after {
                 content : "\2193";
                 position: absolute;
                 right: 13px;
                 color: gray;
+                top: 25%;
             }
             &.sorting {
                 &.asc {

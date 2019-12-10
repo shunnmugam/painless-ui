@@ -240,14 +240,19 @@ const InputExample:React.FC = (props) => {
             default : "-"
         },
         {
-            name : "rounded",
+            name : "validation",
             type: "bool",
-            default : "false"
+            default : "true"
         },
         {
-            name : "bgColor",
-            type: "string",
-            default : "-"
+            name : "validationOptions",
+            type: "object",
+            default : `{
+                rules: '',
+                event: 'onBlur',
+                validationCallback: undefined,
+                validateNow: undefined
+            }`
         },
         {
             name : "height",

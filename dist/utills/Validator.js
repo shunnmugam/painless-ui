@@ -1,4 +1,4 @@
-export default class Validater {
+export default class Validator {
     /*
      * constructor method
      * @params value: any
@@ -34,7 +34,7 @@ export default class Validater {
         if (value.length < ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
-            result.msg = '${input} should minimum ' + ruleOptions[0] + ' charecters';
+            result.msg = '${input} should minimum ' + ruleOptions[0] + ' characters';
         }
         return result;
     }
@@ -49,7 +49,7 @@ export default class Validater {
         if (value.length > ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
-            result.msg = '${input} should minimum ' + ruleOptions[0] + ' charecters';
+            result.msg = '${input} should minimum ' + ruleOptions[0] + ' characters';
         }
         return result;
     }
@@ -91,6 +91,23 @@ export default class Validater {
             result.isValid = false;
             // eslint-disable-next-line
             result.msg = '${input} is wrong type, expected type is ' + ruleOptions[0];
+        }
+        return result;
+    }
+    regex(value, ruleOptions) {
+        if (ruleOptions[0] === undefined) {
+            throw new Error('regex statement is required');
+        }
+        const result = {
+            isValid: true,
+            msg: ''
+        };
+        const regex = ruleOptions.join(",");
+        console.log(regex, new RegExp(regex).test(value));
+        if (new RegExp(regex).test(value) === false) {
+            result.isValid = false;
+            // eslint-disable-next-line
+            result.msg = '${input} is invalid ';
         }
         return result;
     }

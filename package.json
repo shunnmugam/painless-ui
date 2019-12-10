@@ -1,9 +1,13 @@
 {
-  "name": "@react-ui",
+  "name": "painless-ui",
   "description": "React ui kit",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "version": "0.0.1",
+  "files": [ "dist", "README.md" ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shunnmugam/painless-ui"
+  },
+  "peerDependencies": {
     "@types/jest": "24.0.14",
     "@types/node": "12.0.8",
     "@types/react": "16.8.19",

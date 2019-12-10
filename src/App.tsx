@@ -1,7 +1,7 @@
 import React, { useState, Suspense } from 'react';
 import './App.css';
 //import Modal from './Modal/Modal';
-import { Button, ButtonGroup, Checkbox, Input, Badge, TabGroup, Tab, TabWrapper, Accordion, AccordionGroup, Tag, Breadcrumb, Select, Option, Modal, Toast, ToastContainer, Table } from './components/index';
+import { Button, ButtonGroup, Checkbox, Input, Badge, TabGroup, Tab, TabWrapper, Accordion, AccordionGroup, Tag, Breadcrumb, Select, Option, Modal, ToastContainer, Table } from './components/index';
 import TabContainer from './components/TabContainer/TabContainer';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import DataTableExample from './docs/DataTable/DataTable';
@@ -111,7 +111,7 @@ const App: React.FC = (props) => {
       }}>Show Toast 2</Button>
 
       </div>
-      <ToastContainer position={toastPosition}>
+      {/* <ToastContainer position={toastPosition}>
       <Toast onClose={changeToastShow} options={
         {
           autoClose: true,
@@ -126,7 +126,7 @@ const App: React.FC = (props) => {
                 time: 10000
               }
             } show={toastShow2}> 2 show notification message ...</Toast>
-     </ToastContainer>
+     </ToastContainer> */}
 
      <Table columns={[
        {

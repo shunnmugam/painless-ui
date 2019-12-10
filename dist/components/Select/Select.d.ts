@@ -9,9 +9,12 @@ interface SelectProps {
     placeholder?: string;
     value?: string | Array<any>;
     hover?: boolean;
+    disabled?: boolean;
+    searchable?: boolean;
     onOpen?: Function;
     onClose?: Function;
     onChange?: Function;
+    onSearch?: Function;
     [key: string]: any;
 }
 declare class Select extends React.PureComponent<SelectProps> {
@@ -31,7 +34,13 @@ declare class Select extends React.PureComponent<SelectProps> {
     private setHeight;
     private search;
     private clearAll;
-    componentWillMount(): void;
+    static getDerivedStateFromProps(props: any, state: any): {
+        fromLocal: boolean;
+        selectedDetails?: undefined;
+    } | {
+        selectedDetails: any;
+        fromLocal?: undefined;
+    };
     componentDidMount(): void;
     componentDidUpdate(prevProps: any): void;
     render(): JSX.Element;

@@ -1,12 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import './Checkbox.css';
-interface CheckboxProps {
-    bgColor?: string;
-    height?: string;
-    rounded?: boolean;
-    width?: string;
-    onClick?: Function;
-    [key: string]: any;
-}
-declare const Checkbox: React.FC<CheckboxProps>;
-export default Checkbox;
+declare const _default: (props: any) => JSX.Element;
+export default _default;

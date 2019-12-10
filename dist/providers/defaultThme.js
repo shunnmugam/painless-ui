@@ -6,11 +6,11 @@ const defaultTheme = {
                 title: {
                     backgroundColor: '#eeeeeeb8',
                     color: 'black',
-                    fontSize: '1.5rem'
+                    fontSize: '1.3rem'
                 },
                 panel: {
-                    // backgroundColor: 'red',
-                    color: 'white'
+                    backgroundColor: 'white',
+                    color: 'black'
                 }
             }
         },
@@ -37,6 +37,29 @@ const defaultTheme = {
             style: {
                 container: {}
             }
+        },
+        Button: {
+            className: 'theme-default-button',
+            style: {
+                background: {},
+                outline: {},
+                text: {}
+            }
+        },
+        ButtonGroup: {
+            className: 'theme-default-button-group'
+        },
+        Checkbox: {
+            className: 'theme-default-checkbox'
+        },
+        Input: {
+            className: 'theme-default-input'
+        },
+        NavBar: {
+            className: 'theme-default-navbar'
+        },
+        Radio: {
+            className: 'theme-default-radio'
         }
     },
     colors: {

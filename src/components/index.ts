@@ -17,9 +17,10 @@ import Table from './Table/Table';
 import Tab from './Tab/Tab';
 import TabWrapper from './TabWrapper/TabWrapper';
 import Tag from './Tag/Tag';
-import Toast from './Toast/Toast';
+import toast from './ToastContainer/util/toast';
 import ToastContainer from './ToastContainer/ToastContainer';
 import TabContainer from './TabContainer/TabContainer';
+import Tooltip from './Tooltip/Tooltip';
 
 import './index.css';
 
@@ -44,6 +45,7 @@ export {
     Table,
     TabWrapper,
     Tag,
-    Toast,
-    ToastContainer
+    ToastContainer,
+    toast,
+    Tooltip
 };

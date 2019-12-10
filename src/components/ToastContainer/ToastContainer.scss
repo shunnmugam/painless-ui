@@ -3,14 +3,20 @@
 
 .ui-toast-container {
     position: fixed;
+    z-index: 1000;
     /*  */
     @each $p in $toastPosition {
         $l: split-str($p,'-');
         &.#{$p} {
             #{nth($l, 1)} : 30px;
             @if nth($l, 2) == 'center' {
-                left: 0;
-                right: 0;
+                left: 50%;
+                // right: 0;
+                -webkit-transform: translateX(-50%);
+                -moz-transform: translateX(-50%);
+                -ms-transform: translateX(-50%);
+                -o-transform: translateX(-50%);
+                transform: translateX(-50%);
             }
             @if nth($l, 2) != 'center' {
                 #{nth($l, 2)} : 30px;

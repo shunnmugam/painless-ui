@@ -1,11 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import './Radio.css';
-interface RadioProps {
-    bgColor?: string;
-    height?: string;
-    width?: string;
-    onClick?: Function;
-    [key: string]: any;
-}
-declare const Radio: React.FC<RadioProps>;
-export default Radio;
+declare const _default: (props: any) => JSX.Element;
+export default _default;

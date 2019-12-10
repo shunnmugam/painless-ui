@@ -31,6 +31,31 @@ const AccordionExample = (props) => {
         </p>
     </Accordion>
 </>`}></CodeAndExample>
+        <h3>Animation duration</h3>
+        <p>You can change animation duration using <b>style</b> prop</p>
+        <CodeAndExample example={<>
+            <Accordion style={{transitionDuration: '4s'}} title="section 1">
+                <p>
+                Animation duration is 4s
+                </p>
+            </Accordion>
+            <Accordion style={{transitionDuration: '10s'}} title="section 2">
+                <p>
+                Animation duration is 10s
+                </p>
+            </Accordion></>} code={`
+<>
+    <Accordion style={{transitionDuration: '4s'}} title="section 1">
+        <p>
+        Animation duration is 4s
+        </p>
+    </Accordion>
+    <Accordion style={{transitionDuration: '10s'}} title="section 2">
+        <p>
+        Animation duration is 10s
+        </p>
+    </Accordion>
+</>`}></CodeAndExample>
 
         <h3>Collapsible Accordion</h3>
         <p>If you want collapsible feature, you should use <Link to="/accordion-group">AccordionGroup</Link> with collapsible true</p>

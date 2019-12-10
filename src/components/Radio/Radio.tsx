@@ -1,11 +1,14 @@
 import React from 'react';
-
+import { withTheme } from '../../providers/ThemeProvider';
+import { componentTheme, themeColors } from "../../providers/theme";
 import './Radio.css';
 interface RadioProps {
     bgColor?: string
-    height?: string;
-    width?: string;
-    onClick?: Function;
+    height?: string
+    width?: string
+    onClick?: Function
+    theme?: componentTheme
+    colors?: themeColors
     [key:string] : any
 }
 
@@ -22,17 +25,32 @@ const onChangeHandler = ($e:React.SyntheticEvent,props:any) => {
 }
 
 const Radio: React.FC<RadioProps> = (props) => {
-    const { bgColor, height, width, className, style, onClick, label, ...customProps } = props;
+    const { bgColor, height, width, className, style, onClick, label, theme, colors, ...customProps } = props;
+
+    let defaultRadioStyle: any= {
+      backgroundColor : colors ? (colors.primary ? colors.primary : "#2196F3") : "#2196F3",
+      // color : colors ? (colors.secondary ? colors.secondary : "white") : "white"
+    }
+
+    if(theme && theme.style && theme.style.container) {
+      defaultRadioStyle = {...defaultRadioStyle,...theme.style.container}
+    }
+    if(bgColor) {
+      defaultRadioStyle.backgroundColor = bgColor;
+      defaultRadioStyle.borderColor = bgColor;
+    }
+
     return (
-      <label className="ui-radio-container">
+      <label className="ui-radio-container" style={{width,height}}>
     <label  style={
       {...{
         backgroundColor : bgColor
-      },...style}
+      },...defaultRadioStyle,...style}
     }
     {...customProps}
     >
-        <input onClick={($e) => onChangeHandler($e,props)} className={'ui-radio '+className} type="radio" {...customProps}/>
+        <input onClick={($e) => onChangeHandler($e,props)} className={'ui-radio '+className +' ' + (theme && theme.className ? " " + theme.className : "")} 
+        type="radio" {...customProps}/>
         <span className={'checkmark '} style={{width,height}}></span>
         
     </label>
@@ -43,4 +61,4 @@ const Radio: React.FC<RadioProps> = (props) => {
 }
 
 Radio.defaultProps = defaultProps;
-export default Radio;
+export default withTheme(Radio,"Radio");

@@ -1,10 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import './ButtonGroup.css';
-interface ButtonGroupProps {
-    children: any;
-    className?: string;
-    fullWidth?: boolean;
-    vertical?: boolean;
-}
-declare const ButtonGroup: React.FC<ButtonGroupProps>;
-export default ButtonGroup;
+declare const _default: (props: any) => JSX.Element;
+export default _default;

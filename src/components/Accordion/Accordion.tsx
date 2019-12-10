@@ -45,7 +45,7 @@ class Accordion extends React.Component<AccordionProps>  {
     }
 
     render() {
-        const { className, open, children, title, theme, colors, ...customProps} = this.props;
+        const { className, open, children, title, theme, colors, style, ...customProps} = this.props;
         let defaultButtonStyle: any= {
             backgroundColor : colors ? (colors.primary ? colors.primary : null) : null,
             color : colors ? (colors.secondary ? colors.secondary : null) : null
@@ -56,11 +56,15 @@ class Accordion extends React.Component<AccordionProps>  {
 
         let defaultPanelStyle: any= {
             backgroundColor : colors ? (colors.primary ? colors.primary : null) : null,
-            color : colors ? (colors.secondary ? colors.secondary : null) : null
+            color : colors ? (colors.secondary ? colors.secondary : null) : null,
+            transitionDuration: '1s'
         }
         if(theme && theme.style && theme.style.panel) {
             defaultPanelStyle = {...defaultPanelStyle,...theme.style.panel}
         }
+
+        if(style)
+            defaultPanelStyle = {...defaultPanelStyle, ...style}
 
         return (<div className={'ui-accordion ' + (this.state.isOpen ? 'open ' : 'closed ') + (className || '') + 
         (' '+ (theme ? theme.className : ' ') + ' ')} 

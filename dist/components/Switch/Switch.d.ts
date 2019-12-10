@@ -1,10 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import './Switch.css';
-interface SwitchProps {
-    className?: string;
-    height?: string | number;
-    width?: string | number;
-    [key: string]: any;
-}
-declare const Switch: React.FC<SwitchProps>;
-export default Switch;
+declare const _default: (props: any) => JSX.Element;
+export default _default;

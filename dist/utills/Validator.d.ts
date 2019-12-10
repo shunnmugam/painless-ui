@@ -1,4 +1,4 @@
-export default class Validater {
+export default class Validator {
     private rules;
     private value;
     private message;
@@ -9,6 +9,7 @@ export default class Validater {
     private number;
     private required;
     private type;
+    private regex;
     validate(): boolean;
     getMessage(): object;
 }

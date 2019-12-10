@@ -2,8 +2,7 @@
 .ui-radio-container {
     display: inline-flex;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    margin: 3px;
     cursor: pointer;
     font-size: 22px;
     -webkit-user-select: none;
@@ -32,7 +31,6 @@
     /* Create a custom radio button */
     .checkmark {
         position: absolute;
-        top: -19px;
         left: 0;
         height: 25px;
         width: 25px;

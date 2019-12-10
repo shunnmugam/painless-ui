@@ -7,6 +7,7 @@ interface ToastProps {
     options?: ToastOptions;
     style?: object;
     onClose?: Function;
+    titleStyle?: object;
     [key: string]: any;
 }
 interface ToastOptions {
@@ -15,19 +16,11 @@ interface ToastOptions {
     time?: number;
 }
 declare class Toast extends React.PureComponent<ToastProps> {
+    static defaultProps: any;
     private timer;
-    state: {
-        show: boolean;
-        prevShow: any;
-    };
     clear: (forceClick?: boolean) => void;
     setTimer: (callBack: Function) => void;
-    static getDerivedStateFromProps(nextProps: any, state: any): {
-        show: any;
-        prevShow: any;
-    };
     generateAnimationCss(): string;
-    componentDidUpdate(prevProps: any, prevState: any): void;
     componentDidMount(): void;
     render(): JSX.Element;
 }

@@ -12,6 +12,11 @@ import ButtonGroupExample from './ButtonGroup/ButtonGroup';
 import CheckboxExample from './Checkbox/Checkbox';
 import InputExample from './Input/InputExample';
 import ModalExample from './Modal/ModalExample';
+import NavBarExample from './NavBar/NavBarExample';
+import RadioExample from './Radio/Radio';
+import SelectExample from './Select/Select';
+import SwitchExample from './Switch/Switch';
+import ToastExample from './Toast/Toast';
 
 class App extends React.Component {
     constructor(props) {
@@ -59,10 +64,24 @@ class App extends React.Component {
                             <li>
                                 <Link to="/modal">Modal</Link>
                             </li>
+                            <li>
+                                <Link to="/navbar">NavBar</Link>
+                            </li>
+                            <li>
+                                <Link to="/radio">Radio</Link>
+                            </li>
+                            <li>
+                                <Link to="/select">Select</Link>
+                            </li>
+                            <li>
+                                <Link to="/switch">Switch</Link>
+                            </li>
+                            <li>
+                                <Link to="/toast">Toast</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="col-12 col-sm-8 col-md-10">
-                        
                             <Switch>
                                 <Route path='/accordion' component={AccordionExample} />
                                 <Route path='/accordion-group' component={AccordionGroupExample} />
@@ -73,6 +92,11 @@ class App extends React.Component {
                                 <Route path='/checkbox' component={CheckboxExample} />
                                 <Route path='/input' component={InputExample} />
                                 <Route path='/modal' component={ModalExample} />
+                                <Route path='/navbar' component={NavBarExample} />
+                                <Route path='/radio' component={RadioExample} />
+                                <Route path='/select' component={SelectExample} />
+                                <Route path='/switch' component={SwitchExample} />
+                                <Route path='/toast' component={ToastExample} />
                                 <Route path='/data-table' component={DataTable} />
                             </Switch>
                     </div>
