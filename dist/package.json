@@ -2,9 +2,8 @@
   "name": "painless-ui",
   "description": "React ui kit",
   "license": "MIT",
-  "main": "dist/index.js",
-  "version": "0.0.3-alpha",
-  "files": [ "dist/*", "README.md" ],
+  "main": "index.js",
+  "version": "0.0.4-alpha",
   "repository": {
     "type": "git",
     "url": "https://github.com/shunnmugam/painless-ui"
