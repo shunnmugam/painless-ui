@@ -17,6 +17,7 @@ interface ToastProps {
     options?: ToastOptions;
     style?: object;
     onClose?: Function;
+    titleStyle?: object;
     [key: string]: any;
 }
 interface ToastOptions {

@@ -32,10 +32,10 @@ const toast = Object.assign((content, containerId, config:any = {}) => {
     },
     info : (content, containerId, config:any = {}) => {
         let style = config && config.style ? config.style : {};
-        style = {...style,...{background: "rgba(58, 184, 63)"}}
+        style = {...style,...{background: "rgb(219, 192, 58)"}}
         config.style = style;
         let titleStyle = config && config.titleStyle ? config.titleStyle : {};
-        titleStyle = {...titleStyle,...{background: "#43a047"}}
+        titleStyle = {...titleStyle,...{background: "rgb(199, 170, 29)"}}
         config.titleStyle = titleStyle;
 
     

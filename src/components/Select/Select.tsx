@@ -176,8 +176,8 @@ class Select extends React.PureComponent<SelectProps> {
                 React.Children.forEach(this.props.children, (child: any, i) => {
                     if (child.type === Option) {
                         const { value, children, text } = child.props;
-                        if (( (text && text.toLowerCase().includes(this.searchKeyword)) ||
-                         (children && children.toLowerCase().includes(this.searchKeyword))) && selected === false) {
+                        if (( (text && text.toLowerCase().includes(this.searchKeyword.toLowerCase())) ||
+                         (children && children.toLowerCase().includes(this.searchKeyword.toLowerCase()))) && selected === false) {
                             this.onClick(value, children, text);
                             selected = true;
                         }
@@ -443,9 +443,9 @@ class Select extends React.PureComponent<SelectProps> {
                                     React.Children.map(this.props.children, (child: any, i) => {
                                         if (child.type === Option) {
                                             const { value, children, text, className, data, ...customProps } = child.props;
-                                            if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword)) || 
+                                            if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) || 
                                             // (value.toLowerCase().includes(this.state.searchKeyword))  ||
-                                            (children.toLowerCase().includes(this.state.searchKeyword)) ) {
+                                            (children.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) ) {
 
                                                 return (<li className={(className ? className : '') +
                                                     (multiple !== true && this.state.selectedDetails[0] !== undefined && this.state.selectedDetails[0].value === value ? ' selected' : '')

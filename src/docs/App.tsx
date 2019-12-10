@@ -1,5 +1,6 @@
 import React from 'react';
-import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, NavLink as Link, Switch } from "react-router-dom";
+import './App.css';
 import ThemeProvider from '../providers/ThemeProvider';
 import DataTable from './DataTable/DataTable';
 import { NavBar } from '../components';
@@ -17,6 +18,7 @@ import RadioExample from './Radio/Radio';
 import SelectExample from './Select/Select';
 import SwitchExample from './Switch/Switch';
 import ToastExample from './Toast/Toast';
+import TabExample from './Tab/Tab';
 
 class App extends React.Component {
     constructor(props) {
@@ -38,46 +40,52 @@ class App extends React.Component {
                     <div className="col-12 col-sm-4 col-md-2">
                         <ul>
                             <li>
-                                <Link to="/accordion">Accordion</Link>
+                                <Link activeClassName="active" to="/accordion">Accordion</Link>
                             </li>
                             <li>
-                                <Link to="/accordion-group">AccordionGroup</Link>
+                                <Link activeClassName="active" to="/accordion-group">AccordionGroup</Link>
                             </li>
                             <li>
-                                <Link to="/badge">Badge</Link>
+                                <Link activeClassName="active" to="/badge">Badge</Link>
                             </li>
                             <li>
-                                <Link to="/breadcrumb">Breadcrumb</Link>
+                                <Link activeClassName="active" to="/breadcrumb">Breadcrumb</Link>
                             </li>
                             <li>
-                                <Link to="/button">Button</Link>
+                                <Link activeClassName="active" to="/button">Button</Link>
                             </li>
                             <li>
-                                <Link to="/button-group">ButtonGroup</Link>
+                                <Link activeClassName="active" to="/button-group">ButtonGroup</Link>
                             </li>
                             <li>
-                                <Link to="/checkbox">Checkbox</Link>
+                                <Link activeClassName="active" to="/checkbox">Checkbox</Link>
                             </li>
                             <li>
-                                <Link to="/input">Input</Link>
+                                <Link activeClassName="active" to="/input">Input</Link>
                             </li>
                             <li>
-                                <Link to="/modal">Modal</Link>
+                                <Link activeClassName="active" to="/modal">Modal</Link>
                             </li>
                             <li>
-                                <Link to="/navbar">NavBar</Link>
+                                <Link activeClassName="active" to="/navbar">NavBar</Link>
                             </li>
                             <li>
-                                <Link to="/radio">Radio</Link>
+                                <Link activeClassName="active" to="/radio">Radio</Link>
                             </li>
                             <li>
-                                <Link to="/select">Select</Link>
+                                <Link activeClassName="active" to="/select">Select</Link>
                             </li>
                             <li>
-                                <Link to="/switch">Switch</Link>
+                                <Link activeClassName="active" to="/switch">Switch</Link>
                             </li>
                             <li>
-                                <Link to="/toast">Toast</Link>
+                                <Link activeClassName="active" to="/tab">Tab</Link>
+                            </li>
+                            <li>
+                                <Link activeClassName="active" to="/table">Table / Data table</Link>
+                            </li>
+                            <li>
+                                <Link activeClassName="active" to="/toast">Toast</Link>
                             </li>
                         </ul>
                     </div>
@@ -97,9 +105,13 @@ class App extends React.Component {
                                 <Route path='/select' component={SelectExample} />
                                 <Route path='/switch' component={SwitchExample} />
                                 <Route path='/toast' component={ToastExample} />
-                                <Route path='/data-table' component={DataTable} />
+                                <Route path='/tab' component={TabExample} />
+                                <Route path='/table' component={DataTable} />
                             </Switch>
                     </div>
+                </div>
+                <div className="footer" style={{padding: "100px 0px"}}>
+
                 </div>
                 </Router>
                 </ThemeProvider>

@@ -347,27 +347,30 @@ class Table extends React.PureComponent {
                         <tr><td colSpan={this.props.columns.length}>Loading...</td></tr>
                     </tbody>) :
             (<tbody className="ui-table-body">
-                        {data.map((row, r) => {
-                return (<tr key={'tr-' + r}>
+                        {data.length === 0 ? <tr>
+                                <td colSpan={this.props.columns.length}>No data found</td>
+                            </tr> :
+                data.map((row, r) => {
+                    return (<tr key={'tr-' + r}>
                                     {props.dataType === 'array' ? (row.map((d, c) => {
-                    return <td key={'td-' + c + '-' + r}>{d}</td>;
-                })) : (props.columns.map((column, c) => {
-                    let value = '';
-                    if (column.render && typeof column.render === 'function') {
-                        value = column.render(row, column, r);
-                    }
-                    else if (column.selector) {
-                        value = row[column.selector];
-                    }
-                    else {
-                        throw new Error('column should have selector property or render function');
-                    }
-                    return <td key={'td-' + c + '-' + r}>
+                        return <td key={'td-' + c + '-' + r}>{d}</td>;
+                    })) : (props.columns.map((column, c) => {
+                        let value = '';
+                        if (column.render && typeof column.render === 'function') {
+                            value = column.render(row, column, r);
+                        }
+                        else if (column.selector) {
+                            value = row[column.selector];
+                        }
+                        else {
+                            throw new Error('column should have selector property or render function');
+                        }
+                        return <td key={'td-' + c + '-' + r}>
                                                 {value}
                                             </td>;
-                }))}
+                    }))}
                                 </tr>);
-            })}
+                })}
                     </tbody>)}
             </table>
             </div>

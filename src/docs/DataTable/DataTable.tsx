@@ -20,18 +20,18 @@ class DataTableExample extends React.Component {
                 filter: true
             },
             {
-                name: "first_name",
+                name: "First Name",
                 selector: "first_name",
                 sortable: true,
                 filter: true
             },
             {
-                name: "last_name",
+                name: "Last Name",
                 selector: "last_name",
                 sortable: true
             },
             {
-                name: "avatar",
+                name: "Avatar",
                 render: (row,column) => {
                     return <>
                         {/* <img src={row['avatar']} /> */}

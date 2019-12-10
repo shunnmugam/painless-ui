@@ -423,6 +423,9 @@ class Table extends React.PureComponent<TableProps> {
                     </tbody>) : 
                     (<tbody className="ui-table-body">
                         {
+                            data.length === 0 ? <tr>
+                                <td colSpan={this.props.columns.length}>No data found</td>
+                            </tr> :
                             data.map((row,r) => {
                                 return (<tr key={'tr-'+r}>
                                     {

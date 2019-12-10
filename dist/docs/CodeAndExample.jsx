@@ -41,7 +41,7 @@ const CodeAndExample = (props) => {
                 closeOnClick: true
             }
         });
-    }} style={{ float: "right" }} rounded> <img src={process.env.PUBLIC_URL + '/images/copy.svg'}/> </Button>
+    }} style={{ float: "right" }} rounded> <img alt="copy" src={process.env.PUBLIC_URL + '/images/copy.svg'}/> </Button>
             </TabContainer>
         </TabWrapper>
         <ToastContainer containerId={uniqueId}/>
