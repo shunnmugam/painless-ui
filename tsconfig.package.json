@@ -12,6 +12,7 @@
     "src/utills",
     "src/providers",
     "src/components",
-    "src/docs"
+    "src/docs",
+    "src/index.ts"
   ]
 }
