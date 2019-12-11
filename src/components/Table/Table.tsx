@@ -41,7 +41,7 @@ interface typeObjectColumns extends Columns {
 }
 
 interface PaginationOptions {
-    paginagtion?: boolean
+    pagination?: boolean
     totalNoOfData?: number
     currentPage?: number
     limit?:number,
@@ -51,7 +51,8 @@ interface PaginationOptions {
 
 interface SearchOptions {
     searchable?: boolean
-    onSearch?: Function
+    onSearch?: Function,
+    searchComponent?:Function
 }
 
 interface SortOptions {
@@ -273,7 +274,7 @@ class Table extends React.PureComponent<TableProps> {
         data = this.sort(data);
         //pagination
         let paginationUi = <></>;
-        if(this.props.paginationOptions !== undefined && this.props.paginationOptions.paginagtion === true) {
+        if(this.props.paginationOptions !== undefined && this.props.paginationOptions.pagination === true) {
             const paginationResult  = this.paginate(data);
             let totalPage = 1;
             data = paginationResult.data;
@@ -323,18 +324,31 @@ class Table extends React.PureComponent<TableProps> {
             <div className='ui-table-toolbar-wrapper pull-left ui-w-100'>
                 {(this.props.searchOptions!== undefined && this.props.searchOptions.searchable === true) ? 
                 <div className="ui-table-search-container pull-right">
-                <Input type="text" placeholder="Type something..." style={{
-                    width : "150px"
-                }} value={this.state.searchKeyword} onChange={(e) => {
-                    this.setState({
-                        searchKeyword: e.target.value,
-                        localChange: true
-                    });
-                    if(props.searchOptions !== undefined && props.searchOptions.onSearch !== undefined && typeof props.searchOptions.onSearch === 'function') {
-                        props.searchOptions.onSearch(e.target.value);
-                    }
-                }}
-                />
+                    {this.props.searchOptions.searchComponent !== undefined && 
+                        typeof this.props.searchOptions.searchComponent === 'function' ? <>
+                            {this.props.searchOptions.searchComponent((v) => {
+                                //onchange event
+                                this.setState({
+                                    searchKeyword: v,
+                                    localChange: true
+                                });
+                                if(props.searchOptions !== undefined && props.searchOptions.onSearch !== undefined && typeof props.searchOptions.onSearch === 'function') {
+                                    props.searchOptions.onSearch(v);
+                                }
+
+                            })}
+                        </> : 
+                        <Input type="text" placeholder="Type something..." style={{
+                            width : "150px"
+                        }} value={this.state.searchKeyword} onChange={(e) => {
+                            this.setState({
+                                searchKeyword: e.target.value,
+                                localChange: true
+                            });
+                            if(props.searchOptions !== undefined && props.searchOptions.onSearch !== undefined && typeof props.searchOptions.onSearch === 'function') {
+                                props.searchOptions.onSearch(e.target.value);
+                            }
+                        }}/> }
                 </div> : <></>}
             </div>
             <div className={'ui-table-wrapper' + (props.responsive ? 'responsive ': '')}>
@@ -345,6 +359,7 @@ class Table extends React.PureComponent<TableProps> {
                     <tr>
                     {props.columns.map((column,i) => {
                         let selector:any = '';
+                        const tempFilterData = new Set();
                         if(props.dataType === 'array' || column.selector === undefined) {
                             selector = i;
                         } else {
@@ -377,7 +392,6 @@ class Table extends React.PureComponent<TableProps> {
                                         this.props.data.map((row,i) => {
                                             if(props.dataType === 'array') {
                                                 row.map((d,c) => {
-                                                    const tempFilterData = new Set();
                                                     if(!tempFilterData.has(d)) {
                                                         tempFilterData.add(d);
                                                         return <Option value={d} key={'filter-option-'+c+'-'+column.name}>{d}</Option>
@@ -387,7 +401,6 @@ class Table extends React.PureComponent<TableProps> {
                                             } else {
                                                 if(column.selector){
                                                     const d = row[column.selector];
-                                                    const tempFilterData = new Set();
                                                     if(!tempFilterData.has(d)) {
                                                         tempFilterData.add(d);
                                                         return <Option value={d} 

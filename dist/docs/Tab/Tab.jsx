@@ -5,6 +5,9 @@ const TabExample = (props) => {
     const [activeTab, changeActiveTab] = useState(0);
     return <>
         <h1>Tab</h1>
+        <pre className="import-section">
+            {`import {TabContainer, TabGroup, Tab, TabWrapper} from 'painless-ui/components'`}
+        </pre>
         <p>there are 4 sub-components in tab component</p>
         <ol>
             <li>TabWrapper</li>
@@ -88,6 +91,81 @@ return (<>
             type: "string",
             default: "100%"
         }]}/>
+    <h3>TabGroup props</h3>
+    <Table columns={[{
+            selector: "name",
+            name: "Name"
+        }, {
+            name: "Type",
+            selector: "type"
+        }, {
+            name: "Default",
+            selector: "default"
+        }]} data={[{
+            name: "className",
+            type: "string",
+            default: "-"
+        }, {
+            name: "activeColor",
+            type: "string",
+            default: <><span style={{ padding: "1px 10px", background: "#ffc107", marginRight: "3px" }}></span> #ffc107</>
+        }, {
+            name: "color",
+            type: "string",
+            default: "white"
+        },
+        {
+            name: "defaultActive",
+            type: "number",
+            default: 0
+        },
+        {
+            name: "onClick",
+            type: "Function",
+            default: '-'
+        },
+        {
+            name: "width",
+            type: "string",
+            default: '100%'
+        },
+    ]}/>
+    <h3>Tab props</h3>
+    <Table columns={[{
+            selector: "name",
+            name: "Name"
+        }, {
+            name: "Type",
+            selector: "type"
+        }, {
+            name: "Default",
+            selector: "default"
+        }]} data={[{
+            name: "className",
+            type: "string",
+            default: "-"
+        }]}/>
+    <h3>TabContainer props</h3>
+    <Table columns={[{
+            selector: "name",
+            name: "Name"
+        }, {
+            name: "Type",
+            selector: "type"
+        }, {
+            name: "Default",
+            selector: "default"
+        }]} data={[{
+            name: 'active',
+            type: 'boolean',
+            default: '-'
+        },
+        {
+            name: "className",
+            type: "string",
+            default: "-"
+        }]}/>
+    
     </>;
 };
 export default TabExample;

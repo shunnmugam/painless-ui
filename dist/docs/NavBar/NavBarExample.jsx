@@ -4,6 +4,9 @@ import CodeAndExample from '../CodeAndExample';
 const NavBarExample = (props) => {
     return (<>
         <h1>NavBar</h1>
+        <pre className="import-section">
+            {`import {NavBar} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<NavBar>
                 <h3 style={{ textAlign: "center" }}>this is simple navbar</h3>
             </NavBar>} code={`<NavBar> <h3 style={{textAlign: "center"}}>this is simple navbar</h3> </NavBar>`}/>

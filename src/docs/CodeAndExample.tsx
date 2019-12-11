@@ -3,7 +3,8 @@ import { TabContainer, TabGroup, Tab, TabWrapper, Button, ToastContainer, toast 
 
 interface CodeAndExampleProps {
     example : any,
-    code : any
+    code : any,
+    defaultActive?: number
 }
 
 
@@ -21,11 +22,13 @@ const copyToClipboard = function(secretInfo) {
 
 
 const CodeAndExample: FunctionComponent<CodeAndExampleProps> = (props) => {
-    const [ activeTab, changeActiveTab ] = useState(0);
+    const [ activeTab, changeActiveTab ] = useState(props.defaultActive!== undefined ? props.defaultActive : 0);
     let uniqueId = Math.random().toString(36).substring(2) + Date.now().toString(36);
     return <>
         <TabWrapper>
-            <TabGroup onClick={changeActiveTab}>
+            <TabGroup defaultActive={props.defaultActive!== undefined ? props.defaultActive : 0} onClick={(v) => {
+                changeActiveTab(v)
+            }}>
                 <Tab>
                     Example
                 </Tab>
@@ -48,7 +51,6 @@ const CodeAndExample: FunctionComponent<CodeAndExampleProps> = (props) => {
                     toast.success(c,uniqueId,{
                         title: "Info",
                         options : {
-                            time: 5000000,
                             closeOnClick: true
                         }
                     });

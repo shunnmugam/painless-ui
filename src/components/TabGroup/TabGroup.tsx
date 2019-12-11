@@ -7,6 +7,7 @@ interface TabGroupProps {
     bgColor?: string,
     color?: string,
     className?: string,
+    defaultActive?: number
     onClick?: Function,
     width?: string,
     [key:string]: any
@@ -17,14 +18,14 @@ class TabGroup extends React.Component<TabGroupProps> {
     private containerRef: any;
     
     state = {
-        activeIndex: 0,
+        activeIndex: this.props.defaultActive !== undefined ? this.props.defaultActive : 0,
         visibleStatus : false,
         prevLiIndex: -1,
         lastLiIndex: 0,
         isScrollable: false,
         visibleWidth : '1000',
         isNext: false,
-        ul : {
+        ul: {
             width : '100%',
             left: 0
         },

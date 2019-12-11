@@ -5,6 +5,9 @@ const BadgeExample = (props) => {
     return (<>
         <h1>Badge</h1>
         <p>Badges can be used as part of links or buttons to provide a counter.</p>
+        <pre className="import-section">
+            {`import {Badge} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<Badge>14
         </Badge>} code={`
 <Badge>14</Badge>`}></CodeAndExample>

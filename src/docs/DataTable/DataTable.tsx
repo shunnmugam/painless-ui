@@ -66,7 +66,7 @@ class DataTableExample extends React.Component {
         return (<Table loading={this.state.loading} 
             serverSide={true}
             paginationOptions={{
-                paginagtion: true,
+                pagination: true,
                 totalNoOfData:this.state.totalData,
                 limit: 5,
                 onChange:(currentPage,data) => {

@@ -6,6 +6,9 @@ const AccordionGroupExample = (props) => {
     return (<>
         <h1>AccordionGroup</h1>
         <p>AccordionGroup is Accordion container or group of <Link to="/accordion">Accordions</Link> </p>
+        <pre className="import-section">
+            {`import {AccordionGroup} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<AccordionGroup collapsible>
             <Accordion title="section 1">
                 <p>

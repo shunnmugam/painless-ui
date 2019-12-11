@@ -5,6 +5,7 @@ interface TabGroupProps {
     bgColor?: string;
     color?: string;
     className?: string;
+    defaultActive?: number;
     onClick?: Function;
     width?: string;
     [key: string]: any;

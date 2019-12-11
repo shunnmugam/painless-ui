@@ -8,6 +8,9 @@ const ModalExample = (props) => {
     return (<>
         <h1>Modal</h1>
         <p>The Modal is a dialog box/popup window that is displayed on top of the current page</p>
+        <pre className="import-section">
+            {`import {Modal} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<>
             <Button onClick={() => changeVisible(true)}>Click to show modal</Button>
             <Modal open={isVisible} onClose={() => changeVisible(false)}>

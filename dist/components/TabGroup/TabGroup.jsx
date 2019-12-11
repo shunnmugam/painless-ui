@@ -5,7 +5,7 @@ class TabGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndex: 0,
+            activeIndex: this.props.defaultActive !== undefined ? this.props.defaultActive : 0,
             visibleStatus: false,
             prevLiIndex: -1,
             lastLiIndex: 0,

@@ -4,3 +4,11 @@ a.active, a.active:focus {
 pre.import-section {
   font-size: 15px;
   font-weight: bold; }
+
+.sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px; }
+
+.sidebar ul, .sidebar h4 {
+  margin-top: 0; }

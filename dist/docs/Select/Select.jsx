@@ -8,6 +8,9 @@ const SelectExample = (props) => {
         <h1>Select (Dropdown)</h1>
         <p>Select is input</p>
         <p><b>You should use Option component for option</b></p>
+        <pre className="import-section">
+            {`import {Select, Option} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<>
             <Select onChange={(v) => {
         console.log(v);

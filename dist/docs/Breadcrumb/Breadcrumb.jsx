@@ -7,6 +7,9 @@ const BreadcrumbExample = (props) => {
         <h1>Breadcrumb</h1>
         <p>A breadcrumb navigation provide links back to each previous page the user navigated through, 
             and shows the user's current location in a website. </p>
+        <pre className="import-section">
+            {`import {Breadcrumb} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<Breadcrumb>
                 <Link to={'/'}>Home</Link>
                 <span>User</span>

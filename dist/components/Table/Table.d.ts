@@ -31,7 +31,7 @@ interface typeObjectColumns extends Columns {
     selector: string;
 }
 interface PaginationOptions {
-    paginagtion?: boolean;
+    pagination?: boolean;
     totalNoOfData?: number;
     currentPage?: number;
     limit?: number;
@@ -41,6 +41,7 @@ interface PaginationOptions {
 interface SearchOptions {
     searchable?: boolean;
     onSearch?: Function;
+    searchComponent?: Function;
 }
 interface SortOptions {
     onSort?: Function;

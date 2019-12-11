@@ -6,6 +6,9 @@ const SwitchExample = () => {
     return (<>
             <h1>Switch</h1>
             <p>Modern checkbox</p>
+            <pre className="import-section">
+                {`import {Switch} from 'painless-ui/components'`}
+            </pre>
             <CodeAndExample code={` <Switch />`} example={<Switch />}/>
             <h3>Default checked</h3>
             <p></p>

@@ -6,6 +6,9 @@ const CheckboxExample = (props) => {
     return (<>
         <h1>Checkbox</h1>
         <p>Checkbox is input</p>
+        <pre className="import-section">
+            {`import {Checkbox} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<>
             <Checkbox value="1" id="default-checkbox"/>
             <label htmlFor="default-checkbox">Default</label>

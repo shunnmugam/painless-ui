@@ -8,13 +8,13 @@ const ButtonExample = (props) => {
     return (
     <>
         <h1>Button</h1>
-        { <p>We have 3 types of buttons, you can switch using <b>styleType</b> prop
+        {<> <p>We have 3 types of buttons, you can switch using <b>styleType</b> prop </p>
             <ol>
                 <li>Background (Default)</li>
                 <li>Outline</li>
                 <li>Text</li>
             </ol>
-        </p> }
+        </>}
         <pre className="import-section">
             {`import {Button} from 'painless-ui/components'`}
         </pre>
@@ -185,7 +185,7 @@ const ButtonExample = (props) => {
     padding: '0 30px'}}
     >Custom Styled button</Button>`} />
         <h3>Theme</h3>
-        <p>Button with theme using <Link>ThemeProvider</Link></p>
+        <p>Button with theme using <Link to={'/'}>ThemeProvider</Link></p>
         <CodeAndExample example={
             <ThemeProvider>
                 <Button>

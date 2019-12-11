@@ -6,6 +6,9 @@ const AccordionExample = (props) => {
     return (<>
         <h1>Accordion</h1>
         <p>Accordions are useful when you want to toggle between hiding and showing large amount of content</p>
+        <pre className="import-section">
+            {`import {Accordion} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<>
             <Accordion title="section 1">
                 <p>
