@@ -15,6 +15,9 @@ const ButtonExample = (props) => {
                 <li>Text</li>
             </ol>
         </p> }
+        <pre className="import-section">
+            {`import {Button} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={
             <>
                 <Button>

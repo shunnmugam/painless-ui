@@ -8,6 +8,9 @@ const ButtonGroupExample = (props) => {
     <>
         <h1>ButtonGroup</h1>
         <p>ButtonGroup is Button container or group of <Link to="/button" >Buttons</Link> </p>
+        <pre className="import-section">
+            {`import {ButtonGroup} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<ButtonGroup>
             <Button>
                 Button 1

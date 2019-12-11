@@ -7,6 +7,9 @@ const ToastExample:React.FC = (props) => {
     return <>
         <h1>Toast</h1>
         <p>A toast provides simple feedback about an operation in a small popup.</p>
+        <pre className="import-section">
+            {`import {ToastContainer, toast} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<>
         <Button onClick={() => {
             toast("Simple toast","4",{

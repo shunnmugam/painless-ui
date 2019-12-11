@@ -5,6 +5,9 @@ const TabExample:React.FC = (props) => {
     const [ activeTab, changeActiveTab ] = useState(0);
     return <>
         <h1>Tab</h1>
+        <pre className="import-section">
+            {`import {TabContainer, TabGroup, Tab, TabWrapper} from 'painless-ui/components'`}
+        </pre>
         <p>there are 4 sub-components in tab component</p>
         <ol>
             <li>TabWrapper</li>

@@ -8,6 +8,9 @@ const InputExample:React.FC = (props) => {
         <>
         <h1>Input</h1>
         <p>Input is referring </p> <pre> {"<input />"}</pre>
+        <pre className="import-section">
+            {`import {Input} from 'painless-ui/components'`}
+        </pre>
         <p><b>Note:</b> type prop is mandatory</p>
         <CodeAndExample example={<>
             <Input type="text" placeholder="This is simple text input "/>

@@ -8,6 +8,9 @@ const SwitchExample = () => {
         <>
             <h1>Switch</h1>
             <p>Modern checkbox</p>
+            <pre className="import-section">
+                {`import {Switch} from 'painless-ui/components'`}
+            </pre>
             <CodeAndExample code={
                ` <Switch />`
             } example={

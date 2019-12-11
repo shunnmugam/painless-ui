@@ -8,6 +8,9 @@ const RadioExample:React.FC = (props) => {
         <>
         <h1>Radio</h1>
         <p>Radio is input</p>
+        <pre className="import-section">
+            {`import {Radio} from 'painless-ui/components'`}
+        </pre>
         <CodeAndExample example={<>
             <Radio value="1" id="default-radio" />
             <label htmlFor="default-radio">Default</label>
