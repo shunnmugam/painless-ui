@@ -107,7 +107,6 @@ const Button:React.FC<ButtonProps> = (props) => {
         onClick={(e) =>  {
             onClickHandler(e,props);
             animate(e,(v) => {
-                console.log(v)
                 changeBg(v)
             })
         }}
