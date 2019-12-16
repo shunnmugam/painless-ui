@@ -49,7 +49,7 @@ const BadgeExample = (props) => {
                 &nbsp;
                 <Badge bgColor="orange" rounded>14</Badge>
                 &nbsp;
-                <Badge bgColor="#4285f4" rounded>14</Badge>
+                <Badge bgColor="#4285f4" rounded>14000</Badge>
                 &nbsp;
                 <Badge bgColor="black" color="white" rounded>14</Badge>
                 &nbsp;

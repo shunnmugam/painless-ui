@@ -29,6 +29,7 @@ const InputExample:React.FC = (props) => {
             <li>reset</li>
             <li>submit</li>
             <li>file</li>
+            <li>textarea</li>
         </ol>
         <CodeAndExample example={<>
             <Input type="text" placeholder="This is simple text input "/>
@@ -58,6 +59,9 @@ const InputExample:React.FC = (props) => {
             <br />
             <br />
             <Input type="file" text="Submit" />
+            <br />
+            <br />
+            <Input type="textarea" placeholder={'this is simple textarea'}/>
         </>} code={`
 <>
     <Input type="text" placeholder="This is simple text input "/>
@@ -84,8 +88,16 @@ const InputExample:React.FC = (props) => {
     <br />
     <br />
     <Input type="submit" text="Submit" />
+    <br />
+    <br />
+    <Input type="textarea" placeholder={'this is simple textarea'}/>
 </>
 `} />
+        <h3>Floating label</h3>
+        <p></p>
+        <CodeAndExample example={
+            <Input floatingLabel={true} type="text" placeholder="username"/>
+        } code={'<Input floatingLabel={true} type="text" placeholder="username"/>'} />
         <h3>Validation</h3>
         <p>we have validation feature for input</p>
         

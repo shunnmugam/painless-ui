@@ -11,12 +11,14 @@ import NavBar from './NavBar/NavBar';
 import Option from './Option/Option';
 import Radio from './Radio/Radio';
 import Select from './Select/Select';
+import Slider from './Slider/Slider';
 import Switch from './Switch/Switch';
 import TabGroup from './TabGroup/TabGroup';
 import Table from './Table/Table';
 import Tab from './Tab/Tab';
 import TabWrapper from './TabWrapper/TabWrapper';
 import Tag from './Tag/Tag';
+import TextArea from './TextArea/TextArea';
 import toast from './ToastContainer/util/toast';
 import ToastContainer from './ToastContainer/ToastContainer';
 import TabContainer from './TabContainer/TabContainer';
@@ -38,6 +40,7 @@ export {
     Option,
     Radio,
     Select,
+    Slider,
     Switch,
     Tab,
     TabContainer,
@@ -45,6 +48,7 @@ export {
     Table,
     TabWrapper,
     Tag,
+    TextArea,
     ToastContainer,
     toast,
     Tooltip

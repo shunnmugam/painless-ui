@@ -29,13 +29,13 @@
   display: none; }
 
 .ui-badge.rounded {
-  border-radius: 50%; }
+  border-radius: 10rem; }
 
 .ui-badge.animation {
   animation: pulse 1.5s infinite; }
 
 .ui-badge.animation.rounded {
-  border-radius: 50%; }
+  border-radius: 10rem; }
 
 @keyframes sonar {
   0% {

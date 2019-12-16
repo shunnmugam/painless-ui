@@ -5,6 +5,7 @@ import { componentTheme, themeColors } from "../../providers/theme";
 
 import './InputBox.css';
 import Button from '../Button/Button';
+import TextArea from '../TextArea/TextArea';
 
 interface ValidationOptions {
     event?:string,
@@ -14,8 +15,9 @@ interface ValidationOptions {
 }
 
 interface InputBoxProps {
-    className?: string,
-    type: string,
+    className?: string
+    floatingLabel?: boolean
+    type: string
     rounded?: boolean
     theme?: componentTheme
     style?:object
@@ -37,6 +39,7 @@ class InputBox extends React.Component<InputBoxProps> {
 
     state = {
        isValid : true,
+       isFocus : false
     }
 
     inputElement:any = null;
@@ -85,7 +88,7 @@ class InputBox extends React.Component<InputBoxProps> {
     
     makeClassName(): string {
         let className = '';
-        className+=this.state.isValid ? ' valid' : ' not-valid';
+        className+=this.state.isValid ? ' valid ' : ' not-valid ';
         return className;
     }
 
@@ -103,7 +106,7 @@ class InputBox extends React.Component<InputBoxProps> {
      * render
      */       
     render(): JSX.Element {
-        const { type, className, validation, validationOptions, rounded, style, theme, colors, ...customProps} = this.props;
+        const { type, className, validation, validationOptions, rounded, style, theme, colors, floatingLabel, ...customProps} = this.props;
         const customClassName = this.makeClassName();
         const validationEventName:string = (validationOptions && validationOptions.event) ? validationOptions.event : "onBlur";
         const validationEvent:object = {
@@ -138,6 +141,36 @@ class InputBox extends React.Component<InputBoxProps> {
             return <Button type='reset' text={"Reset"} {...customProps} className={defaultClassName} rounded={rounded} />
         } else if(type === 'button') {
             return <Button type='button' text={"Click"} {...customProps} className={defaultClassName} rounded={rounded} />
+        } else if(type === 'textarea') {
+            return <TextArea {...this.props}>{this.props.children}</TextArea>
+        }
+        if(floatingLabel === true) {
+            const { placeholder, onFocus, onBlur, ...customFocusProps} = customProps;
+            return <>
+                <div className={"float-container ui-input " + (this.state.isFocus ? ' active' : '')}>
+                    <input ref={input => this.inputElement = input} type={type} {...validationEvent} 
+                    className={'ui-input-field '+ type + ' '+ customClassName + defaultClassName + 
+                    (rounded ? ' rounded' : '') + ' floating-label-field '}
+                    {...customFocusProps}  onFocus={(e) => {
+                        this.setState({
+                            isFocus: true
+                        });
+                        if(onFocus) {
+                            onFocus(e);
+                        }
+                    }} onBlur={(e) => {
+                        if(!e.target.value) {
+                            this.setState({
+                                isFocus: false
+                            }); 
+                        }
+                        if(onBlur) {
+                            onBlur(e);
+                        }
+                    }} />
+                    <label htmlFor="field-1" className="floating-label">{placeholder}</label>
+                </div>
+            </>
         }
         return <input ref={input => this.inputElement = input} type={type} {...validationEvent}
             className={'ui-input '+ type + ' '+ customClassName + defaultClassName + (rounded ? ' rounded' : '') }  {...customProps} 

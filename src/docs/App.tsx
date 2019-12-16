@@ -21,6 +21,7 @@ import ToastExample from './Toast/Toast';
 import TabExample from './Tab/Tab';
 import TagExample from './Tag/Tag';
 import TableExample from './Table/Table';
+import SliderExample from './Slider/Slider';
 
 class App extends React.Component {
     constructor(props) {
@@ -80,6 +81,9 @@ class App extends React.Component {
                                 <Link activeClassName="active" to="/select">Select</Link>
                             </li>
                             <li>
+                                <Link activeClassName="active" to="/slider">Slider</Link>
+                            </li>
+                            <li>
                                 <Link activeClassName="active" to="/switch">Switch</Link>
                             </li>
                             <li>
@@ -118,6 +122,7 @@ class App extends React.Component {
                                 <Route path='/navbar' component={NavBarExample} />
                                 <Route path='/radio' component={RadioExample} />
                                 <Route path='/select' component={SelectExample} />
+                                <Route path='/slider' component={SliderExample} />
                                 <Route path='/switch' component={SwitchExample} />
                                 <Route path='/toast' component={ToastExample} />
                                 <Route path='/tab' component={TabExample} />

@@ -29,12 +29,12 @@
         display: none;
     }
     &.rounded {
-      border-radius: 50%;
+      border-radius: 10rem;
     }
     &.animation {
         animation: pulse 1.5s infinite;
         &.rounded {
-          border-radius: 50%;
+          border-radius: 10rem;
           // &:after {
           //   content: '';
           //   position: absolute;
