@@ -20,6 +20,7 @@ import ToastExample from './Toast/Toast';
 import TabExample from './Tab/Tab';
 import TagExample from './Tag/Tag';
 import TableExample from './Table/Table';
+import SliderExample from './Slider/Slider';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -61,6 +62,8 @@ class App extends React.Component {
                                     React.createElement("li", null,
                                         React.createElement(Link, { activeClassName: "active", to: "/select" }, "Select")),
                                     React.createElement("li", null,
+                                        React.createElement(Link, { activeClassName: "active", to: "/slider" }, "Slider")),
+                                    React.createElement("li", null,
                                         React.createElement(Link, { activeClassName: "active", to: "/switch" }, "Switch")),
                                     React.createElement("li", null,
                                         React.createElement(Link, { activeClassName: "active", to: "/tab" }, "Tab")),
@@ -89,6 +92,7 @@ class App extends React.Component {
                                 React.createElement(Route, { path: '/navbar', component: NavBarExample }),
                                 React.createElement(Route, { path: '/radio', component: RadioExample }),
                                 React.createElement(Route, { path: '/select', component: SelectExample }),
+                                React.createElement(Route, { path: '/slider', component: SliderExample }),
                                 React.createElement(Route, { path: '/switch', component: SwitchExample }),
                                 React.createElement(Route, { path: '/toast', component: ToastExample }),
                                 React.createElement(Route, { path: '/tab', component: TabExample }),

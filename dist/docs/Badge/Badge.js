@@ -44,7 +44,7 @@ const BadgeExample = (props) => {
                 "\u00A0",
                 React.createElement(Badge, { bgColor: "orange", rounded: true }, "14"),
                 "\u00A0",
-                React.createElement(Badge, { bgColor: "#4285f4", rounded: true }, "14"),
+                React.createElement(Badge, { bgColor: "#4285f4", rounded: true }, "14000"),
                 "\u00A0",
                 React.createElement(Badge, { bgColor: "black", color: "white", rounded: true }, "14"),
                 "\u00A0",

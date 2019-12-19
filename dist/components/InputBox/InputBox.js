@@ -3,12 +3,14 @@ import Validator from '../../utills/Validator';
 import { withTheme } from '../../providers/ThemeProvider';
 import './InputBox.css';
 import Button from '../Button/Button';
+import TextArea from '../TextArea/TextArea';
 const noValidateField = ['submit', 'reset', 'button', 'file'];
 class InputBox extends React.Component {
     constructor() {
         super(...arguments);
         this.state = {
             isValid: true,
+            isFocus: false
         };
         this.inputElement = null;
     }
@@ -49,7 +51,7 @@ class InputBox extends React.Component {
     }
     makeClassName() {
         let className = '';
-        className += this.state.isValid ? ' valid' : ' not-valid';
+        className += this.state.isValid ? ' valid ' : ' not-valid ';
         return className;
     }
     componentDidUpdate(prevProps) {
@@ -65,7 +67,7 @@ class InputBox extends React.Component {
      * render
      */
     render() {
-        const { type, className, validation, validationOptions, rounded, style, theme, colors, ...customProps } = this.props;
+        const { type, className, validation, validationOptions, rounded, style, theme, colors, floatingLabel, ...customProps } = this.props;
         const customClassName = this.makeClassName();
         const validationEventName = (validationOptions && validationOptions.event) ? validationOptions.event : "onBlur";
         const validationEvent = {
@@ -98,6 +100,33 @@ class InputBox extends React.Component {
         }
         else if (type === 'button') {
             return React.createElement(Button, Object.assign({ type: 'button', text: "Click" }, customProps, { className: defaultClassName, rounded: rounded }));
+        }
+        else if (type === 'textarea') {
+            return React.createElement(TextArea, Object.assign({}, this.props), this.props.children);
+        }
+        if (floatingLabel === true) {
+            const { placeholder, onFocus, onBlur, ...customFocusProps } = customProps;
+            return React.createElement(React.Fragment, null,
+                React.createElement("div", { className: "float-container ui-input " + (this.state.isFocus ? ' active' : '') },
+                    React.createElement("input", Object.assign({ ref: input => this.inputElement = input, type: type }, validationEvent, { className: 'ui-input-field ' + type + ' ' + customClassName + defaultClassName +
+                            (rounded ? ' rounded' : '') + ' floating-label-field ' }, customFocusProps, { onFocus: (e) => {
+                            this.setState({
+                                isFocus: true
+                            });
+                            if (onFocus) {
+                                onFocus(e);
+                            }
+                        }, onBlur: (e) => {
+                            if (!e.target.value) {
+                                this.setState({
+                                    isFocus: false
+                                });
+                            }
+                            if (onBlur) {
+                                onBlur(e);
+                            }
+                        } })),
+                    React.createElement("label", { htmlFor: "field-1", className: "floating-label" }, placeholder)));
         }
         return React.createElement("input", Object.assign({ ref: input => this.inputElement = input, type: type }, validationEvent, { className: 'ui-input ' + type + ' ' + customClassName + defaultClassName + (rounded ? ' rounded' : '') }, customProps, { style: customStyle }));
     }

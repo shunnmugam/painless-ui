@@ -29,7 +29,8 @@ const InputExample = (props) => {
             React.createElement("li", null, "button"),
             React.createElement("li", null, "reset"),
             React.createElement("li", null, "submit"),
-            React.createElement("li", null, "file")),
+            React.createElement("li", null, "file"),
+            React.createElement("li", null, "textarea")),
         React.createElement(CodeAndExample, { example: React.createElement(React.Fragment, null,
                 React.createElement(Input, { type: "text", placeholder: "This is simple text input " }),
                 React.createElement("br", null),
@@ -57,7 +58,10 @@ const InputExample = (props) => {
                 React.createElement(Input, { type: "submit", text: "Submit" }),
                 React.createElement("br", null),
                 React.createElement("br", null),
-                React.createElement(Input, { type: "file", text: "Submit" })), code: `
+                React.createElement(Input, { type: "file", text: "Submit" }),
+                React.createElement("br", null),
+                React.createElement("br", null),
+                React.createElement(Input, { type: "textarea", placeholder: 'this is simple textarea' })), code: `
 <>
     <Input type="text" placeholder="This is simple text input "/>
     <br />
@@ -83,8 +87,14 @@ const InputExample = (props) => {
     <br />
     <br />
     <Input type="submit" text="Submit" />
+    <br />
+    <br />
+    <Input type="textarea" placeholder={'this is simple textarea'}/>
 </>
 ` }),
+        React.createElement("h3", null, "Floating label"),
+        React.createElement("p", null),
+        React.createElement(CodeAndExample, { example: React.createElement(Input, { floatingLabel: true, type: "text", placeholder: "username" }), code: '<Input floatingLabel={true} type="text" placeholder="username"/>' }),
         React.createElement("h3", null, "Validation"),
         React.createElement("p", null, "we have validation feature for input"),
         React.createElement(CodeAndExample, { example: React.createElement(React.Fragment, null,

@@ -60,6 +60,9 @@ const defaultTheme = {
         },
         Radio: {
             className: 'theme-default-radio'
+        },
+        Slider: {
+            className: 'theme-default-slider'
         }
     },
     colors: {
