@@ -51,8 +51,8 @@ const Button = (props) => {
     if (theme && theme.style && styleType && theme.style[styleType]) {
         defaultButtonStyle = { ...defaultButtonStyle, ...theme.style[styleType] };
     }
-    if (bgColor && styleType === 'background') {
-        defaultButtonStyle.backgroundColor = bgColor;
+    if (bgColor && styleType === 'background' && bgColor) {
+        defaultButtonStyle.background = bgColor;
     }
     if (bgColor && styleType === 'outline') {
         defaultButtonStyle.borderColor = bgColor;

@@ -22,6 +22,7 @@ import TabExample from './Tab/Tab';
 import TagExample from './Tag/Tag';
 import TableExample from './Table/Table';
 import SliderExample from './Slider/Slider';
+import DropdownExample from './Dropdown/Dropdown';
 
 class App extends React.Component {
     constructor(props) {
@@ -64,6 +65,9 @@ class App extends React.Component {
                             </li>
                             <li>
                                 <Link activeClassName="active" to="/checkbox">Checkbox</Link>
+                            </li>
+                            <li>
+                                <Link activeClassName="active" to="/dropdown">Dropdown</Link>
                             </li>
                             <li>
                                 <Link activeClassName="active" to="/input">Input</Link>
@@ -117,6 +121,7 @@ class App extends React.Component {
                                 <Route path='/button' component={ButtonExample} />
                                 <Route path='/button-group' component={ButtonGroupExample} />
                                 <Route path='/checkbox' component={CheckboxExample} />
+                                <Route path='/dropdown' component={DropdownExample} />
                                 <Route path='/input' component={InputExample} />
                                 <Route path='/modal' component={ModalExample} />
                                 <Route path='/navbar' component={NavBarExample} />

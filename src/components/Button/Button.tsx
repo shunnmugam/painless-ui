@@ -92,8 +92,8 @@ const Button:React.FC<ButtonProps> = (props) => {
         defaultButtonStyle = {...defaultButtonStyle,...theme.style[styleType]}
     }
 
-    if(bgColor && styleType === 'background') {
-        defaultButtonStyle.backgroundColor = bgColor;
+    if(bgColor && styleType === 'background' && bgColor) {
+        defaultButtonStyle.background = bgColor;
     }
     if(bgColor && styleType === 'outline') {
         defaultButtonStyle.borderColor = bgColor;

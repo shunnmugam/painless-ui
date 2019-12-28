@@ -1,0 +1,30 @@
+.ui-dropdown {
+  float: left;
+  overflow: hidden; }
+  .ui-dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0; }
+  .ui-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1; }
+    .ui-dropdown .dropdown-content .ui-dropdown-item {
+      float: none;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left; }
+      .ui-dropdown .dropdown-content .ui-dropdown-item:hover {
+        background-color: #ddd; }
+    .ui-dropdown .dropdown-content.open {
+      display: block; }
