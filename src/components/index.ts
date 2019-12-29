@@ -5,6 +5,8 @@ import Breadcrumb from './Breadcrumb/Breadcrumb';
 import Button from './Button/Button';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
 import Checkbox from './Checkbox/Checkbox';
+import Dropdown from './Dropdown/Dropdown';
+import DropdownItem from './DropdownItem/DropdownItem';
 import Input from './Input/Input';
 import Modal from './Modal/Modal';
 import NavBar from './NavBar/NavBar';
@@ -34,6 +36,8 @@ export {
     Button,
     ButtonGroup,
     Checkbox,
+    Dropdown,
+    DropdownItem,
     Input,
     Modal,
     NavBar,
