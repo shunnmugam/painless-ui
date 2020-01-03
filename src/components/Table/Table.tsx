@@ -139,7 +139,7 @@ class Table extends React.PureComponent<TableProps> {
      * @return data:Array<any>
      */
     sort(d:Array<any>): Array<any> {
-        if(this.state.sortBy === '' || this.props.serverSide === true) {
+        if(this.state.sortBy === '') {
             return d;
         }
         const data = [...d];
@@ -156,6 +156,9 @@ class Table extends React.PureComponent<TableProps> {
             if(sortedDataFromView !== undefined) {
                 return sortedDataFromView;
             }
+        }
+        if(this.props.serverSide === true) {
+            return d;
         }
         data.sort((d1,d2) => {
             if(d1[sortBy] < d2[sortBy]) {

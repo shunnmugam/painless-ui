@@ -326,13 +326,16 @@ class Select extends React.PureComponent<SelectProps> {
             } else {
                 const children: any = React.Children.toArray(props.children).find((child: any) => {
                     return child.props.value === props.value;
-                })
-                const selectedDetails = [{
-                    value: children.props.value,
-                    text: children.props.text || children.props.value,
-                    child: children.props.children,
-                    data: children.props.data
-                }];
+                });
+                let selectedDetails = [];
+                if(children) {
+                     selectedDetails = [{
+                        value: children.props.value,
+                        text: children.props.text || children.props.value,
+                        child: children.props.children,
+                        data: children.props.data
+                    }];
+                }
                 return {
                     selectedDetails
                 }
