@@ -24,6 +24,8 @@ interface Columns {
     render?: Function;
     onSort?: Function;
     filterRender?: Function;
+    filterData?: Function;
+    onFilter?: Function;
 }
 interface typeArrayColumns extends Columns {
     selector?: string;

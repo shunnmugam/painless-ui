@@ -119,6 +119,9 @@ class Table extends React.PureComponent {
     filter(d) {
         if (Object.keys(this.state.filterColumnData).length === 0)
             return d;
+        if (this.props.serverSide) {
+            return d;
+        }
         return d.filter((data) => {
             for (const key in this.state.filterColumnData) {
                 let index = key;
@@ -129,6 +132,18 @@ class Table extends React.PureComponent {
                     }
                     else {
                         index = key;
+                    }
+                    const columnData = this.props.columns.find((column, i) => {
+                        if (this.props.dataType !== 'array') {
+                            return column.selector === key;
+                        }
+                        else {
+                            "" + i === "" + key;
+                        }
+                    });
+                    if (columnData && columnData.filterData && typeof columnData.filterData === "function") {
+                        const filterData = columnData.filterData(data[index], element, data);
+                        return filterData === true ? true : false;
                     }
                     if (data[index] !== element)
                         return false;
@@ -317,6 +332,10 @@ class Table extends React.PureComponent {
                                             t[index] = e.value;
                                         this.setState({
                                             filterColumnData: t
+                                        }, () => {
+                                            if (column.onFilter) {
+                                                column.onFilter(this.state.filterColumnData, index);
+                                            }
                                         });
                                     } }, this.props.data.map((row, i) => {
                                     if (props.dataType === 'array') {
