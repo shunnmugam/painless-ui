@@ -29,6 +29,7 @@ interface Columns {
     filter?: boolean
     render?: Function
     onSort?: Function
+    filterRender?: Function
 }
 
 
@@ -375,7 +376,21 @@ class Table extends React.PureComponent<TableProps> {
                         }} key={'th-'+i} className={(column.sortable === true ? 'sort-column' : '') + sortClassName}>
                             {column.name}
                             {column.filter ? <>
-                                <Select searchable style={{width : '100%',display : 'block'}} onClick={(e) => e.stopPropagation()} onChange ={(e) => {
+                                {
+                                    column.filterRender ? column.filterRender((v) => {
+                                        const t = {...this.state.filterColumnData}
+                                        let index:number|string = i
+                                        if(this.props.dataType !== 'array' && column.selector)
+                                            index = column.selector
+
+                                        if(v === '' || v === undefined){
+                                            delete t[index]
+                                        } else
+                                            t[index] = v;
+                                        this.setState({
+                                            filterColumnData: t
+                                        });
+                                    }) :  <Select searchable style={{width : '100%',display : 'block'}} onClick={(e) => e.stopPropagation()} onChange ={(e) => {
 
                                         const t = {...this.state.filterColumnData}
                                         let index:number|string = i
@@ -427,6 +442,7 @@ class Table extends React.PureComponent<TableProps> {
                                         })
                                     }
                                     </Select>
+                                }
                             </> : <></>}
                         </th>)
                     })}

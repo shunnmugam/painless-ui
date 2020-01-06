@@ -112,6 +112,115 @@ const TableExample = (props) => {
                 role: 'Register'
             },
             ]}/>}/>
+            <h3>render</h3>
+            <p>you can change render behaviour</p>
+            <CodeAndExample code={`<Table columns={[
+                {
+                    selector: 'no',
+                    name: 'Number',
+                    render: (row) => {
+                        return row.no;
+                    }
+                },
+                {
+                    selector: 'name',
+                    name: 'Name',
+                    render: (row) => {
+                        return <span style={{color:"red"}}>{row.name}</span>
+                    }
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number'
+                },
+                {
+                    selector: 'role',
+                    name: 'Role'
+                },
+            ]} data={[{
+                no : 1,
+                name: 'user1',
+                mobile_number: '0902313XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 2,
+                name: 'user2',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'user3',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'user4',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'user5',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]}/>`} example={<Table columns={[
+                {
+                    selector: 'no',
+                    name: 'Number',
+                    render: (row) => {
+                        return row.no;
+                    }
+                },
+                {
+                    selector: 'name',
+                    name: 'Name',
+                    render: (row) => {
+                        return <span style={{color:"red"}}>{row.name}</span>
+                    }
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number'
+                },
+                {
+                    selector: 'role',
+                    name: 'Role'
+                },
+            ]} data={[{
+                no : 1,
+                name: 'user1',
+                mobile_number: '0902313XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 2,
+                name: 'user2',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'user3',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'user4',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'user5',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]}/>}/>
             <h3>search</h3>
             <p>you can add searchable feature in table using <b>searchOptions</b> prop <b>{`(searchOptions={{searchable: true}})`}</b></p>
             <CodeAndExample code={`<Table searchOptions={{
@@ -791,6 +900,361 @@ const TableExample = (props) => {
                 role: 'Register'
             },
             ]}/>}/>
+
+            <h3>custom filter (filterRender)</h3>
+            <p>you can modify filter options using <b>filterRender</b> in <b>columns</b> prop</p>
+            <CodeAndExample code={`<Table searchOptions={{
+                searchable : true
+            }} columns={[
+                {
+                    selector: 'no',
+                    name: 'Number',
+                    searchable: false,
+                    sortable: true
+                },
+                {
+                    selector: 'name',
+                    name: 'Name',
+                    sortable: true
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number',
+                    sortable: true
+                },
+                {
+                    selector: 'role',
+                    name: 'Role',
+                    sortable: true,
+                    filter: true,
+                    filterRender: (onChange) => {
+                        return <select onChange={(e) => {
+                            onChange(e.target.value)
+                        }}>
+                            <option value=""></option>
+                            <option value="Admin">Admin</option>
+                            <option value="Developer">Dev</option>
+                        </select>
+                    }
+                },
+            ]} data={[{
+                no : 1,
+                name: 'userA',
+                mobile_number: '0902313XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 2,
+                name: 'userB',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'userC',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'userD',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'userE',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]}/>`} example={<Table searchOptions={{
+                searchable : true,
+            }} columns={[
+                {
+                    selector: 'no',
+                    name: 'Number',
+                    searchable: false,
+                    sortable: true
+                },
+                {
+                    selector: 'name',
+                    name: 'Name',
+                    sortable: true
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number',
+                    sortable: true
+                },
+                {
+                    selector: 'role',
+                    name: 'Role',
+                    sortable: true,
+                    filter: true,
+                    filterRender: (onChange) => {
+                        return <select onChange={(e) => {
+                            onChange(e.target.value)
+                        }}>
+                            <option value=""></option>
+                            <option value="Admin">Admin</option>
+                            <option value="Developer">Dev</option>
+                        </select>
+                    }
+                },
+            ]} data={[{
+                no : 1,
+                name: 'userA',
+                mobile_number: '0902313XXXX',
+                role: 'Admin',
+            },
+            {
+                no : 2,
+                name: 'userB',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'userC',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'userD',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'userE',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]}/>}/>
+            <h3>Table props</h3>
+            <Table columns={[{
+                selector: "name",
+                name: "Name"
+            },{
+                name : "Type",
+                selector: "type"
+            },{
+                name : "Default",
+                selector: "default"
+            }]} data={[{
+                    name : 'columns',
+                    type: 'Array<Object>',
+                    default: '-',
+
+                },
+                {
+                    name : "data",
+                    type: "Array<Object>",
+                    default: "-"
+                },
+                {
+                    name : "className",
+                    type: "string",
+                    default: "-"
+                },
+                {
+                    name : "containerStyle",
+                    type: "css",
+                    default: "-"
+                },
+                {
+                    name : "responsive",
+                    type: "boolean",
+                    default: "-"
+                },
+                {
+                    name : "serverSide",
+                    type: "boolean",
+                    default: "-"
+                },
+                {
+                    name : "style",
+                    type: "css",
+                    default: "-"
+                },
+                {
+                    name : "loading",
+                    type: "boolean",
+                    default: "-"
+                },
+                {
+                    name : "paginationOptions",
+                    type: "PaginationOptions",
+                    default: "-"
+                },
+                {
+                    name : "searchOptions",
+                    type: "SearchOptions",
+                    default: "-"
+                },
+                {
+                    name : "sortOptions",
+                    type: "SortOptions",
+                    default: "-"
+                },
+            ]}/>
+            <h3>Colums props</h3>
+            <Table columns={[{
+                selector: "name",
+                name: "Name"
+            },{
+                name : "Type",
+                selector: "type"
+            },{
+                name : "Default",
+                selector: "default"
+            }]} data={[{
+                    name : 'selector',
+                    type: 'string',
+                    default: '-',
+
+                },
+                {
+                    name : 'name',
+                    type: 'string',
+                    default: '-',
+
+                },
+                {
+                    name : 'sortable',
+                    type: 'boolean',
+                    default: 'false',
+
+                },
+                {
+                    name : 'searchable',
+                    type: 'boolean',
+                    default: 'false',
+
+                },
+                {
+                    name : 'filter',
+                    type: 'boolean',
+                    default: '-',
+
+                },
+                {
+                    name : 'render',
+                    type: 'Function',
+                    default: '-',
+
+                },
+                {
+                    name : 'onSort',
+                    type: 'Function',
+                    default: '-',
+
+                },
+                {
+                    name : 'filterRender',
+                    type: 'Function',
+                    default: '-',
+
+                },
+            ]} />
+
+            <h3>PaginationOptions</h3>
+            <Table columns={[{
+                selector: "name",
+                name: "Name"
+            },{
+                name : "Type",
+                selector: "type"
+            },{
+                name : "Default",
+                selector: "default"
+            }]} data={[{
+                    name : 'pagination',
+                    type: 'boolean',
+                    default: '-',
+
+                },
+                {
+                    name : 'totalNoOfData',
+                    type: 'integer',
+                    default: '-',
+
+                },
+                {
+                    name : 'currentPage',
+                    type: 'integer',
+                    default: '-',
+
+                },
+                {
+                    name : 'limit',
+                    type: 'integer',
+                    default: '-',
+
+                },
+                {
+                    name : 'beforeChange',
+                    type: 'Function',
+                    default: '-',
+
+                },
+                {
+                    name : 'onChange',
+                    type: 'Function',
+                    default: '-',
+
+                }
+            ]} />
+
+            <h3>SearchOptions</h3>
+            <Table columns={[{
+                selector: "name",
+                name: "Name"
+            },{
+                name : "Type",
+                selector: "type"
+            },{
+                name : "Default",
+                selector: "default"
+            }]} data={[{
+                    name : 'searchable',
+                    type: 'boolean',
+                    default: '-',
+
+                },
+                {
+                    name : 'onSearch',
+                    type: 'Function',
+                    default: '-',
+
+                },
+                {
+                    name : 'searchComponent',
+                    type: 'React.JSX',
+                    default: '-',
+
+                }
+            ]} />
+
+            <h3>SortOptions</h3>
+            <Table columns={[{
+                selector: "name",
+                name: "Name"
+            },{
+                name : "Type",
+                selector: "type"
+            },{
+                name : "Default",
+                selector: "default"
+            }]} data={[
+                {
+                    name : 'onSort',
+                    type: 'Function',
+                    default: '-',
+
+                }
+            ]} />
         </>
     )
 }

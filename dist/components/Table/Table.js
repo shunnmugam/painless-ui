@@ -292,53 +292,65 @@ class Table extends React.PureComponent {
                                         this.setSortController(selector);
                                 }, key: 'th-' + i, className: (column.sortable === true ? 'sort-column' : '') + sortClassName },
                                 column.name,
-                                column.filter ? React.createElement(React.Fragment, null,
-                                    React.createElement(Select, { searchable: true, style: { width: '100%', display: 'block' }, onClick: (e) => e.stopPropagation(), onChange: (e) => {
-                                            const t = { ...this.state.filterColumnData };
-                                            let index = i;
-                                            if (this.props.dataType !== 'array' && column.selector)
-                                                index = column.selector;
-                                            if (e.value === '' || e.value === undefined) {
-                                                delete t[index];
-                                            }
-                                            else
-                                                t[index] = e.value;
-                                            this.setState({
-                                                filterColumnData: t
-                                            });
-                                        } }, this.props.data.map((row, i) => {
-                                        if (props.dataType === 'array') {
-                                            row.map((d, c) => {
-                                                if (!tempFilterData.has(d)) {
-                                                    tempFilterData.add(d);
-                                                    return React.createElement(Option, { value: d, key: 'filter-option-' + c + '-' + column.name }, d);
-                                                }
-                                                return React.createElement(React.Fragment, null);
-                                            });
+                                column.filter ? React.createElement(React.Fragment, null, column.filterRender ? column.filterRender((v) => {
+                                    const t = { ...this.state.filterColumnData };
+                                    let index = i;
+                                    if (this.props.dataType !== 'array' && column.selector)
+                                        index = column.selector;
+                                    if (v === '' || v === undefined) {
+                                        delete t[index];
+                                    }
+                                    else
+                                        t[index] = v;
+                                    this.setState({
+                                        filterColumnData: t
+                                    });
+                                }) : React.createElement(Select, { searchable: true, style: { width: '100%', display: 'block' }, onClick: (e) => e.stopPropagation(), onChange: (e) => {
+                                        const t = { ...this.state.filterColumnData };
+                                        let index = i;
+                                        if (this.props.dataType !== 'array' && column.selector)
+                                            index = column.selector;
+                                        if (e.value === '' || e.value === undefined) {
+                                            delete t[index];
                                         }
-                                        else {
-                                            if (column.selector) {
-                                                const d = row[column.selector];
-                                                if (!tempFilterData.has(d)) {
-                                                    tempFilterData.add(d);
-                                                    return React.createElement(Option, { value: d, key: 'filter-option-' + i + '-' + column.name }, d);
-                                                }
-                                                return React.createElement(React.Fragment, null);
+                                        else
+                                            t[index] = e.value;
+                                        this.setState({
+                                            filterColumnData: t
+                                        });
+                                    } }, this.props.data.map((row, i) => {
+                                    if (props.dataType === 'array') {
+                                        row.map((d, c) => {
+                                            if (!tempFilterData.has(d)) {
+                                                tempFilterData.add(d);
+                                                return React.createElement(Option, { value: d, key: 'filter-option-' + c + '-' + column.name }, d);
                                             }
-                                            else
-                                                return React.createElement(React.Fragment, null);
+                                            return React.createElement(React.Fragment, null);
+                                        });
+                                    }
+                                    else {
+                                        if (column.selector) {
+                                            const d = row[column.selector];
+                                            if (!tempFilterData.has(d)) {
+                                                tempFilterData.add(d);
+                                                return React.createElement(Option, { value: d, key: 'filter-option-' + i + '-' + column.name }, d);
+                                            }
+                                            return React.createElement(React.Fragment, null);
                                         }
-                                        return React.createElement(React.Fragment, null);
-                                        // (column.selector)  ? (
-                                        //     console.log(column.selector)
-                                        //     const d = row[column.selector];
-                                        //     const tempFilterData = new Set();
-                                        //     if(!tempFilterData.has(d)) {
-                                        //         tempFilterData.add(d);
-                                        //         return <option value={d} key={'filter-option-'+c+'-'+column.name}>{d}</option>
-                                        //     }
-                                        // }) : <></>
-                                    }))) : React.createElement(React.Fragment, null)));
+                                        else
+                                            return React.createElement(React.Fragment, null);
+                                    }
+                                    return React.createElement(React.Fragment, null);
+                                    // (column.selector)  ? (
+                                    //     console.log(column.selector)
+                                    //     const d = row[column.selector];
+                                    //     const tempFilterData = new Set();
+                                    //     if(!tempFilterData.has(d)) {
+                                    //         tempFilterData.add(d);
+                                    //         return <option value={d} key={'filter-option-'+c+'-'+column.name}>{d}</option>
+                                    //     }
+                                    // }) : <></>
+                                }))) : React.createElement(React.Fragment, null)));
                         }))),
                     this.state.loading === true ? (React.createElement("tbody", null,
                         React.createElement("tr", null,

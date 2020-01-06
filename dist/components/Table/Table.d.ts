@@ -23,6 +23,7 @@ interface Columns {
     filter?: boolean;
     render?: Function;
     onSort?: Function;
+    filterRender?: Function;
 }
 interface typeArrayColumns extends Columns {
     selector?: string;

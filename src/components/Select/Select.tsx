@@ -327,7 +327,7 @@ class Select extends React.PureComponent<SelectProps> {
                 const children: any = React.Children.toArray(props.children).find((child: any) => {
                     return child.props.value === props.value;
                 });
-                let selectedDetails = [];
+                let selectedDetails:any = [];
                 if(children) {
                      selectedDetails = [{
                         value: children.props.value,
