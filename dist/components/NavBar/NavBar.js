@@ -6,7 +6,7 @@ const defaultProps = {
     position: ''
 };
 const NavBar = (props) => {
-    const { bgColor, className, position, theme, colors, style, ...customProps } = props;
+    const { bgColor, className, position, theme, colors, style, fixed, ...customProps } = props;
     let defaultNavBarStyle = {
         background: colors ? (colors.primary ? colors.primary : "#1976d2") : "#1976d2",
         color: colors ? (colors.secondary ? colors.secondary : "white") : "white",
@@ -20,7 +20,7 @@ const NavBar = (props) => {
     if (style) {
         defaultNavBarStyle = { ...style, ...defaultNavBarStyle };
     }
-    return (React.createElement("div", Object.assign({ style: defaultNavBarStyle, className: "ui-nav-bar " + className + ' ' + position }, customProps), props.children));
+    return (React.createElement("div", Object.assign({ style: defaultNavBarStyle, className: ("ui-nav-bar " + className + ' ' + position) + (fixed ? ' fixed' : '') }, customProps), props.children));
 };
 NavBar.defaultProps = defaultProps;
 export default withTheme(NavBar, "NavBar");

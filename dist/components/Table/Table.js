@@ -29,6 +29,8 @@ class Table extends React.PureComponent {
             searchKeyword: '',
             filterColumnData: {}
         };
+        this.rowSpanSkipDetails = {};
+        this.colSpanSkipDetails = {};
     }
     setSortController(sortBy) {
         let order = 'asc';
@@ -138,7 +140,7 @@ class Table extends React.PureComponent {
                             return column.selector === key;
                         }
                         else {
-                            "" + i === "" + key;
+                            return "" + i === "" + key;
                         }
                     });
                     if (columnData && columnData.filterData && typeof columnData.filterData === "function") {
@@ -193,6 +195,34 @@ class Table extends React.PureComponent {
             loading: this.props.serverSide === true,
             localChange: true
         });
+    }
+    /*
+     * get rowSpan
+     */
+    getRowSpan(column, c, r) {
+        if (column.rowSpan && column.rowSpan[r + 1]) {
+            for (let i = 1; i < column.rowSpan[r + 1]; i++) {
+                if (!this.rowSpanSkipDetails[r + i])
+                    this.rowSpanSkipDetails[r + i] = [];
+                this.rowSpanSkipDetails[r + i].push(c);
+            }
+            return column.rowSpan[r + 1];
+        }
+        return 1;
+    }
+    /*
+     * get colSpan
+     */
+    getColSpan(column, c, r) {
+        if (column.colSpan && column.colSpan[r + 1]) {
+            for (let i = 1; i < column.colSpan[r + 1]; i++) {
+                if (!this.colSpanSkipDetails[r])
+                    this.colSpanSkipDetails[r] = [];
+                this.colSpanSkipDetails[r].push(c + i);
+            }
+            return column.colSpan[r + 1];
+        }
+        return 1;
     }
     /*
      * get derived state from props
@@ -289,8 +319,8 @@ class Table extends React.PureComponent {
                                 props.searchOptions.onSearch(e.target.value);
                             }
                         } })) : React.createElement(React.Fragment, null)),
-            React.createElement("div", { className: 'ui-table-wrapper' + (props.responsive ? 'responsive ' : '') },
-                React.createElement("table", { className: 'ui-table ' + (props.className || ''), style: this.props.style || {} },
+            React.createElement("div", { className: 'ui-table-wrapper ' + (props.responsive ? 'responsive ' : '') },
+                React.createElement("table", { className: 'ui-table ' + (props.className || '') + (props.noBg ? ' no-bg' : '') + (props.border ? ' border' : ''), style: this.props.style || {} },
                     this.props.noHeader === true ? React.createElement(React.Fragment, null) :
                         React.createElement("thead", { className: "ui-table-header" }, React.createElement("tr", null, props.columns.map((column, i) => {
                             let selector = '';
@@ -319,6 +349,10 @@ class Table extends React.PureComponent {
                                         t[index] = v;
                                     this.setState({
                                         filterColumnData: t
+                                    }, () => {
+                                        if (column.onFilter) {
+                                            column.onFilter(this.state.filterColumnData, index);
+                                        }
                                     });
                                 }) : React.createElement(Select, { searchable: true, style: { width: '100%', display: 'block' }, onClick: (e) => e.stopPropagation(), onChange: (e) => {
                                         const t = { ...this.state.filterColumnData };
@@ -380,6 +414,12 @@ class Table extends React.PureComponent {
                                 return (React.createElement("tr", { key: 'tr-' + r }, props.dataType === 'array' ? (row.map((d, c) => {
                                     return React.createElement("td", { key: 'td-' + c + '-' + r }, d);
                                 })) : (props.columns.map((column, c) => {
+                                    if (this.rowSpanSkipDetails[r] && this.rowSpanSkipDetails[r].indexOf(c) !== -1) {
+                                        return React.createElement(React.Fragment, null);
+                                    }
+                                    else if (this.colSpanSkipDetails[r] && this.colSpanSkipDetails[r].indexOf(c) !== -1) {
+                                        return React.createElement(React.Fragment, null);
+                                    }
                                     let value = '';
                                     if (column.render && typeof column.render === 'function') {
                                         value = column.render(row, column, r);
@@ -390,7 +430,7 @@ class Table extends React.PureComponent {
                                     else {
                                         throw new Error('column should have selector property or render function');
                                     }
-                                    return React.createElement("td", { key: 'td-' + c + '-' + r }, value);
+                                    return React.createElement("td", { rowSpan: this.getRowSpan(column, c, r), colSpan: this.getColSpan(column, c, r), key: 'td-' + c + '-' + r }, value);
                                 }))));
                             }))))),
             this.state.loading === true ? (React.createElement(React.Fragment, null)) : (paginationUi)));

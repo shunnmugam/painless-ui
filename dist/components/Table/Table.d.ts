@@ -14,6 +14,8 @@ interface TableProps {
     searchOptions?: SearchOptions;
     sortOptions?: SortOptions;
     noHeader?: boolean;
+    noBg?: boolean;
+    border?: boolean;
     [key: string]: any;
 }
 interface Columns {
@@ -21,6 +23,8 @@ interface Columns {
     sortable?: boolean;
     searchable?: boolean;
     filter?: boolean;
+    rowSpan?: any;
+    colSpan?: any;
     render?: Function;
     onSort?: Function;
     filterRender?: Function;
@@ -58,12 +62,16 @@ declare class Table extends React.PureComponent<TableProps> {
         searchKeyword: string;
         filterColumnData: {};
     };
+    rowSpanSkipDetails: {};
+    colSpanSkipDetails: {};
     setSortController(sortBy: any): void;
     search(d: Array<any>): Array<any>;
     sort(d: Array<any>): Array<any>;
     filter(d: Array<any>): Array<any>;
     paginate(d: Array<any>): any;
     pageChange(page: any): void;
+    getRowSpan(column: Columns, c: any, r: any): number;
+    getColSpan(column: Columns, c: any, r: any): number;
     static getDerivedStateFromProps(nextProps: any, state: any): {
         localChange: boolean;
         loading?: undefined;

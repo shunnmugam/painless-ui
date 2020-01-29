@@ -217,6 +217,113 @@ const TableExample = (props) => {
                         role: 'Register'
                     },
                 ] }) }),
+        React.createElement("h3", null, "rowSpan and colSpan"),
+        React.createElement("p", null,
+            "you can control rowSpan and colSpan using ",
+            React.createElement("b", null, "rowSpan & colSpan")),
+        React.createElement(CodeAndExample, { code: `<Table noBg border columns={[
+                {
+                    selector: 'no',
+                    name: 'Number'
+                },
+                {
+                    selector: 'name',
+                    name: 'Name'
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number'
+                },
+                {
+                    selector: 'role',
+                    name: 'Role',
+                    rowSpan: {
+                        1: 2, //rownumber : rowSpan
+                        3: 2
+                    }
+                },
+            ]} data={[{
+                no : 1,
+                name: 'user1',
+                mobile_number: '0902313XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 2,
+                name: 'user2',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'user3',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'user4',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'user5',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]}/>`, example: React.createElement(Table, { responsive: true, border: true, noBg: true, columns: [
+                    {
+                        selector: 'no',
+                        name: 'Number',
+                    },
+                    {
+                        selector: 'name',
+                        name: 'Name'
+                    },
+                    {
+                        selector: 'mobile_number',
+                        name: 'Mobile Number'
+                    },
+                    {
+                        selector: 'role',
+                        name: 'Role',
+                        rowSpan: {
+                            1: 2,
+                            3: 2
+                        }
+                    },
+                ], data: [{
+                        no: 1,
+                        name: 'user1',
+                        mobile_number: '0902313XXXX',
+                        role: 'Admin'
+                    },
+                    {
+                        no: 2,
+                        name: 'user2',
+                        mobile_number: '0902513XXXX',
+                        role: 'Admin'
+                    },
+                    {
+                        no: 3,
+                        name: 'user3',
+                        mobile_number: '0901513XXXX',
+                        role: 'Developer'
+                    },
+                    {
+                        no: 4,
+                        name: 'user4',
+                        mobile_number: '0911513XXXX',
+                        role: 'Developer'
+                    },
+                    {
+                        no: 5,
+                        name: 'user5',
+                        mobile_number: '0911513XXXX',
+                        role: 'Register'
+                    },
+                ] }) }),
         React.createElement("h3", null, "search"),
         React.createElement("p", null,
             "you can add searchable feature in table using ",
@@ -1104,6 +1211,15 @@ const TableExample = (props) => {
                     default: "-"
                 },
                 {
+                    name: "noBg",
+                    type: "boolean",
+                    default: "-"
+                }, {
+                    name: "border",
+                    type: "boolean",
+                    default: "-"
+                },
+                {
                     name: "loading",
                     type: "boolean",
                     default: "-"
@@ -1172,6 +1288,16 @@ const TableExample = (props) => {
                 {
                     name: 'filterRender',
                     type: 'Function',
+                    default: '-',
+                },
+                {
+                    name: 'rowSpan',
+                    type: 'object',
+                    default: '-',
+                },
+                {
+                    name: 'colSpan',
+                    type: 'object',
                     default: '-',
                 },
             ] }),

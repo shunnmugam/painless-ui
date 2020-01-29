@@ -25,5 +25,6 @@ import toast from './ToastContainer/util/toast';
 import ToastContainer from './ToastContainer/ToastContainer';
 import TabContainer from './TabContainer/TabContainer';
 import Tooltip from './Tooltip/Tooltip';
+import WatchClickOutside from './WatchClickOutside/WatchClickOutside';
 import './index.css';
-export { Accordion, AccordionGroup, Badge, Breadcrumb, Button, ButtonGroup, Checkbox, Dropdown, DropdownItem, Input, Modal, NavBar, Option, Radio, Select, Slider, Switch, Tab, TabContainer, TabGroup, Table, TabWrapper, Tag, TextArea, ToastContainer, toast, Tooltip };
+export { Accordion, AccordionGroup, Badge, Breadcrumb, Button, ButtonGroup, Checkbox, Dropdown, DropdownItem, Input, Modal, NavBar, Option, Radio, Select, Slider, Switch, Tab, TabContainer, TabGroup, Table, TabWrapper, Tag, TextArea, ToastContainer, toast, Tooltip, WatchClickOutside, };
