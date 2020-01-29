@@ -12,42 +12,36 @@
   /* Hide the browser's default radio button */
   /* Create a custom radio button */
   /* On mouse-over, add a grey background color */ }
-
-.ui-radio-container input.ui-radio {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  /* When the radio button is checked, add a blue background */ }
-
-.ui-radio-container input.ui-radio:checked ~ .checkmark {
-  background-color: inherit;
-  /* Show the indicator (dot/circle) when checked */ }
-
-.ui-radio-container input.ui-radio:checked ~ .checkmark:after {
-  display: block; }
-
-.ui-radio-container .checkmark {
-  position: absolute;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-  border-radius: 50%;
-  /* Create the indicator (the dot/circle - hidden when not checked) */ }
-
-.ui-radio-container .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  top: 30%;
-  left: 30%;
-  width: 40%;
-  height: 40%;
-  border-radius: 50%;
-  background: white; }
-
-.ui-radio-container:hover input ~ .checkmark {
-  background-color: #ccc; }
+  .ui-radio-container input.ui-radio {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    /* When the radio button is checked, add a blue background */ }
+    .ui-radio-container input.ui-radio:checked ~ .checkmark {
+      background-color: inherit;
+      /* Show the indicator (dot/circle) when checked */ }
+      .ui-radio-container input.ui-radio:checked ~ .checkmark:after {
+        display: block; }
+  .ui-radio-container .checkmark {
+    position: absolute;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    /* Create the indicator (the dot/circle - hidden when not checked) */ }
+    .ui-radio-container .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      top: 30%;
+      left: 30%;
+      width: 40%;
+      height: 40%;
+      border-radius: 50%;
+      background: white; }
+  .ui-radio-container:hover input ~ .checkmark {
+    background-color: #ccc; }

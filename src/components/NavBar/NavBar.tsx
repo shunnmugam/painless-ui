@@ -10,6 +10,7 @@ interface NavBarProps {
     theme?: componentTheme
     colors?: themeColors
     style?: object
+    fixed?: boolean
     [key:string]: any
 }
 
@@ -18,7 +19,7 @@ const defaultProps:NavBarProps = {
     position: ''
 }
 const NavBar:React.FC<NavBarProps> = (props) => {
-    const { bgColor, className, position, theme, colors, style, ...customProps} = props;
+    const { bgColor, className, position, theme, colors, style,fixed, ...customProps} = props;
 
     let defaultNavBarStyle:any = {
         background: colors ? (colors.primary ? colors.primary : "#1976d2") : "#1976d2",
@@ -36,7 +37,7 @@ const NavBar:React.FC<NavBarProps> = (props) => {
     }
     
     return (
-        <div style={defaultNavBarStyle} className={"ui-nav-bar " + className +' '+ position} {...customProps}>
+        <div style={defaultNavBarStyle} className={("ui-nav-bar " + className +' '+ position) + (fixed ? ' fixed': '')} {...customProps}>
             {props.children}
         </div>
     )

@@ -105,8 +105,7 @@ ul.ui-slider-grid {
   padding: 0;
   list-style: none;
   margin-bottom: 25px; }
-
-ul.ui-slider-grid li {
-  position: absolute; }
+  ul.ui-slider-grid li {
+    position: absolute; }
 
 /*# sourceMappingURL=react-input-range.css.map*/

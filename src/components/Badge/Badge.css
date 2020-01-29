@@ -24,18 +24,14 @@
   text-align: center;
   font-size: 14px;
   font-weight: 400; }
-
-.ui-badge.empty {
-  display: none; }
-
-.ui-badge.rounded {
-  border-radius: 10rem; }
-
-.ui-badge.animation {
-  animation: pulse 1.5s infinite; }
-
-.ui-badge.animation.rounded {
-  border-radius: 10rem; }
+  .ui-badge.empty {
+    display: none; }
+  .ui-badge.rounded {
+    border-radius: 10rem; }
+  .ui-badge.animation {
+    animation: pulse 1.5s infinite; }
+    .ui-badge.animation.rounded {
+      border-radius: 10rem; }
 
 @keyframes sonar {
   0% {

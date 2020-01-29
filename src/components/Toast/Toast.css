@@ -19,78 +19,69 @@
   white-space: nowrap;
   overflow: hidden;
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12); }
-
-.ui-toast .ui-toast-img {
-  min-width: 50px;
-  float: left;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  box-sizing: border-box;
-  background-color: #111;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center; }
-
-.ui-toast .ui-toast-desc {
-  color: #fff;
-  padding: 16px;
-  overflow: hidden;
-  white-space: nowrap;
-  flex: 1; }
-
-.ui-toast.show {
-  visibility: visible;
-  margin-bottom: 3px; }
+  .ui-toast .ui-toast-img {
+    min-width: 50px;
+    float: left;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+    background-color: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .ui-toast .ui-toast-desc {
+    color: #fff;
+    padding: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1; }
+  .ui-toast.show {
+    visibility: visible;
+    margin-bottom: 3px; }
 
 /*  */
 .ui-toast-container.top-center .ui-toast.show {
   -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
   animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s; }
-
-.ui-toast-container.top-center .ui-toast.show.auto-close {
-  -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
-  animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
+  .ui-toast-container.top-center .ui-toast.show.auto-close {
+    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
+    animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
 
 .ui-toast-container.top-left .ui-toast.show {
   -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
   animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s; }
-
-.ui-toast-container.top-left .ui-toast.show.auto-close {
-  -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
-  animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
+  .ui-toast-container.top-left .ui-toast.show.auto-close {
+    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
+    animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
 
 .ui-toast-container.top-right .ui-toast.show {
   -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
   animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s; }
-
-.ui-toast-container.top-right .ui-toast.show.auto-close {
-  -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
-  animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
+  .ui-toast-container.top-right .ui-toast.show.auto-close {
+    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
+    animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
 
 .ui-toast-container.bottom-center .ui-toast.show {
   -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
   animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s; }
-
-.ui-toast-container.bottom-center .ui-toast.show.auto-close {
-  -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
-  animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
+  .ui-toast-container.bottom-center .ui-toast.show.auto-close {
+    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
+    animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
 
 .ui-toast-container.bottom-left .ui-toast.show {
   -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
   animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s; }
-
-.ui-toast-container.bottom-left .ui-toast.show.auto-close {
-  -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
-  animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
+  .ui-toast-container.bottom-left .ui-toast.show.auto-close {
+    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
+    animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
 
 .ui-toast-container.bottom-right .ui-toast.show {
   -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s;
   animation: fade-in 0.5s, expand 0.5s 0.5s, stay infinite 1s; }
-
-.ui-toast-container.bottom-right .ui-toast.show.auto-close {
-  -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
-  animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
+  .ui-toast-container.bottom-right .ui-toast.show.auto-close {
+    -webkit-animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s;
+    animation: fade-in 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fade-out 0.5s 4.5s; }
 
 @-webkit-keyframes fade-in {
   from {

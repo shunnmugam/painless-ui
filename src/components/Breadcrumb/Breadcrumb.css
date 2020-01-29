@@ -3,15 +3,12 @@
   padding: 10px 16px;
   list-style: none;
   background-color: #eee; }
-
-.ui-breadcrumb .ui-breadcrumb-item {
-  display: inline;
-  font-size: 18px; }
-
-.ui-breadcrumb .ui-breadcrumb-item a {
-  color: #0275d8;
-  text-decoration: none; }
-
-.ui-breadcrumb .ui-breadcrumb-item a:hover {
-  color: #01447e;
-  text-decoration: underline; }
+  .ui-breadcrumb .ui-breadcrumb-item {
+    display: inline;
+    font-size: 18px; }
+    .ui-breadcrumb .ui-breadcrumb-item a {
+      color: #0275d8;
+      text-decoration: none; }
+      .ui-breadcrumb .ui-breadcrumb-item a:hover {
+        color: #01447e;
+        text-decoration: underline; }

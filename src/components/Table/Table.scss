@@ -48,9 +48,16 @@
         }
     }
 
-    tr:nth-child(even) {
+    &:not(.no-bg) tr:nth-child(even) {
         background-color: #f2f2f2;
     }
+    &.border td {
+        border: 1px solid #c5c5c5;
+    }
+}
+.ui-table-wrapper.responsive {
+    width: 100%;
+    overflow-x: auto;
 }
 .ui-table-toolbar-wrapper, .ui-table-pagination-control {
     padding: 5px 2%;

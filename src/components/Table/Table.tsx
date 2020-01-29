@@ -19,14 +19,19 @@ interface TableProps {
     searchOptions?: SearchOptions
     sortOptions?: SortOptions
     noHeader?: boolean
+    noBg?: boolean
+    border?: boolean
     [key:string]: any
 }
+
 
 interface Columns {
     name: string
     sortable?: boolean
     searchable?: boolean
     filter?: boolean
+    rowSpan?: any
+    colSpan?: any
     render?: Function
     onSort?: Function
     filterRender?: Function
@@ -88,6 +93,9 @@ class Table extends React.PureComponent<TableProps> {
         searchKeyword: '',
         filterColumnData : {}
     }
+
+    rowSpanSkipDetails = {};
+    colSpanSkipDetails = {};
 
     setSortController(sortBy) {
         let order = 'asc';
@@ -202,7 +210,7 @@ class Table extends React.PureComponent<TableProps> {
                         if(this.props.dataType !== 'array') {
                             return column.selector === key;
                         } else {
-                            ""+i === ""+key;
+                            return ""+i === ""+key;
                         }
                     })
                     if(columnData && columnData.filterData && typeof columnData.filterData === "function") {
@@ -261,6 +269,38 @@ class Table extends React.PureComponent<TableProps> {
             loading: this.props.serverSide === true,
             localChange: true
         });
+    }
+
+    /*
+     * get rowSpan
+     */
+    getRowSpan(column: Columns, c, r): number {
+        if(column.rowSpan && column.rowSpan[r+1]) {
+            for(let i = 1;i<column.rowSpan[r+1];i++) {
+                if(!this.rowSpanSkipDetails[r+i])
+                    this.rowSpanSkipDetails[r+i] = [];
+                
+                this.rowSpanSkipDetails[r+i].push(c)
+            }
+            return column.rowSpan[r+1];
+        } 
+        return 1;
+    }
+
+    /*
+     * get colSpan
+     */
+    getColSpan(column: Columns, c, r):number {
+        if(column.colSpan && column.colSpan[r+1]) {
+            for(let i = 1;i<column.colSpan[r+1];i++) {
+                if(!this.colSpanSkipDetails[r])
+                    this.colSpanSkipDetails[r] = [];
+                
+                this.colSpanSkipDetails[r].push(c+i)
+            }
+            return column.colSpan[r+1];
+        } 
+        return 1;
     }
 
     /*
@@ -372,8 +412,8 @@ class Table extends React.PureComponent<TableProps> {
                         }}/> }
                 </div> : <></>}
             </div>
-            <div className={'ui-table-wrapper' + (props.responsive ? 'responsive ': '')}>
-                <table className={'ui-table '+ (props.className || '')} style={this.props.style || {}}>
+            <div className={'ui-table-wrapper ' + (props.responsive ? 'responsive ': '')}>
+                <table className={'ui-table '+ (props.className || '') + (props.noBg ? ' no-bg' : '') + (props.border ? ' border' : '') } style={this.props.style || {}}>
                 {this.props.noHeader === true ? <></> :
                 <thead className="ui-table-header">
                 {
@@ -406,6 +446,10 @@ class Table extends React.PureComponent<TableProps> {
                                             t[index] = v;
                                         this.setState({
                                             filterColumnData: t
+                                        },() => {
+                                            if(column.onFilter) {
+                                                column.onFilter(this.state.filterColumnData, index);
+                                            }
                                         });
                                     }) :  <Select searchable style={{width : '100%',display : 'block'}} onClick={(e) => e.stopPropagation()} onChange ={(e) => {
 
@@ -488,6 +532,12 @@ class Table extends React.PureComponent<TableProps> {
                                             })
                                         ) : (
                                         props.columns.map((column,c) => {
+                                            if(this.rowSpanSkipDetails[r] && this.rowSpanSkipDetails[r].indexOf(c) !== -1) {
+                                                return <></>;
+                                            } else if(this.colSpanSkipDetails[r] && this.colSpanSkipDetails[r].indexOf(c) !== -1) {
+                                                return <></>;
+                                            }
+                                            
                                             let value = '';
                                             if(column.render && typeof column.render === 'function') {
                                                 value = column.render(row,column,r);
@@ -496,9 +546,12 @@ class Table extends React.PureComponent<TableProps> {
                                             } else {
                                                 throw new Error('column should have selector property or render function')
                                             }
-                                            return <td key={'td-'+c+'-'+r}>
+                                            return <td rowSpan={this.getRowSpan(column, c, r)}
+                                                colSpan={this.getColSpan(column,c,r)}
+                                                key={'td-'+c+'-'+r}>
                                                 {value}
                                             </td>
+                                            
                                         }) )
                                     }
                                 </tr>)

@@ -25,6 +25,7 @@ import toast from './ToastContainer/util/toast';
 import ToastContainer from './ToastContainer/ToastContainer';
 import TabContainer from './TabContainer/TabContainer';
 import Tooltip from './Tooltip/Tooltip';
+import WatchClickOutside from './WatchClickOutside/WatchClickOutside';
 
 import './index.css';
 
@@ -55,5 +56,6 @@ export {
     TextArea,
     ToastContainer,
     toast,
-    Tooltip
+    Tooltip,
+    WatchClickOutside,
 };
