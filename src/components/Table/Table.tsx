@@ -361,14 +361,14 @@ class Table extends React.PureComponent<TableProps> {
                                 this.pageChange(this.state.currentPage-1);
                             }
                     }}>
-                    <Button styleType="text" rounded>&#8249;</Button>
+                    <Button disabled={!(this.state.currentPage > 1)} styleType="text" rounded>&#8249;</Button>
                     </li>
                     <li className="ui-table-pagination-next" onClick={() => {
                         if(this.state.currentPage < totalPage) {
                             this.pageChange(this.state.currentPage+1);
                         }
                     }}>
-                        <Button styleType="text" rounded>&#8250;</Button>
+                        <Button disabled={!(this.state.currentPage < totalPage)} styleType="text" rounded>&#8250;</Button>
                     </li>
                     <li className="ui-table-pagination-next" onClick={() => {
                         if(this.state.currentPage < totalPage) {

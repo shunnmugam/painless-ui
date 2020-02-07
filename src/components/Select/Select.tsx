@@ -392,7 +392,8 @@ class Select extends React.PureComponent<SelectProps> {
      */
     render(): JSX.Element {
         const { className,label,multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose,onSearch, ...customProps} = {...this.props}
-        return (
+        const inValidValues:any = [];
+        const returnValue = (
             <WatchClickOutside style={{ display: "initial" }} onClickOutside={() => this.toggle(false)}>
                 <div onKeyDown={this.onKeyPressed}
                     tabIndex={0} className="ui-select-container" style={{ maxWidth: width || '300px' }} {...customProps}>
@@ -424,7 +425,7 @@ class Select extends React.PureComponent<SelectProps> {
                                         }
                                     </div>
                                 )}
-                                {disabled !== true ? <i className="fa fa-chevron-left" onClick={this.clearAll}>x</i> : <></>}
+                                {disabled !== true ? <i className="close-i" onClick={this.clearAll}>x</i> : <></>}
                             
                         </div>
                         <div className={"dropdown-menu " + this.state.menuClassName} ref={this.dropDownMenuRef} style={this.state.menuStyle}>
@@ -449,10 +450,13 @@ class Select extends React.PureComponent<SelectProps> {
                                             if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) || 
                                             // (value.toLowerCase().includes(this.state.searchKeyword))  ||
                                             (children.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) ) {
-
+                                                const isValid = this.findValue(value);
+                                                if(isValid === undefined && value) {
+                                                    inValidValues.push(value);
+                                                }
                                                 return (<li className={(className ? className : '') +
                                                     (multiple !== true && this.state.selectedDetails[0] !== undefined && this.state.selectedDetails[0].value === value ? ' selected' : '')
-                                                    + (multiple === true && this.findValue(value) !== undefined ? ' selected' : '')
+                                                    + (multiple === true && isValid !== undefined ? ' selected' : '')
                                                 }
                                                     onClick={() => this.onClick(value, children, text, data)} {...customProps}>
                                                     {children}
@@ -470,6 +474,10 @@ class Select extends React.PureComponent<SelectProps> {
                 </div>
             </WatchClickOutside>
         )
+        if(inValidValues.length !== 0 && this.props.inValidValueCallback) {
+            this.props.inValidValueCallback(inValidValues);
+        }
+        return returnValue;
     }
 }
 

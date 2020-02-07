@@ -352,7 +352,8 @@ class Select extends React.PureComponent {
      */
     render() {
         const { className, label, multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose, onSearch, ...customProps } = { ...this.props };
-        return (React.createElement(WatchClickOutside, { style: { display: "initial" }, onClickOutside: () => this.toggle(false) },
+        const inValidValues = [];
+        const returnValue = (React.createElement(WatchClickOutside, { style: { display: "initial" }, onClickOutside: () => this.toggle(false) },
             React.createElement("div", Object.assign({ onKeyDown: this.onKeyPressed, tabIndex: 0, className: "ui-select-container", style: { maxWidth: width || '300px' } }, customProps),
                 React.createElement("label", { className: "ui-select-label" }, label),
                 React.createElement("div", { onMouseLeave: this.onMouseLeave, onMouseEnter: this.onMouseEnter, className: "dropdown", style: { height: height || 'auto' } },
@@ -371,7 +372,7 @@ class Select extends React.PureComponent {
                                                 }, className: "close-btn" }, "x")
                                             : React.createElement(React.Fragment, null));
                                 }))),
-                        disabled !== true ? React.createElement("i", { className: "fa fa-chevron-left", onClick: this.clearAll }, "x") : React.createElement(React.Fragment, null)),
+                        disabled !== true ? React.createElement("i", { className: "close-i", onClick: this.clearAll }, "x") : React.createElement(React.Fragment, null)),
                     React.createElement("div", { className: "dropdown-menu " + this.state.menuClassName, ref: this.dropDownMenuRef, style: this.state.menuStyle },
                         searchable === true ?
                             React.createElement("div", { className: "ui-select-search" },
@@ -392,15 +393,23 @@ class Select extends React.PureComponent {
                                 if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) ||
                                     // (value.toLowerCase().includes(this.state.searchKeyword))  ||
                                     (children.toLowerCase().includes(this.state.searchKeyword.toLowerCase()))) {
+                                    const isValid = this.findValue(value);
+                                    if (isValid === undefined && value) {
+                                        inValidValues.push(value);
+                                    }
                                     return (React.createElement("li", Object.assign({ className: (className ? className : '') +
                                             (multiple !== true && this.state.selectedDetails[0] !== undefined && this.state.selectedDetails[0].value === value ? ' selected' : '')
-                                            + (multiple === true && this.findValue(value) !== undefined ? ' selected' : ''), onClick: () => this.onClick(value, children, text, data) }, customProps), children));
+                                            + (multiple === true && isValid !== undefined ? ' selected' : ''), onClick: () => this.onClick(value, children, text, data) }, customProps), children));
                                 }
                                 else {
                                     return React.createElement(React.Fragment, null);
                                 }
                             }
                         })))))));
+        if (inValidValues.length !== 0 && this.props.inValidValueCallback) {
+            this.props.inValidValueCallback(inValidValues);
+        }
+        return returnValue;
     }
 }
 export default Select;

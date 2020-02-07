@@ -281,13 +281,13 @@ class Table extends React.PureComponent {
                                 this.pageChange(this.state.currentPage - 1);
                             }
                         } },
-                        React.createElement(Button, { styleType: "text", rounded: true }, "\u2039")),
+                        React.createElement(Button, { disabled: !(this.state.currentPage > 1), styleType: "text", rounded: true }, "\u2039")),
                     React.createElement("li", { className: "ui-table-pagination-next", onClick: () => {
                             if (this.state.currentPage < totalPage) {
                                 this.pageChange(this.state.currentPage + 1);
                             }
                         } },
-                        React.createElement(Button, { styleType: "text", rounded: true }, "\u203A")),
+                        React.createElement(Button, { disabled: !(this.state.currentPage < totalPage), styleType: "text", rounded: true }, "\u203A")),
                     React.createElement("li", { className: "ui-table-pagination-next", onClick: () => {
                             if (this.state.currentPage < totalPage) {
                                 this.pageChange(totalPage);
