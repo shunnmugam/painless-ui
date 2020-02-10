@@ -37,9 +37,15 @@ declare class Select extends React.PureComponent<SelectProps> {
     static getDerivedStateFromProps(props: any, state: any): {
         fromLocal: boolean;
         selectedDetails?: undefined;
+        inValidValues?: undefined;
+    } | {
+        selectedDetails: any;
+        inValidValues: any[];
+        fromLocal?: undefined;
     } | {
         selectedDetails: any;
         fromLocal?: undefined;
+        inValidValues?: undefined;
     };
     componentDidMount(): void;
     componentDidUpdate(prevProps: any): void;

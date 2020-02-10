@@ -15,7 +15,8 @@ class Select extends React.PureComponent {
             selectedDetails: [],
             searchKeyword: '',
             placeholder: this.props.placeholder,
-            fromLocal: false
+            fromLocal: false,
+            inValidValues: []
         };
         /*
          * dropdown reference
@@ -271,8 +272,13 @@ class Select extends React.PureComponent {
         }
         if (props.value !== undefined) {
             if (props.multiple === true) {
+                const childValues = [];
                 const childrens = React.Children.toArray(props.children).filter((child) => {
-                    return props.value && -1 !== props.value.indexOf(child.props.value);
+                    childValues.push(child.props.value);
+                    if (props.value && -1 !== props.value.indexOf(child.props.value)) {
+                        return true;
+                    }
+                    return false;
                 });
                 const selectedDetails = [];
                 childrens.forEach(children => {
@@ -283,8 +289,10 @@ class Select extends React.PureComponent {
                         data: children.props.data
                     });
                 });
+                const inValidValues = props.value.filter(s => childValues.indexOf(s) === -1);
                 return {
-                    selectedDetails
+                    selectedDetails,
+                    inValidValues
                 };
             }
             else {
@@ -346,15 +354,21 @@ class Select extends React.PureComponent {
                 asyncFunc(fallbackHeight);
             }
         }
+        if (this.props.inValidValueCallback && this.state.inValidValues.length !== 0) {
+            this.props.inValidValueCallback(this.state.inValidValues);
+            this.setState({
+                fromLocal: true,
+                inValidValues: []
+            });
+        }
     }
     /*
      * render
      */
     render() {
         const { className, label, multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose, onSearch, ...customProps } = { ...this.props };
-        const inValidValues = [];
-        const returnValue = (React.createElement(WatchClickOutside, { style: { display: "initial" }, onClickOutside: () => this.toggle(false) },
-            React.createElement("div", Object.assign({ onKeyDown: this.onKeyPressed, tabIndex: 0, className: "ui-select-container", style: { maxWidth: width || '300px' } }, customProps),
+        return (React.createElement(WatchClickOutside, { style: { display: "initial" }, onClickOutside: () => this.toggle(false) },
+            React.createElement("div", Object.assign({ onKeyDown: this.onKeyPressed, tabIndex: 0, className: "ui-select-container " + className, style: { maxWidth: width || '300px' } }, customProps),
                 React.createElement("label", { className: "ui-select-label" }, label),
                 React.createElement("div", { onMouseLeave: this.onMouseLeave, onMouseEnter: this.onMouseEnter, className: "dropdown", style: { height: height || 'auto' } },
                     React.createElement("div", { onClick: () => this.toggle(), className: "select " + (this.state.selectedDetails.length === 0 ? 'empty ' : 'non-empty ')
@@ -393,23 +407,15 @@ class Select extends React.PureComponent {
                                 if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) ||
                                     // (value.toLowerCase().includes(this.state.searchKeyword))  ||
                                     (children.toLowerCase().includes(this.state.searchKeyword.toLowerCase()))) {
-                                    const isValid = this.findValue(value);
-                                    if (isValid === undefined && value) {
-                                        inValidValues.push(value);
-                                    }
                                     return (React.createElement("li", Object.assign({ className: (className ? className : '') +
                                             (multiple !== true && this.state.selectedDetails[0] !== undefined && this.state.selectedDetails[0].value === value ? ' selected' : '')
-                                            + (multiple === true && isValid !== undefined ? ' selected' : ''), onClick: () => this.onClick(value, children, text, data) }, customProps), children));
+                                            + (multiple === true && this.findValue(value) !== undefined ? ' selected' : ''), onClick: () => this.onClick(value, children, text, data) }, customProps), children));
                                 }
                                 else {
                                     return React.createElement(React.Fragment, null);
                                 }
                             }
                         })))))));
-        if (inValidValues.length !== 0 && this.props.inValidValueCallback) {
-            this.props.inValidValueCallback(inValidValues);
-        }
-        return returnValue;
     }
 }
 export default Select;

@@ -37,7 +37,8 @@ class Select extends React.PureComponent<SelectProps> {
         selectedDetails: [],
         searchKeyword: '',
         placeholder: this.props.placeholder,
-        fromLocal: false
+        fromLocal: false,
+        inValidValues: []
     };
     /*
      * dropdown reference
@@ -307,9 +308,14 @@ class Select extends React.PureComponent<SelectProps> {
         }
         if (props.value !== undefined) {
             if (props.multiple === true) {
-                const childrens: any = React.Children.toArray(props.children).filter((child: any) => {
-                    return props.value && -1 !== props.value.indexOf(child.props.value);
-                })
+                const childValues:Array<any> = [];
+                const childrens = React.Children.toArray(props.children).filter((child) => {
+                    childValues.push(child.props.value)
+                    if(props.value && -1 !== props.value.indexOf(child.props.value)) {
+                        return true;
+                    }
+                    return false
+                });
                 const selectedDetails: any = [];
                 childrens.forEach(children => {
                     selectedDetails.push({
@@ -320,8 +326,11 @@ class Select extends React.PureComponent<SelectProps> {
                     });
                 });
 
+                const inValidValues: Array<any> = props.value.filter(s => childValues.indexOf(s) === -1)
+
                 return {
-                    selectedDetails
+                    selectedDetails,
+                    inValidValues
                 }
             } else {
                 const children: any = React.Children.toArray(props.children).find((child: any) => {
@@ -385,6 +394,14 @@ class Select extends React.PureComponent<SelectProps> {
             }
 
         }
+
+        if(this.props.inValidValueCallback && this.state.inValidValues.length !== 0) {
+            this.props.inValidValueCallback(this.state.inValidValues);
+            this.setState({
+                fromLocal: true,
+                inValidValues: []
+            });
+        }
     }
 
     /*
@@ -392,11 +409,10 @@ class Select extends React.PureComponent<SelectProps> {
      */
     render(): JSX.Element {
         const { className,label,multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose,onSearch, ...customProps} = {...this.props}
-        const inValidValues:any = [];
-        const returnValue = (
+        return (
             <WatchClickOutside style={{ display: "initial" }} onClickOutside={() => this.toggle(false)}>
                 <div onKeyDown={this.onKeyPressed}
-                    tabIndex={0} className="ui-select-container" style={{ maxWidth: width || '300px' }} {...customProps}>
+                    tabIndex={0} className={"ui-select-container "+ className} style={{ maxWidth: width || '300px' }} {...customProps}>
                     <label className="ui-select-label">{label}</label>
                     <div onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} className="dropdown" style={{ height: height || 'auto' }}>
                         <div onClick={() => this.toggle()} className={"select " + (this.state.selectedDetails.length === 0 ? 'empty ' : 'non-empty ') 
@@ -450,13 +466,9 @@ class Select extends React.PureComponent<SelectProps> {
                                             if (this.state.searchKeyword === '' || (text && text.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) || 
                                             // (value.toLowerCase().includes(this.state.searchKeyword))  ||
                                             (children.toLowerCase().includes(this.state.searchKeyword.toLowerCase())) ) {
-                                                const isValid = this.findValue(value);
-                                                if(isValid === undefined && value) {
-                                                    inValidValues.push(value);
-                                                }
                                                 return (<li className={(className ? className : '') +
                                                     (multiple !== true && this.state.selectedDetails[0] !== undefined && this.state.selectedDetails[0].value === value ? ' selected' : '')
-                                                    + (multiple === true && isValid !== undefined ? ' selected' : '')
+                                                    + (multiple === true && this.findValue(value) !== undefined ? ' selected' : '')
                                                 }
                                                     onClick={() => this.onClick(value, children, text, data)} {...customProps}>
                                                     {children}
@@ -474,10 +486,6 @@ class Select extends React.PureComponent<SelectProps> {
                 </div>
             </WatchClickOutside>
         )
-        if(inValidValues.length !== 0 && this.props.inValidValueCallback) {
-            this.props.inValidValueCallback(inValidValues);
-        }
-        return returnValue;
     }
 }
 
