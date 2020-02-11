@@ -66,7 +66,7 @@ class Table extends React.PureComponent {
             if (c.selector !== undefined && c.searchable !== false)
                 searchColumns.push(index);
         });
-        return data.filter((row, i) => {
+        const filnalData = data.filter((row, i) => {
             const f = [];
             searchColumns.forEach((s) => {
                 if (row[s] !== undefined && ('' + row[s]).toLowerCase().includes(this.state.searchKeyword.toLowerCase())) {
@@ -75,6 +75,12 @@ class Table extends React.PureComponent {
             });
             return f.length > 0;
         });
+        if (filnalData.length !== 0 && d.length !== filnalData.length) {
+            this.setState({
+                currentPage: 1
+            });
+        }
+        return filnalData;
     }
     /*
      * sort a table data
