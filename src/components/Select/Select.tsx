@@ -360,7 +360,8 @@ class Select extends React.PureComponent<SelectProps> {
      * @return void
      */
     componentDidMount(): void {
-        this.setHeight();
+        const fallbackHeight = React.Children.toArray(this.props.children).length * 30;
+        this.setHeight(fallbackHeight);
     }
 
     /*
@@ -445,7 +446,7 @@ class Select extends React.PureComponent<SelectProps> {
                             
                         </div>
                         <div className={"dropdown-menu " + this.state.menuClassName} ref={this.dropDownMenuRef} style={this.state.menuStyle}>
-                            {searchable === true ? 
+                            {searchable === true && (React.Children.toArray(this.props.children).length !== 0) ? 
                             <div className="ui-select-search">
                                 <input onClick={(e) => e.stopPropagation()} onChange={this.search} type="text" value={this.state.searchKeyword} />
                                 {!this.state.searchKeyword || this.state.searchKeyword === "" ?

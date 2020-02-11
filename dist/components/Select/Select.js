@@ -321,7 +321,8 @@ class Select extends React.PureComponent {
      * @return void
      */
     componentDidMount() {
-        this.setHeight();
+        const fallbackHeight = React.Children.toArray(this.props.children).length * 30;
+        this.setHeight(fallbackHeight);
     }
     /*
      * component did update (life cycle)
@@ -388,7 +389,7 @@ class Select extends React.PureComponent {
                                 }))),
                         disabled !== true ? React.createElement("i", { className: "close-i", onClick: this.clearAll }, "x") : React.createElement(React.Fragment, null)),
                     React.createElement("div", { className: "dropdown-menu " + this.state.menuClassName, ref: this.dropDownMenuRef, style: this.state.menuStyle },
-                        searchable === true ?
+                        searchable === true && (React.Children.toArray(this.props.children).length !== 0) ?
                             React.createElement("div", { className: "ui-select-search" },
                                 React.createElement("input", { onClick: (e) => e.stopPropagation(), onChange: this.search, type: "text", value: this.state.searchKeyword }),
                                 !this.state.searchKeyword || this.state.searchKeyword === "" ?
