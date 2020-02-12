@@ -8,6 +8,7 @@ interface TabGroupProps {
     color?: string,
     className?: string,
     defaultActive?: number
+    centerAlign?: boolean
     onClick?: Function,
     width?: string,
     [key:string]: any
@@ -27,7 +28,8 @@ class TabGroup extends React.Component<TabGroupProps> {
         isNext: false,
         ul: {
             width : '100%',
-            left: 0
+            left: 0,
+            margin: this.props.centerAlign === true ? '0 auto' : ''
         },
         activeBar : {
             width: 0,
@@ -174,12 +176,16 @@ class TabGroup extends React.Component<TabGroupProps> {
     setActiveTab = (index: number) => {
         this.setState({
             activeIndex: index
-        });
-
+        });       
         const ul = this.containerRef.current.querySelector('.nav.nav-tabs');
         let width = 0;
         let left = 0;
         let i = 0;
+        if(this.props.centerAlign === true && this.state.ul.width !== '100%') {
+            const center = this.containerRef.current.clientWidth / 2;
+            const ulCenter = parseInt(this.state.ul.width) / 2;
+            left = center - ulCenter;
+        }
         for (let li of ul.children) {
             if(i === index) {
                 width = li.getBoundingClientRect().width;
@@ -202,7 +208,7 @@ class TabGroup extends React.Component<TabGroupProps> {
         }
     }
 
-    componentDidMount() {
+    setWidth() {
         let totalWidth = 0;
         const ul = this.containerRef.current.querySelector('.nav.nav-tabs');
         for (let li of ul.children) {
@@ -212,6 +218,7 @@ class TabGroup extends React.Component<TabGroupProps> {
             ul : {
                 width: totalWidth,
                 left: this.state.ul.left,
+                margin: this.props.centerAlign === true ? '0 auto' : ''
             }
         },() => {
             this.calculateDimonsions();
@@ -221,9 +228,14 @@ class TabGroup extends React.Component<TabGroupProps> {
                 })
             },0);
         })
-
         this.setActiveTab(this.state.activeIndex);
-        window.addEventListener('resize',this.calculateDimonsions);
+    }
+
+    componentDidMount() {
+        this.setWidth()
+        window.addEventListener('resize',() => {
+            this.setWidth()
+        });
     }
 
 

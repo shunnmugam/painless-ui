@@ -46,6 +46,27 @@ const AccordionExample = (props) => {
         </p>
     </Accordion>
 </>` }),
+        React.createElement("h3", null, "onToggle"),
+        React.createElement("p", null, "callback method for onToggle (on open or on close)"),
+        React.createElement(CodeAndExample, { example: React.createElement(React.Fragment, null,
+                React.createElement(Accordion, { onToggle: (isOpen) => {
+                        alert("isOpen : " + isOpen);
+                    }, style: { transitionDuration: '4s' }, title: "section 1" },
+                    React.createElement("p", null, "Animation duration is 4s")),
+                React.createElement(Accordion, { style: { transitionDuration: '10s' }, title: "section 2" },
+                    React.createElement("p", null, "Animation duration is 10s"))), code: `
+<>
+    <Accordion style={{transitionDuration: '4s'}} title="section 1">
+        <p>
+        Animation duration is 4s
+        </p>
+    </Accordion>
+    <Accordion style={{transitionDuration: '10s'}} title="section 2">
+        <p>
+        Animation duration is 10s
+        </p>
+    </Accordion>
+</>` }),
         React.createElement("h3", null, "Collapsible Accordion"),
         React.createElement("p", null,
             "If you want collapsible feature, you should use ",
@@ -91,6 +112,11 @@ const AccordionExample = (props) => {
                 {
                     name: "title",
                     type: "string",
+                    default: "-"
+                },
+                {
+                    name: "onToggle",
+                    type: "function",
                     default: "-"
                 },
                 {

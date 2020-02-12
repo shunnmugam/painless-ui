@@ -14,7 +14,8 @@ class TabGroup extends React.Component {
             isNext: false,
             ul: {
                 width: '100%',
-                left: 0
+                left: 0,
+                margin: this.props.centerAlign === true ? '0 auto' : ''
             },
             activeBar: {
                 width: 0,
@@ -144,6 +145,11 @@ class TabGroup extends React.Component {
             let width = 0;
             let left = 0;
             let i = 0;
+            if (this.props.centerAlign === true && this.state.ul.width !== '100%') {
+                const center = this.containerRef.current.clientWidth / 2;
+                const ulCenter = parseInt(this.state.ul.width) / 2;
+                left = center - ulCenter;
+            }
             for (let li of ul.children) {
                 if (i === index) {
                     width = li.getBoundingClientRect().width;
@@ -172,7 +178,7 @@ class TabGroup extends React.Component {
         });
         this.containerRef = React.createRef();
     }
-    componentDidMount() {
+    setWidth() {
         let totalWidth = 0;
         const ul = this.containerRef.current.querySelector('.nav.nav-tabs');
         for (let li of ul.children) {
@@ -182,6 +188,7 @@ class TabGroup extends React.Component {
             ul: {
                 width: totalWidth,
                 left: this.state.ul.left,
+                margin: this.props.centerAlign === true ? '0 auto' : ''
             }
         }, () => {
             this.calculateDimonsions();
@@ -192,7 +199,12 @@ class TabGroup extends React.Component {
             }, 0);
         });
         this.setActiveTab(this.state.activeIndex);
-        window.addEventListener('resize', this.calculateDimonsions);
+    }
+    componentDidMount() {
+        this.setWidth();
+        window.addEventListener('resize', () => {
+            this.setWidth();
+        });
     }
     componentDidUpdate(oldProps) {
         if (this.props.children !== oldProps.children) {

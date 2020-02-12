@@ -79,9 +79,7 @@ class App extends React.Component {
                         React.createElement("div", { className: "col-12 col-sm-8 col-md-10" },
                             React.createElement(Switch, null,
                                 React.createElement(Route, { path: '/', exact: true, render: () => {
-                                        return React.createElement(React.Fragment, null,
-                                            "A rich and customizable React UI Components Library",
-                                            React.createElement("h1", null));
+                                        return React.createElement(React.Fragment, null, "A rich and customizable React UI Components Library");
                                     } }),
                                 React.createElement(Route, { path: '/accordion', component: AccordionExample }),
                                 React.createElement(Route, { path: '/accordion-group', component: AccordionGroupExample }),

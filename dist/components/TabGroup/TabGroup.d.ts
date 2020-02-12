@@ -6,6 +6,7 @@ interface TabGroupProps {
     color?: string;
     className?: string;
     defaultActive?: number;
+    centerAlign?: boolean;
     onClick?: Function;
     width?: string;
     [key: string]: any;
@@ -23,6 +24,7 @@ declare class TabGroup extends React.Component<TabGroupProps> {
         ul: {
             width: string;
             left: number;
+            margin: string;
         };
         activeBar: {
             width: number;
@@ -36,6 +38,7 @@ declare class TabGroup extends React.Component<TabGroupProps> {
     moveRight: () => void;
     moveLeft: () => void;
     setActiveTab: (index: number) => void;
+    setWidth(): void;
     componentDidMount(): void;
     componentDidUpdate(oldProps: any): void;
     render(): JSX.Element;

@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, NavLink as Link, Switch } from "react-rout
 import './App.css';
 import ThemeProvider from '../providers/ThemeProvider';
 import DataTable from './DataTable/DataTable';
-import { NavBar } from '../components';
+import { NavBar, TabGroup, Tab } from '../components';
 import AccordionExample from './Accordion/Accordion';
 import AccordionGroupExample from './AccordionGroup/AccordionGroup';
 import BadgeExample from './Badge/Badge';
@@ -110,7 +110,6 @@ class App extends React.Component {
                                 <Route path='/' exact render={() => {
                                     return <>
                                         A rich and customizable React UI Components Library
-                                        <h1></h1>
                                     </>
                                     }
                                 } />

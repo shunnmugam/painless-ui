@@ -7,6 +7,8 @@ interface AccordionProps {
     open?: boolean
     title: any
     children: any
+    onToggle?: Function
+    beforeToggle?: Function
     theme?: componentTheme
     colors?: themeColors
     [key:string] : any
@@ -32,7 +34,9 @@ class Accordion extends React.Component<AccordionProps>  {
 
 
     private toggle = () => {
-       
+        if(this.props.beforeToggle) {
+            this.props.beforeToggle(this.state.isOpen);
+        }
         this.setState({
             prevOpen: this.state.isOpen,
             isOpen : !this.state.isOpen,

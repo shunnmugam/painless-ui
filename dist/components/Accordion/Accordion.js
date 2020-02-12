@@ -10,6 +10,9 @@ class Accordion extends React.Component {
             heigth: 0,
         };
         this.toggle = () => {
+            if (this.props.beforeToggle) {
+                this.props.beforeToggle(this.state.isOpen);
+            }
             this.setState({
                 prevOpen: this.state.isOpen,
                 isOpen: !this.state.isOpen,
