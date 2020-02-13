@@ -17,13 +17,15 @@
   padding-left: 0;
   margin-bottom: 0;
   list-style: none; }
-  .nav > li {
-    position: relative;
-    display: block; }
-    .nav > li > a {
-      position: relative;
-      display: block;
-      padding: 10px 15px; }
+
+.nav > li {
+  position: relative;
+  display: block; }
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px; }
 
 .v-hidden {
   visibility: hidden; }
@@ -112,14 +114,15 @@ a:hover {
 .ui-tabs {
   position: relative;
   overflow: hidden; }
-  .ui-tabs .nav-tabs {
-    border-bottom: none;
-    position: relative;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease; }
+
+.ui-tabs .nav-tabs {
+  border-bottom: none;
+  position: relative;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease; }
 
 .ui-tabs .nav-tabs > li.active > a,
 .ui-tabs .nav-tabs > li.active > a:focus,
@@ -239,9 +242,5 @@ a:focus {
 .tab-content > .tab-pane {
   position: relative; }
 
-/*! CSS Used fontfaces */
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2"); }
+.ui-tab-icon {
+  width: 10px; }

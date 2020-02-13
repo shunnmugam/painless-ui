@@ -26,7 +26,7 @@ const TabExample:React.FC = (props) => {
         <CodeAndExample example={
             <>
             <TabWrapper>
-            <TabGroup onClick={changeActiveTab}>
+            <TabGroup onClick={changeActiveTab} id="test">
                 <Tab>
                     Tab 1
                 </Tab>
