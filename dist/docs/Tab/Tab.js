@@ -22,7 +22,7 @@ const TabExample = (props) => {
         React.createElement("p", null, "tab body"),
         React.createElement(CodeAndExample, { example: React.createElement(React.Fragment, null,
                 React.createElement(TabWrapper, null,
-                    React.createElement(TabGroup, { onClick: changeActiveTab },
+                    React.createElement(TabGroup, { onClick: changeActiveTab, id: "test" },
                         React.createElement(Tab, null, "Tab 1"),
                         React.createElement(Tab, null, "Tab 2"),
                         React.createElement(Tab, null, "Tab 3")),
