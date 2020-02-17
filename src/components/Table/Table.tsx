@@ -143,7 +143,10 @@ class Table extends React.PureComponent<TableProps> {
             return f.length > 0;
         })
 
-        if(filnalData.length !== 0 && d.length !== filnalData.length) {
+        const limit = this.props.paginationOptions !== undefined && this.props.paginationOptions.limit ? this.props.paginationOptions.limit : 10;
+        const totalPage = Math.ceil(filnalData.length / limit);
+
+        if (totalPage < this.state.currentPage ) {
             this.setState({
                 currentPage: 1
             })
@@ -328,6 +331,15 @@ class Table extends React.PureComponent<TableProps> {
         }
         return null;
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.searchKeyword !== '' && this.state.searchKeyword === '') {
+            this.setState({
+                currentPage: 1
+            })
+        }
+    }
+
 
     render(): JSX.Element {
         const props = {...defaultProps, ...this.props};

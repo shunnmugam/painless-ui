@@ -79,6 +79,7 @@ declare class Table extends React.PureComponent<TableProps> {
         loading: any;
         localChange?: undefined;
     };
+    componentDidUpdate(prevProps: any, prevState: any): void;
     render(): JSX.Element;
 }
 export default Table;
