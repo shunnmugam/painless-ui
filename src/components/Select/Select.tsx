@@ -7,6 +7,7 @@ import WatchClickOutside from '../WatchClickOutside/WatchClickOutside';
 interface SelectProps {
     className?: string
     label?: any
+    icon?: any
     multiple?: boolean
     width?: string | number
     height?: string | number
@@ -15,6 +16,7 @@ interface SelectProps {
     hover?: boolean
     disabled?: boolean
     searchable?: boolean
+    inValidValueCallback?: Function
     onOpen?: Function
     onClose?: Function
     onChange?: Function
@@ -409,7 +411,7 @@ class Select extends React.PureComponent<SelectProps> {
      * render
      */
     render(): JSX.Element {
-        const { className,label,multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose,onSearch, ...customProps} = {...this.props}
+        const { className,label,multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose,onSearch, icon,inValidValueCallback, ...customProps} = {...this.props}
         return (
             <WatchClickOutside style={{ display: "initial" }} onClickOutside={() => this.toggle(false)}>
                 <div onKeyDown={this.onKeyPressed}
@@ -443,6 +445,7 @@ class Select extends React.PureComponent<SelectProps> {
                                     </div>
                                 )}
                                 {disabled !== true ? <i className="close-i" onClick={this.clearAll}>x</i> : <></>}
+                                {icon ? icon : <></>}
                             
                         </div>
                         <div className={"dropdown-menu " + this.state.menuClassName} ref={this.dropDownMenuRef} style={this.state.menuStyle}>

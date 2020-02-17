@@ -367,7 +367,7 @@ class Select extends React.PureComponent {
      * render
      */
     render() {
-        const { className, label, multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose, onSearch, ...customProps } = { ...this.props };
+        const { className, label, multiple, width, height, placeholder, value, hover, disabled, searchable, onOpen, onChange, onClose, onSearch, icon, inValidValueCallback, ...customProps } = { ...this.props };
         return (React.createElement(WatchClickOutside, { style: { display: "initial" }, onClickOutside: () => this.toggle(false) },
             React.createElement("div", Object.assign({ onKeyDown: this.onKeyPressed, tabIndex: 0, className: "ui-select-container " + className, style: { maxWidth: width || '300px' } }, customProps),
                 React.createElement("label", { className: "ui-select-label" }, label),
@@ -387,7 +387,8 @@ class Select extends React.PureComponent {
                                                 }, className: "close-btn" }, "x")
                                             : React.createElement(React.Fragment, null));
                                 }))),
-                        disabled !== true ? React.createElement("i", { className: "close-i", onClick: this.clearAll }, "x") : React.createElement(React.Fragment, null)),
+                        disabled !== true ? React.createElement("i", { className: "close-i", onClick: this.clearAll }, "x") : React.createElement(React.Fragment, null),
+                        icon ? icon : React.createElement(React.Fragment, null)),
                     React.createElement("div", { className: "dropdown-menu " + this.state.menuClassName, ref: this.dropDownMenuRef, style: this.state.menuStyle },
                         searchable === true && (React.Children.toArray(this.props.children).length !== 0) ?
                             React.createElement("div", { className: "ui-select-search" },

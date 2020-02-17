@@ -3,6 +3,7 @@ import './Select.css';
 interface SelectProps {
     className?: string;
     label?: any;
+    icon?: any;
     multiple?: boolean;
     width?: string | number;
     height?: string | number;
@@ -11,6 +12,7 @@ interface SelectProps {
     hover?: boolean;
     disabled?: boolean;
     searchable?: boolean;
+    inValidValueCallback?: Function;
     onOpen?: Function;
     onClose?: Function;
     onChange?: Function;
