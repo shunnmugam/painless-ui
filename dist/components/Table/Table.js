@@ -66,7 +66,7 @@ class Table extends React.PureComponent {
             if (c.selector !== undefined && c.searchable !== false)
                 searchColumns.push(index);
         });
-        const filnalData = data.filter((row, i) => {
+        const finalData = data.filter((row, i) => {
             const f = [];
             searchColumns.forEach((s) => {
                 if (row[s] !== undefined && ('' + row[s]).toLowerCase().includes(this.state.searchKeyword.toLowerCase())) {
@@ -76,13 +76,13 @@ class Table extends React.PureComponent {
             return f.length > 0;
         });
         const limit = this.props.paginationOptions !== undefined && this.props.paginationOptions.limit ? this.props.paginationOptions.limit : 10;
-        const totalPage = Math.ceil(filnalData.length / limit);
+        const totalPage = Math.ceil(finalData.length / limit);
         if (totalPage < this.state.currentPage) {
             this.setState({
                 currentPage: 1
             });
         }
-        return filnalData;
+        return finalData;
     }
     /*
      * sort a table data
@@ -132,7 +132,7 @@ class Table extends React.PureComponent {
         if (this.props.serverSide) {
             return d;
         }
-        return d.filter((data) => {
+        const finalData = d.filter((data) => {
             for (const key in this.state.filterColumnData) {
                 let index = key;
                 if (this.state.filterColumnData.hasOwnProperty(key)) {
@@ -161,6 +161,14 @@ class Table extends React.PureComponent {
             }
             return true;
         });
+        const limit = this.props.paginationOptions !== undefined && this.props.paginationOptions.limit ? this.props.paginationOptions.limit : 10;
+        const totalPage = Math.ceil(finalData.length / limit);
+        if (totalPage < this.state.currentPage) {
+            this.setState({
+                currentPage: 1
+            });
+        }
+        return finalData;
     }
     /*
      * pagination
@@ -170,10 +178,10 @@ class Table extends React.PureComponent {
     paginate(d) {
         const limit = this.props.paginationOptions !== undefined && this.props.paginationOptions.limit ? this.props.paginationOptions.limit : 10;
         const currentPage = this.state.currentPage;
-        const totalNoOfData = this.props.paginationOptions !== undefined && this.props.paginationOptions.totalNoOfData ? this.props.paginationOptions.totalNoOfData : d.length;
+        const totalNoOfData = (this.props.paginationOptions !== undefined && this.props.paginationOptions.totalNoOfData && this.props.serverSide === true) ? this.props.paginationOptions.totalNoOfData : d.length;
         const totalPage = Math.ceil(totalNoOfData / limit);
         let data = d;
-        if (this.props.serverSide === false)
+        if (!this.props.serverSide)
             data = d.slice((currentPage - 1) * limit, limit * currentPage);
         if (currentPage > totalPage && this.state.currentPage !== 1) {
             // setTimeout(() => {

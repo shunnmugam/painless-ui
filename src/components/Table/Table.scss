@@ -62,6 +62,16 @@
 .ui-table-toolbar-wrapper, .ui-table-pagination-control {
     padding: 5px 2%;
 }
+.ui-table-container button[disabled] {
+    color: gray !important;
+}
+.ui-table-container .ui-button[data-style-type=text][disabled]:hover {
+    background-color: inherit !important;
+}
+.ui-table-pagination-control>span {
+    padding-top: 16px;
+    display: inline-block;
+}  
 .ui-table-pagination-control {
     ul {
         margin: 0px;

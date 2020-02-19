@@ -89,7 +89,7 @@
 .nav:after {
 	clear: both;
 }
-
+.ui-tabgroup {
 a {
 	color: #4285f4;
 	text-decoration: none;
@@ -102,6 +102,7 @@ a:hover {
 	outline: 0;
 	color: #0d5bdd;
 	outline-offset: -2px;
+}
 }
 
 .ui-z-depth {
