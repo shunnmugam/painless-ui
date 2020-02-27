@@ -358,7 +358,7 @@ class Table extends React.PureComponent {
                             return (React.createElement("th", { onClick: () => {
                                     if (column.sortable === true)
                                         this.setSortController(selector);
-                                }, key: 'th-' + i, className: (column.sortable === true ? 'sort-column' : '') + sortClassName },
+                                }, key: 'th-' + i, className: (column.className ? column.className : "") + " " + (column.sortable === true ? 'sort-column' : '') + sortClassName },
                                 column.name,
                                 column.filter ? React.createElement(React.Fragment, null, column.filterRender ? column.filterRender((v) => {
                                     const t = { ...this.state.filterColumnData };
@@ -453,7 +453,7 @@ class Table extends React.PureComponent {
                                     else {
                                         throw new Error('column should have selector property or render function');
                                     }
-                                    return React.createElement("td", { rowSpan: this.getRowSpan(column, c, r), colSpan: this.getColSpan(column, c, r), key: 'td-' + c + '-' + r }, value);
+                                    return React.createElement("td", { className: (column.className ? column.className : ""), rowSpan: this.getRowSpan(column, c, r), colSpan: this.getColSpan(column, c, r), key: 'td-' + c + '-' + r }, value);
                                 }))));
                             }))))),
             this.state.loading === true ? (React.createElement(React.Fragment, null)) : (paginationUi)));

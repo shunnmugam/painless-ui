@@ -19,6 +19,7 @@ interface TableProps {
     [key: string]: any;
 }
 interface Columns {
+    className?: string;
     name: string;
     sortable?: boolean;
     searchable?: boolean;
