@@ -341,11 +341,24 @@ class Table extends React.PureComponent<TableProps> {
         return null;
     }
 
-    componentWillUpdate(prevProps) {
-        if( JSON.stringify(this.props.columns) !== JSON.stringify(prevProps.columns)) {
+    getSnapshotBeforeUpdate(prevProps) {
+        let isChanged = false;
+        if(prevProps.columns.length !== this.props.columns.length) {
+            isChanged = true;
+        } else {
+            this.props.columns.forEach((c, i) => {
+                if(JSON.stringify(c.rowSpan) !== JSON.stringify(prevProps.columns[i].rowSpan)) {
+                    isChanged = true;
+                } else if(JSON.stringify(c.colSpan) !== JSON.stringify(prevProps.columns[i].rowSpan)) {
+                    isChanged = true;
+                }
+            })
+        }
+        if (isChanged) {
             this.rowSpanSkipDetails = {};
             this.colSpanSkipDetails = {};
         }
+        return null;
     }
 
     componentDidUpdate(prevProps, prevState) {
