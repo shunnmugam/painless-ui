@@ -80,6 +80,7 @@ declare class Table extends React.PureComponent<TableProps> {
         loading: any;
         localChange?: undefined;
     };
+    componentWillUpdate(prevProps: any): void;
     componentDidUpdate(prevProps: any, prevState: any): void;
     render(): JSX.Element;
 }

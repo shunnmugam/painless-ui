@@ -341,12 +341,20 @@ class Table extends React.PureComponent<TableProps> {
         return null;
     }
 
+    componentWillUpdate(prevProps) {
+        if( JSON.stringify(this.props.columns) !== JSON.stringify(prevProps.columns)) {
+            this.rowSpanSkipDetails = {};
+            this.colSpanSkipDetails = {};
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if(prevState.searchKeyword !== '' && this.state.searchKeyword === '') {
             this.setState({
                 currentPage: 1
             })
         }
+        
     }
 
 
