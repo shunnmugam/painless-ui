@@ -4,7 +4,7 @@ import './Toast.css';
 interface ToastProps {
     className?: string
     show?: boolean
-    title?: string
+    title?: string | Function
     options?: ToastOptions
     style?: object
     onClose?: Function
@@ -79,7 +79,10 @@ class Toast extends React.PureComponent<ToastProps> {
                 }, ...style
             }}
             {...customProps}>
-            <div style={titleStyle || {}} className="ui-toast-img">{title || 'Alert'}</div>
+            <div style={titleStyle || {}} className="ui-toast-img">
+                {typeof title === 'function' ? title() :
+                (title || 'Alert')}
+            </div>
             <div className="ui-toast-desc">{this.props.children}</div>
         </div>)
         

@@ -3,7 +3,7 @@ import './Toast.css';
 interface ToastProps {
     className?: string;
     show?: boolean;
-    title?: string;
+    title?: string | Function;
     options?: ToastOptions;
     style?: object;
     onClose?: Function;

@@ -52,7 +52,8 @@ class Toast extends React.PureComponent {
                     animation: animationCss
                 }, ...style
             } }, customProps),
-            React.createElement("div", { style: titleStyle || {}, className: "ui-toast-img" }, title || 'Alert'),
+            React.createElement("div", { style: titleStyle || {}, className: "ui-toast-img" }, typeof title === 'function' ? title() :
+                (title || 'Alert')),
             React.createElement("div", { className: "ui-toast-desc" }, this.props.children)));
     }
 }
