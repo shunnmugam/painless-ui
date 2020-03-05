@@ -12,6 +12,7 @@ interface TableProps {
     dataType?: string
     columns: Array<typeArrayColumns | typeObjectColumns>
     responsive?: boolean
+    rows?: Rows
     serverSide?: boolean
     style?: object
     loading?: boolean
@@ -38,6 +39,10 @@ interface Columns {
     filterRender?: Function
     filterData?: Function
     onFilter?:Function
+}
+
+interface Rows {
+    classNameCallback?: Function
 }
 
 
@@ -573,7 +578,7 @@ class Table extends React.PureComponent<TableProps> {
                                 <td colSpan={this.props.columns.length}>No data found</td>
                             </tr> :
                             data.map((row,r) => {
-                                return (<tr key={'tr-'+r}>
+                                return (<tr key={'tr-'+r} className={this.props.rows && this.props.rows.classNameCallback ? this.props.rows.classNameCallback(row, r): '' }>
                                     {
                                         props.dataType === 'array' ? (
                                             row.map((d,c) => {

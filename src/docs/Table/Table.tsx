@@ -1,7 +1,7 @@
 import React from 'react';
 import CodeAndExample from '../CodeAndExample';
 import { Table } from '../../components';
-
+import './Table.css';
 const TableExample = (props) => {
     return (
         <>
@@ -1137,6 +1137,131 @@ const TableExample = (props) => {
                 role: 'Register'
             },
             ]}/>}/>
+            <h3>rows</h3>
+            <p>You can control tr using <b>rows</b></p>
+            <CodeAndExample code={`<Table searchOptions={{
+                searchable : true
+            }} columns={[
+                {
+                    selector: 'no',
+                    name: 'Number',
+                    searchable: false,
+                    sortable: true
+                },
+                {
+                    selector: 'name',
+                    name: 'Name',
+                    sortable: true
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number',
+                    sortable: true
+                },
+                {
+                    selector: 'role',
+                    name: 'Role',
+                    sortable: true,
+                    filter: true
+                },
+            ]} data={[{
+                no : 1,
+                name: 'userA',
+                mobile_number: '0902313XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 2,
+                name: 'userB',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'userC',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'userD',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'userE',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]} rows={{
+                classNameCallback: (rows, i) => {
+                    if((i+1) % 2 === 0) {
+                        return 'even';
+                    }
+                }
+            }}/>`} example={<Table searchOptions={{
+                searchable : true,
+            }} columns={[
+                {
+                    selector: 'no',
+                    name: 'Number',
+                    searchable: false,
+                    sortable: true
+                },
+                {
+                    selector: 'name',
+                    name: 'Name',
+                    sortable: true
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number',
+                    sortable: true
+                },
+                {
+                    selector: 'role',
+                    name: 'Role',
+                    sortable: true,
+                    filter: true
+                },
+            ]} data={[{
+                no : 1,
+                name: 'userA',
+                mobile_number: '0902313XXXX',
+                role: 'Admin',
+            },
+            {
+                no : 2,
+                name: 'userB',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'userC',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'userD',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'userE',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]} rows={{
+                classNameCallback: (rows, i) => {
+                    if((i+1) % 2 === 0) {
+                        return 'even';
+                    }
+                }
+            }}/>}/>
             <h3>Table props</h3>
             <Table columns={[{
                 selector: "name",
@@ -1171,6 +1296,11 @@ const TableExample = (props) => {
                 {
                     name : "responsive",
                     type: "boolean",
+                    default: "-"
+                },
+                {
+                    name : "rows",
+                    type: "object",
                     default: "-"
                 },
                 {
@@ -1283,6 +1413,24 @@ const TableExample = (props) => {
                     default: '-',
 
                 },
+            ]} />
+
+            <h3>Rows props</h3>
+            <Table columns={[{
+                selector: "name",
+                name: "Name"
+            },{
+                name : "Type",
+                selector: "type"
+            },{
+                name : "Default",
+                selector: "default"
+            }]} data={[{
+                    name : 'classNameCallback',
+                    type: 'function',
+                    default: '-',
+
+                }
             ]} />
 
             <h3>PaginationOptions</h3>

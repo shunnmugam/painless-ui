@@ -1,6 +1,7 @@
 import React from 'react';
 import CodeAndExample from '../CodeAndExample';
 import { Table } from '../../components';
+import './Table.css';
 const TableExample = (props) => {
     return (React.createElement(React.Fragment, null,
         React.createElement("h1", null, "Table"),
@@ -1165,6 +1166,133 @@ const TableExample = (props) => {
                         role: 'Register'
                     },
                 ] }) }),
+        React.createElement("h3", null, "rows"),
+        React.createElement("p", null,
+            "You can control tr using ",
+            React.createElement("b", null, "rows")),
+        React.createElement(CodeAndExample, { code: `<Table searchOptions={{
+                searchable : true
+            }} columns={[
+                {
+                    selector: 'no',
+                    name: 'Number',
+                    searchable: false,
+                    sortable: true
+                },
+                {
+                    selector: 'name',
+                    name: 'Name',
+                    sortable: true
+                },
+                {
+                    selector: 'mobile_number',
+                    name: 'Mobile Number',
+                    sortable: true
+                },
+                {
+                    selector: 'role',
+                    name: 'Role',
+                    sortable: true,
+                    filter: true
+                },
+            ]} data={[{
+                no : 1,
+                name: 'userA',
+                mobile_number: '0902313XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 2,
+                name: 'userB',
+                mobile_number: '0902513XXXX',
+                role: 'Admin'
+            },
+            {
+                no : 3,
+                name: 'userC',
+                mobile_number: '0901513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 4,
+                name: 'userD',
+                mobile_number: '0911513XXXX',
+                role: 'Developer'
+            },
+            {
+                no : 5,
+                name: 'userE',
+                mobile_number: '0911513XXXX',
+                role: 'Register'
+            },
+            ]} rows={{
+                classNameCallback: (rows, i) => {
+                    if((i+1) % 2 === 0) {
+                        return 'even';
+                    }
+                }
+            }}/>`, example: React.createElement(Table, { searchOptions: {
+                    searchable: true,
+                }, columns: [
+                    {
+                        selector: 'no',
+                        name: 'Number',
+                        searchable: false,
+                        sortable: true
+                    },
+                    {
+                        selector: 'name',
+                        name: 'Name',
+                        sortable: true
+                    },
+                    {
+                        selector: 'mobile_number',
+                        name: 'Mobile Number',
+                        sortable: true
+                    },
+                    {
+                        selector: 'role',
+                        name: 'Role',
+                        sortable: true,
+                        filter: true
+                    },
+                ], data: [{
+                        no: 1,
+                        name: 'userA',
+                        mobile_number: '0902313XXXX',
+                        role: 'Admin',
+                    },
+                    {
+                        no: 2,
+                        name: 'userB',
+                        mobile_number: '0902513XXXX',
+                        role: 'Admin'
+                    },
+                    {
+                        no: 3,
+                        name: 'userC',
+                        mobile_number: '0901513XXXX',
+                        role: 'Developer'
+                    },
+                    {
+                        no: 4,
+                        name: 'userD',
+                        mobile_number: '0911513XXXX',
+                        role: 'Developer'
+                    },
+                    {
+                        no: 5,
+                        name: 'userE',
+                        mobile_number: '0911513XXXX',
+                        role: 'Register'
+                    },
+                ], rows: {
+                    classNameCallback: (rows, i) => {
+                        if ((i + 1) % 2 === 0) {
+                            return 'even';
+                        }
+                    }
+                } }) }),
         React.createElement("h3", null, "Table props"),
         React.createElement(Table, { columns: [{
                     selector: "name",
@@ -1198,6 +1326,11 @@ const TableExample = (props) => {
                 {
                     name: "responsive",
                     type: "boolean",
+                    default: "-"
+                },
+                {
+                    name: "rows",
+                    type: "object",
                     default: "-"
                 },
                 {
@@ -1300,6 +1433,22 @@ const TableExample = (props) => {
                     type: 'object',
                     default: '-',
                 },
+            ] }),
+        React.createElement("h3", null, "Rows props"),
+        React.createElement(Table, { columns: [{
+                    selector: "name",
+                    name: "Name"
+                }, {
+                    name: "Type",
+                    selector: "type"
+                }, {
+                    name: "Default",
+                    selector: "default"
+                }], data: [{
+                    name: 'classNameCallback',
+                    type: 'function',
+                    default: '-',
+                }
             ] }),
         React.createElement("h3", null, "PaginationOptions"),
         React.createElement(Table, { columns: [{

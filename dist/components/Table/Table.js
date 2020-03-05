@@ -455,7 +455,7 @@ class Table extends React.PureComponent {
                         (React.createElement("tbody", { className: "ui-table-body" }, data.length === 0 ? React.createElement("tr", null,
                             React.createElement("td", { colSpan: this.props.columns.length }, "No data found")) :
                             data.map((row, r) => {
-                                return (React.createElement("tr", { key: 'tr-' + r }, props.dataType === 'array' ? (row.map((d, c) => {
+                                return (React.createElement("tr", { key: 'tr-' + r, className: this.props.rows && this.props.rows.classNameCallback ? this.props.rows.classNameCallback(row, r) : '' }, props.dataType === 'array' ? (row.map((d, c) => {
                                     return React.createElement("td", { key: 'td-' + c + '-' + r }, d);
                                 })) : (props.columns.map((column, c) => {
                                     if (this.rowSpanSkipDetails[r] && this.rowSpanSkipDetails[r].indexOf(c) !== -1) {
