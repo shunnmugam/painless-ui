@@ -6,6 +6,7 @@ interface TableProps {
     data: Array<object> | any;
     dataType?: string;
     columns: Array<typeArrayColumns | typeObjectColumns>;
+    headerWrapperComponent?: Function;
     responsive?: boolean;
     rows?: Rows;
     serverSide?: boolean;

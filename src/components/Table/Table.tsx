@@ -11,6 +11,7 @@ interface TableProps {
     data: Array<object> | any
     dataType?: string
     columns: Array<typeArrayColumns | typeObjectColumns>
+    headerWrapperComponent?: Function,
     responsive?: boolean
     rows?: Rows
     serverSide?: boolean
@@ -437,6 +438,7 @@ class Table extends React.PureComponent<TableProps> {
         
         return (<div className={'ui-table-container '} style={this.props.containerStyle || {}}>
             <div className='ui-table-toolbar-wrapper pull-left ui-w-100'>
+                {this.props.headerWrapperComponent ? this.props.headerWrapperComponent() : <></>}
                 {(this.props.searchOptions!== undefined && this.props.searchOptions.searchable === true) ? 
                 <div className="ui-table-search-container pull-right">
                     {this.props.searchOptions.searchComponent !== undefined && 

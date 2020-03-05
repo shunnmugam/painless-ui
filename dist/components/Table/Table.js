@@ -340,29 +340,31 @@ class Table extends React.PureComponent {
                         React.createElement(Button, { disabled: !(this.state.currentPage < totalPage), styleType: "text", rounded: true }, "\u203A|")))));
         }
         return (React.createElement("div", { className: 'ui-table-container ', style: this.props.containerStyle || {} },
-            React.createElement("div", { className: 'ui-table-toolbar-wrapper pull-left ui-w-100' }, (this.props.searchOptions !== undefined && this.props.searchOptions.searchable === true) ?
-                React.createElement("div", { className: "ui-table-search-container pull-right" }, this.props.searchOptions.searchComponent !== undefined &&
-                    typeof this.props.searchOptions.searchComponent === 'function' ? React.createElement(React.Fragment, null, this.props.searchOptions.searchComponent((v) => {
-                    //onchange event
-                    this.setState({
-                        searchKeyword: v,
-                        localChange: true
-                    });
-                    if (props.searchOptions !== undefined && props.searchOptions.onSearch !== undefined && typeof props.searchOptions.onSearch === 'function') {
-                        props.searchOptions.onSearch(v);
-                    }
-                })) :
-                    React.createElement(Input, { type: "text", placeholder: "Type something...", style: {
-                            width: "150px"
-                        }, value: this.state.searchKeyword, onChange: (e) => {
-                            this.setState({
-                                searchKeyword: e.target.value,
-                                localChange: true
-                            });
-                            if (props.searchOptions !== undefined && props.searchOptions.onSearch !== undefined && typeof props.searchOptions.onSearch === 'function') {
-                                props.searchOptions.onSearch(e.target.value);
-                            }
-                        } })) : React.createElement(React.Fragment, null)),
+            React.createElement("div", { className: 'ui-table-toolbar-wrapper pull-left ui-w-100' },
+                this.props.headerWrapperComponent ? this.props.headerWrapperComponent() : React.createElement(React.Fragment, null),
+                (this.props.searchOptions !== undefined && this.props.searchOptions.searchable === true) ?
+                    React.createElement("div", { className: "ui-table-search-container pull-right" }, this.props.searchOptions.searchComponent !== undefined &&
+                        typeof this.props.searchOptions.searchComponent === 'function' ? React.createElement(React.Fragment, null, this.props.searchOptions.searchComponent((v) => {
+                        //onchange event
+                        this.setState({
+                            searchKeyword: v,
+                            localChange: true
+                        });
+                        if (props.searchOptions !== undefined && props.searchOptions.onSearch !== undefined && typeof props.searchOptions.onSearch === 'function') {
+                            props.searchOptions.onSearch(v);
+                        }
+                    })) :
+                        React.createElement(Input, { type: "text", placeholder: "Type something...", style: {
+                                width: "150px"
+                            }, value: this.state.searchKeyword, onChange: (e) => {
+                                this.setState({
+                                    searchKeyword: e.target.value,
+                                    localChange: true
+                                });
+                                if (props.searchOptions !== undefined && props.searchOptions.onSearch !== undefined && typeof props.searchOptions.onSearch === 'function') {
+                                    props.searchOptions.onSearch(e.target.value);
+                                }
+                            } })) : React.createElement(React.Fragment, null)),
             React.createElement("div", { className: 'ui-table-wrapper ' + (props.responsive ? 'responsive ' : '') },
                 React.createElement("table", { className: 'ui-table ' + (props.className || '') + (props.noBg ? ' no-bg' : '') + (props.border ? ' border' : ''), style: this.props.style || {} },
                     this.props.noHeader === true ? React.createElement(React.Fragment, null) :

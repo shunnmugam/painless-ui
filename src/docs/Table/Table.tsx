@@ -1304,6 +1304,11 @@ const TableExample = (props) => {
                     default: "-"
                 },
                 {
+                    name : "headerWrapperComponent",
+                    type: "Function",
+                    default: "-"
+                },
+                {
                     name : "serverSide",
                     type: "boolean",
                     default: "-"
