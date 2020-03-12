@@ -31,6 +31,7 @@ class Table extends React.PureComponent {
         };
         this.rowSpanSkipDetails = {};
         this.colSpanSkipDetails = {};
+        this.isChangesDetected = false;
     }
     setSortController(sortBy) {
         let order = 'asc';
@@ -184,12 +185,7 @@ class Table extends React.PureComponent {
         if (!this.props.serverSide)
             data = d.slice((currentPage - 1) * limit, limit * currentPage);
         if (currentPage > totalPage && this.state.currentPage !== 1) {
-            // setTimeout(() => {
-            //     this.setState({
-            //         currentPage : 1,
-            //         oldState: this.state
-            //     })
-            // },0);
+            this.isChangesDetected = true;
         }
         return {
             data,
@@ -281,6 +277,14 @@ class Table extends React.PureComponent {
         if (prevState.searchKeyword !== '' && this.state.searchKeyword === '') {
             this.setState({
                 currentPage: 1
+            });
+        }
+        if (this.isChangesDetected === true) {
+            this.setState({
+                currentPage: 1,
+                oldState: this.state
+            }, () => {
+                this.isChangesDetected = false;
             });
         }
     }

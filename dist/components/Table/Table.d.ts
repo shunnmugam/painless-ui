@@ -70,6 +70,7 @@ declare class Table extends React.PureComponent<TableProps> {
     };
     rowSpanSkipDetails: {};
     colSpanSkipDetails: {};
+    isChangesDetected: Boolean;
     setSortController(sortBy: any): void;
     search(d: Array<any>): Array<any>;
     sort(d: Array<any>): Array<any>;
