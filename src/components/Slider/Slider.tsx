@@ -40,6 +40,7 @@ class Slider extends React.PureComponent<SliderProps> {
         value: this.props.value || this.props.min,
         position2 : this.props.value || 0,
         value2: this.props.value || this.props.min,
+        fromLocal : true
     }
 
     constructor(props) {
@@ -51,6 +52,7 @@ class Slider extends React.PureComponent<SliderProps> {
                     value: this.props.value ? this.props.value[0] : this.props.min,
                     position2: calculatePercentage(this.props.value ? this.props.value[1] : this.props.max, this.props.max, this.props.min),
                     value2: this.props.value ? this.props.value[1] : this.props.max,
+                    fromLocal : true
                 });
             })
         }
@@ -115,11 +117,13 @@ class Slider extends React.PureComponent<SliderProps> {
                 }
                 this.setState({
                     position : percentage,
-                    value: value
+                    value: value,
+                    fromLocal : true
                 },this.onChangeCallback);
             } else {
                 this.setState({
                     position : percentage,
+                    fromLocal : true
                     // value: value
                 },this.onChangeCallback);
             }
@@ -137,11 +141,13 @@ class Slider extends React.PureComponent<SliderProps> {
                 }
                 this.setState({
                     position2 : percentage,
-                    value2: value
+                    value2: value,
+                    fromLocal : true
                 },this.onChangeCallback);
             } else {
                 this.setState({
                     position2 : percentage,
+                    fromLocal : true
                     // value2: value * (this.props.step || 1)
                 },this.onChangeCallback);
             }
@@ -154,7 +160,8 @@ class Slider extends React.PureComponent<SliderProps> {
         document.removeEventListener('mousemove', this.dragHandler2, true);
         if(this.state.value === 0 && this.state.position !== 0) {
             this.setState({
-                position: 0
+                position: 0,
+                fromLocal : true
             })
         }
     }
@@ -188,6 +195,32 @@ class Slider extends React.PureComponent<SliderProps> {
         }
         return dataArray;
     }
+
+    static getDerivedStateFromProps(props, state) {
+        if(state.fromLocal === true) {
+            return {
+                fromLocal: false
+            }
+        }
+        if(props.value && props.range === false && props.value !== state.value ) {
+            return {
+                value : props.value,
+                position: calculatePercentage(props.value ? props.value : props.min, props.max, props.min)
+            }
+        }
+
+        if(props.value && props.range === true && (props.value[0] !== state.value || props.value[1] !== state.value2)) {
+            return {
+                value : props.value[0],
+                value2: props.value[1],
+                position: calculatePercentage(props.value ? props.value[0] : props.min, props.max, props.min),
+                position2: calculatePercentage(props.value ? props.value[1] : props.max, props.max, props.min)
+            }
+        }
+        
+        return null;
+    }
+
 
     render() {
         let defaultSliderStyle = {};

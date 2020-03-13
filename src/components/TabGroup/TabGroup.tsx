@@ -201,7 +201,7 @@ class TabGroup extends React.Component<TabGroupProps> {
         }
         this.setState({
             activeBar : {
-                left,
+                left : ((left / this.containerRef.current.clientWidth) * 100) + "%",
                 width
             }
         });
