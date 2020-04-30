@@ -4,9 +4,10 @@ export default class Validator {
      * @params value: any
      * @params rules: object
      */
-    constructor(value, rules) {
+    constructor(value, rules, customMessages = {}) {
         this.value = value;
         this.rules = rules;
+        this.customMessages = customMessages;
         this.message = {};
     }
     email(value, ruleOptions) {
@@ -124,7 +125,14 @@ export default class Validator {
                     if (this.message[key] === undefined)
                         this.message[key] = [];
                     // eslint-disable-next-line
-                    const msg = result.msg ? result.msg.replace('${input}', key) : '';
+                    let msg = result.msg ? result.msg : '';
+                    if (this.customMessages[key + '.' + rule]) {
+                        msg = this.customMessages[key + '.' + rule];
+                    }
+                    else if (this.customMessages[key]) {
+                        msg = this.customMessages[key];
+                    }
+                    msg = msg.replace('${input}', key);
                     this.message[key].push(msg);
                     isValid = false;
                 }

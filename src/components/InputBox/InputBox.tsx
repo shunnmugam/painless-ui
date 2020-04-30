@@ -8,9 +8,11 @@ import Button from '../Button/Button';
 import TextArea from '../TextArea/TextArea';
 
 interface ValidationOptions {
-    event?:string,
-    rules: string,
-    validationCallback?: Function,
+    name?: string
+    messages: object
+    event?:string
+    rules: string
+    validationCallback?: Function
     validateNow?: boolean
 }
 
@@ -59,11 +61,19 @@ class InputBox extends React.Component<InputBoxProps> {
             if(this.props.validationOptions && this.props.validationOptions.rules) {
                 rules+='|'+this.props.validationOptions.rules;
             }
+            let inputName:string = 'input';
+            if(this.props.validationOptions && this.props.validationOptions.name)
+                inputName = this.props.validationOptions.name;
+            
+            let messages = {}
+            if(this.props.validationOptions && this.props.validationOptions.messages) {
+                messages = this.props.validationOptions.messages;
+            }
             const validatorObj = new Validator({
                 input : v
             },{
-                'input' : rules
-            });
+                [inputName] : rules
+            }, messages);
             const isValid:boolean = validatorObj.validate();
             if(this.state.isValid !== isValid) {
                 this.setState({
@@ -77,7 +87,8 @@ class InputBox extends React.Component<InputBoxProps> {
                 this.props.validationOptions.validationCallback(
                     {
                         isValid,
-                        message
+                        message,
+                        name: inputName
                     },
                     e
                 );

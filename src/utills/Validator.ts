@@ -16,13 +16,18 @@ export default class Validator {
      */
     private message: object;
     /*
+     * validation custom message
+     */
+    private customMessages: object;
+    /*
      * constructor method
      * @params value: any
      * @params rules: object
      */
-    constructor(value: any,rules: object) {
+    constructor(value: any,rules: object, customMessages:object = {}) {
         this.value = value;
         this.rules = rules;
+        this.customMessages = customMessages;
         this.message = {};
     }
 
@@ -148,7 +153,14 @@ export default class Validator {
                      if(this.message[key] === undefined)
                          this.message[key] = [];
                      // eslint-disable-next-line
-                    const msg = result.msg ? result.msg.replace('${input}',key) : ''
+                    let msg = result.msg ? result.msg : '';
+                    if(this.customMessages[key+'.'+rule]) {
+                        msg = this.customMessages[key+'.'+rule];
+                    } else if(this.customMessages[key]) {
+                        msg = this.customMessages[key];
+                    }
+                    
+                    msg =  msg.replace('${input}', key);
                     this.message[key].push(msg);
                     isValid = false;
              }

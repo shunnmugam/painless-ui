@@ -29,11 +29,18 @@ class InputBox extends React.Component {
             if (this.props.validationOptions && this.props.validationOptions.rules) {
                 rules += '|' + this.props.validationOptions.rules;
             }
+            let inputName = 'input';
+            if (this.props.validationOptions && this.props.validationOptions.name)
+                inputName = this.props.validationOptions.name;
+            let messages = {};
+            if (this.props.validationOptions && this.props.validationOptions.messages) {
+                messages = this.props.validationOptions.messages;
+            }
             const validatorObj = new Validator({
                 input: v
             }, {
-                'input': rules
-            });
+                [inputName]: rules
+            }, messages);
             const isValid = validatorObj.validate();
             if (this.state.isValid !== isValid) {
                 this.setState({
@@ -44,7 +51,8 @@ class InputBox extends React.Component {
             if (this.props.validationOptions && typeof this.props.validationOptions.validationCallback === "function") {
                 this.props.validationOptions.validationCallback({
                     isValid,
-                    message
+                    message,
+                    name: inputName
                 }, e);
             }
         }

@@ -2,7 +2,8 @@ export default class Validator {
     private rules;
     private value;
     private message;
-    constructor(value: any, rules: object);
+    private customMessages;
+    constructor(value: any, rules: object, customMessages?: object);
     private email;
     private min;
     private max;
