@@ -70,7 +70,7 @@ class InputBox extends React.Component<InputBoxProps> {
                 messages = this.props.validationOptions.messages;
             }
             const validatorObj = new Validator({
-                input : v
+                [inputName] : v
             },{
                 [inputName] : rules
             }, messages);
