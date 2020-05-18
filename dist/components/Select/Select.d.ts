@@ -12,6 +12,7 @@ interface SelectProps {
     hover?: boolean;
     disabled?: boolean;
     searchable?: boolean;
+    removeIcon?: any;
     inValidValueCallback?: Function;
     onOpen?: Function;
     onClose?: Function;

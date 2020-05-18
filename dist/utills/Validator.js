@@ -32,7 +32,7 @@ export default class Validator {
             isValid: true,
             msg: ''
         };
-        if (value.length < ruleOptions[0]) {
+        if (value === null || value === undefined || value.length < ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
             result.msg = '${input} should minimum ' + ruleOptions[0] + ' characters';
@@ -47,7 +47,7 @@ export default class Validator {
             isValid: true,
             msg: ''
         };
-        if (value.length > ruleOptions[0]) {
+        if (value === null || value === undefined || value.length > ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
             result.msg = '${input} should minimum ' + ruleOptions[0] + ' characters';

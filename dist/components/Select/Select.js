@@ -384,7 +384,7 @@ class Select extends React.PureComponent {
                                             React.createElement("span", { onClick: (e) => {
                                                     e.stopPropagation();
                                                     this.unSelect(o.value);
-                                                }, className: "close-btn" }, "x")
+                                                }, className: "close-btn" }, this.props.removeIcon ? this.props.removeIcon : "x")
                                             : React.createElement(React.Fragment, null));
                                 }))),
                         disabled !== true ? React.createElement("i", { className: "close-i", onClick: this.clearAll }, "x") : React.createElement(React.Fragment, null),

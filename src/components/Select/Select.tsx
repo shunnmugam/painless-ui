@@ -16,6 +16,7 @@ interface SelectProps {
     hover?: boolean
     disabled?: boolean
     searchable?: boolean
+    removeIcon?: any
     inValidValueCallback?: Function
     onOpen?: Function
     onClose?: Function
@@ -437,7 +438,9 @@ class Select extends React.PureComponent<SelectProps> {
                                                         e.stopPropagation();
                                                         this.unSelect(o.value);
                                                     }
-                                                    } className="close-btn">x</span>
+                                                } className="close-btn">{
+                                                    this.props.removeIcon ? this.props.removeIcon : "x"
+                                                }</span>
                                                 : <></> }
                                                 </span>
                                             })
