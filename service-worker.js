@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/painless-ui/precache-manifest.e227ef7e7f8a21c33d3ecc7f022bd93f.js"
+  "/painless-ui/precache-manifest.6c1766c62ee5c3a41e054b8aadb60d25.js"
 );
 
 self.addEventListener('message', (event) => {
