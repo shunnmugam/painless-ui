@@ -8,6 +8,7 @@ interface TabGroupProps {
     defaultActive?: number;
     centerAlign?: boolean;
     onClick?: Function;
+    navType?: string;
     width?: string;
     [key: string]: any;
 }
@@ -31,6 +32,7 @@ declare class TabGroup extends React.Component<TabGroupProps> {
             left: number;
         };
     };
+    private touchObj;
     constructor(props: any);
     calculateDimonsions: () => void;
     setPrev: () => void;
@@ -39,6 +41,9 @@ declare class TabGroup extends React.Component<TabGroupProps> {
     moveLeft: () => void;
     setActiveTab: (index: number) => void;
     setWidth(): void;
+    handleTouchStart: (event: any) => void;
+    handleTouchMove: (event: any) => void;
+    handleTouchEnd: () => void;
     componentDidMount(): void;
     componentDidUpdate(oldProps: any): void;
     render(): JSX.Element;

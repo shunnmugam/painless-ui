@@ -22,6 +22,10 @@ class TabGroup extends React.Component {
                 left: 0
             }
         };
+        this.touchObj = {
+            initialClientX: 0,
+            finalClientX: 0
+        };
         this.calculateDimonsions = () => {
             if (this.containerRef.current) {
                 const tabContainer = this.containerRef.current.querySelector('.ui-tabs');
@@ -173,6 +177,28 @@ class TabGroup extends React.Component {
                 this.props.onClick(index);
             }
         };
+        this.handleTouchStart = (event) => {
+            if (this.props.navType && this.props.navType === "swipe")
+                this.touchObj.initialClientX = event.nativeEvent.touches[0].clientX;
+        };
+        this.handleTouchMove = (event) => {
+            if (this.props.navType && this.props.navType === "swipe")
+                this.touchObj.finalClientX = event.nativeEvent.touches[0].clientX;
+        };
+        this.handleTouchEnd = () => {
+            if (this.props.navType && this.props.navType === "swipe") {
+                if (this.touchObj.finalClientX < this.touchObj.initialClientX) {
+                    this.moveRight();
+                }
+                else {
+                    this.moveLeft();
+                }
+                this.touchObj = {
+                    initialClientX: 0,
+                    finalClientX: 0
+                };
+            }
+        };
         React.Children.forEach(this.props.children, function (child) {
             if (child === null || child.type !== Tab) {
                 throw new Error('`Tabgroup` children should be of type `Tab`.');
@@ -242,13 +268,14 @@ class TabGroup extends React.Component {
     render() {
         return (React.createElement("div", { style: { ...{ width: this.props.width || '100%' },
                 ...this.props.style || {}
-            }, className: "ui-tabgroup " + (this.state.visibleStatus === false ? 'v-hidden' : 'show'), ref: this.containerRef, id: this.props.id },
+            }, className: "ui-tabgroup " + (this.state.visibleStatus === false ? 'v-hidden' : 'show'), ref: this.containerRef, id: this.props.id, onTouchStart: this.handleTouchStart, onTouchMove: this.handleTouchMove, onTouchEnd: this.handleTouchEnd },
             React.createElement("div", { className: "ui-tabs ui-tabs-bg ui-tabs-scroll", style: {
                     backgroundColor: this.props.bgColor || '#4285f4'
                 } },
-                React.createElement("div", { onClick: this.moveLeft, className: "ui-tabs-scroll-left", style: { display: (this.state.isScrollable && this.state.ul.left !== 0) ? 'block' : 'none' } },
-                    React.createElement("svg", { focusable: "false", "data-prefix": "fas", "data-icon": "chevron-left", role: "img", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", className: "ui-tab-icon" },
-                        React.createElement("path", { fill: "currentColor", d: "M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z", className: "" }))),
+                this.props.navType && this.props.navType !== "swipe" ?
+                    React.createElement("div", { onClick: this.moveLeft, className: "ui-tabs-scroll-left", style: { display: (this.state.isScrollable && this.state.ul.left !== 0) ? 'block' : 'none' } },
+                        React.createElement("svg", { focusable: "false", "data-prefix": "fas", "data-icon": "chevron-left", role: "img", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", className: "ui-tab-icon" },
+                            React.createElement("path", { fill: "currentColor", d: "M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z", className: "" }))) : React.createElement(React.Fragment, null),
                 React.createElement("div", { className: 'ui-tabs-scroll-container' },
                     React.createElement("div", { className: "ui-tab-active-bar", style: { ...this.state.activeBar, ...{ backgroundColor: this.props.activeColor || '#ffc107' } } }),
                     React.createElement("ul", { className: "nav nav-tabs", role: "tablist", style: this.state.ul }, React.Children.map(this.props.children, (tab, i) => {
@@ -258,9 +285,11 @@ class TabGroup extends React.Component {
                                     color: this.props.color || 'white'
                                 }, onClick: (e) => e.preventDefault(), href: "#", className: this.state.activeIndex === i ? 'active' : '' }, tab)));
                     }))),
-                React.createElement("div", { onClick: this.moveRight, className: "ui-tabs-scroll-right", style: { display: (this.state.isScrollable && this.state.isNext ? 'block' : 'none') } },
-                    React.createElement("svg", { focusable: "false", "data-prefix": "fas", "data-icon": "chevron-right", role: "img", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", className: "ui-tab-icon" },
-                        React.createElement("path", { fill: "currentColor", d: "M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z", className: "" }))))));
+                this.props.navType && this.props.navType !== "swipe" ?
+                    React.createElement("div", { onClick: this.moveRight, className: "ui-tabs-scroll-right", style: { display: (this.state.isScrollable && this.state.isNext ? 'block' : 'none') } },
+                        React.createElement("svg", { focusable: "false", "data-prefix": "fas", "data-icon": "chevron-right", role: "img", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 320 512", className: "ui-tab-icon" },
+                            React.createElement("path", { fill: "currentColor", d: "M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z", className: "" })))
+                    : React.createElement(React.Fragment, null))));
     }
 }
 export default TabGroup;

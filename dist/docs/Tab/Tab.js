@@ -113,6 +113,11 @@ return (<>
                     type: "string",
                     default: '100%'
                 },
+                {
+                    name: "navType",
+                    type: "button|swipe",
+                    default: "button"
+                }
             ] }),
         React.createElement("h3", null, "Tab props"),
         React.createElement(Table, { columns: [{
