@@ -117,11 +117,11 @@ const InputExample:React.FC = (props) => {
         <h3>Validation Rules</h3>
         <p>You can add rules using rules key</p>
         <ul>
-            <li>email -> it will check input is email or not </li>
-            <li>min:$length -> it will minimum length of input</li>
-            <li>max:$length -> it will maximum length of input</li>
-            <li>number -> it will input is number or not</li>
-            <li>required -> it will input is present or not</li>
+            <li>email : it will check input is email or not </li>
+            <li>min:$length : it will minimum length of input</li>
+            <li>max:$length : it will maximum length of input</li>
+            <li>number : it will input is number or not</li>
+            <li>required : it will input is present or not</li>
             {/* <li>regex:$regex -> it will input is present or not</li> */}
         </ul>
         <CodeAndExample example={<>

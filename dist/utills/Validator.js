@@ -88,7 +88,14 @@ export default class Validator {
             isValid: true,
             msg: ''
         };
-        if (typeof value !== ruleOptions[0]) {
+        if (ruleOptions[0] === "array") {
+            if (Array.isArray(value) === false) {
+                result.isValid = false;
+                // eslint-disable-next-line
+                result.msg = '${input} is wrong type, expected type is ' + ruleOptions[0];
+            }
+        }
+        else if (typeof value !== ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
             result.msg = '${input} is wrong type, expected type is ' + ruleOptions[0];
@@ -148,5 +155,8 @@ export default class Validator {
     }
     getMessage() {
         return this.message;
+    }
+    addNewRule(name, callback) {
+        Validator.prototype[name] = callback;
     }
 }

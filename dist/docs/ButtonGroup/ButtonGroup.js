@@ -102,17 +102,14 @@ const ButtonGroupExample = (props) => {
                     name: "title",
                     type: "bool",
                     default: "-"
-                },
-                {
+                }, {
                     name: "children",
                     type: React.createElement(Link, { to: "/accordion" }, "Accordions"),
                     default: "-"
-                },
-                {
+                }, {
                     name: "[key:string]",
                     type: "any",
                     default: "-"
-                }
-            ] })));
+                }] })));
 };
 export default ButtonGroupExample;

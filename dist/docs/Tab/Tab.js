@@ -117,8 +117,7 @@ return (<>
                     name: "navType",
                     type: "button|swipe",
                     default: "button"
-                }
-            ] }),
+                }] }),
         React.createElement("h3", null, "Tab props"),
         React.createElement(Table, { columns: [{
                     selector: "name",

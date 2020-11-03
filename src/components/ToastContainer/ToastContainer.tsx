@@ -59,7 +59,7 @@ class ToastContainer extends React.PureComponent<ToastContainerProps> {
             if(this.props.containerId === containerId) {
                 this.count++;
                 const toast = [...this.state.toast];
-                const config = {
+                const config:any = {
                     ...c,
                     options: {
                         ...defaultToastOptions,

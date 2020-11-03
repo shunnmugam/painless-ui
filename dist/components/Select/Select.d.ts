@@ -8,7 +8,7 @@ interface SelectProps {
     width?: string | number;
     height?: string | number;
     placeholder?: string;
-    value?: string | Array<any>;
+    value?: string | number | Array<any>;
     hover?: boolean;
     disabled?: boolean;
     searchable?: boolean;

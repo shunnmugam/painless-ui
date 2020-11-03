@@ -27,7 +27,7 @@ const BreadcrumbExample = (props) => {
         <h3>Separator</h3>
         <p>You can change Separator of breadcrumb using <b>separator</b> prop</p>
         <CodeAndExample example={
-            <Breadcrumb separator={<span>-></span>}>
+            <Breadcrumb separator={<span>-&gt;</span>}>
                 <Link to={'/'}>Home</Link>
                 <span>User</span>
                 <span>Profile</span>

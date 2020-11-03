@@ -13,4 +13,5 @@ export default class Validator {
     private regex;
     validate(): boolean;
     getMessage(): object;
+    addNewRule(name: string, callback: Function): void;
 }

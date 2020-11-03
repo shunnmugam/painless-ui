@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/shunnmugam/painless-ui"
   },
-  "peerDependencies": {
+  "dependencies": {
     "@types/jest": "24.0.14",
     "@types/node": "12.0.8",
     "@types/react": "16.8.19",
@@ -18,11 +18,11 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "typescript": "3.5.1"
+    "typescript": "3.9.7"
   },
   "scripts": {
     "build-css": "node-sass src/ -o dist/ --output-style compressed",
-    "compile-ts": "tsc -p ./tsconfig.package.json",
+    "compile-ts": "./node_modules/typescript/bin/tsc -p ./tsconfig.package.json",
     "start": "node-sass src/ -o src/ -w & react-scripts start",
     "build-package": "npm run build-css & npm run compile-ts",
     "build": "react-scripts build",
