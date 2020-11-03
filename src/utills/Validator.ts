@@ -114,7 +114,13 @@ export default class Validator {
             isValid: true,
             msg: ''
         };
-        if(typeof value !== ruleOptions[0]) {
+        if(ruleOptions[0] === "array") {
+            if(Array.isArray(value) === false) {
+                result.isValid = false;
+                // eslint-disable-next-line
+                result.msg = '${input} is wrong type, expected type is '+ruleOptions[0];
+            }
+        } else if(typeof value !== ruleOptions[0]) {
             result.isValid = false;
             // eslint-disable-next-line
             result.msg = '${input} is wrong type, expected type is '+ruleOptions[0];
@@ -177,6 +183,10 @@ export default class Validator {
 
     public getMessage(): object {
         return this.message;
+    }
+
+    public addNewRule(name: string, callback: Function) {
+        Validator.prototype[name] = callback;
     }
 
 }
