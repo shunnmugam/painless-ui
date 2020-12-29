@@ -14,12 +14,12 @@ class WatchClickOutside extends Component<WatchClickOutsideProps> {
     }
 
     componentWillMount() {
-        window.addEventListener('click', this.handleClick);
+        document.addEventListener('click', this.handleClick);
     }
 
     componentWillUnmount() {
         // remember to remove all events to avoid memory leaks
-        window.removeEventListener('click', this.handleClick);
+        document.removeEventListener('click', this.handleClick);
     }
 
     handleClick = (event) => {
