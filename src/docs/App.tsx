@@ -23,6 +23,8 @@ import TagExample from './Tag/Tag';
 import TableExample from './Table/Table';
 import SliderExample from './Slider/Slider';
 import DropdownExample from './Dropdown/Dropdown';
+import ConfirmExample from './Confirm/Confirm';
+import DialogExample from './Dialog/Dialog';
 
 class App extends React.Component {
     constructor(props) {
@@ -64,7 +66,13 @@ class App extends React.Component {
                                 <Link activeClassName="active" to="/button-group">ButtonGroup</Link>
                             </li>
                             <li>
+                                <Link activeClassName="active" to="/confirm">Confirm</Link>
+                            </li>
+                            <li>
                                 <Link activeClassName="active" to="/checkbox">Checkbox</Link>
+                            </li>
+                            <li>
+                                <Link activeClassName="active" to="/dialog">Dialog</Link>
                             </li>
                             <li>
                                 <Link activeClassName="active" to="/dropdown">Dropdown</Link>
@@ -120,6 +128,8 @@ class App extends React.Component {
                                 <Route path='/button' component={ButtonExample} />
                                 <Route path='/button-group' component={ButtonGroupExample} />
                                 <Route path='/checkbox' component={CheckboxExample} />
+                                <Route path='/confirm' component={ConfirmExample} />
+                                <Route path='/dialog' component={DialogExample} />
                                 <Route path='/dropdown' component={DropdownExample} />
                                 <Route path='/input' component={InputExample} />
                                 <Route path='/modal' component={ModalExample} />

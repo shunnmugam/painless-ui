@@ -2,7 +2,7 @@
   "name": "painless-ui",
   "description": "React ui kit",
   "license": "MIT",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "repository": {
     "type": "git",
     "url": "https://github.com/shunnmugam/painless-ui"
@@ -21,6 +21,8 @@
     "typescript": "3.9.7"
   },
   "scripts": {
+    "css-watch": "node-sass src/ -o src/ -w",
+    "css": "node-sass src/ -o src/",
     "build-css": "node-sass src/ -o dist/ --output-style compressed",
     "compile-ts": "./node_modules/typescript/bin/tsc -p ./tsconfig.package.json",
     "start": "node-sass src/ -o src/ -w & react-scripts start",

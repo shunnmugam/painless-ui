@@ -22,6 +22,8 @@ import TagExample from './Tag/Tag';
 import TableExample from './Table/Table';
 import SliderExample from './Slider/Slider';
 import DropdownExample from './Dropdown/Dropdown';
+import ConfirmExample from './Confirm/Confirm';
+import DialogExample from './Dialog/Dialog';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -51,7 +53,11 @@ class App extends React.Component {
                                     React.createElement("li", null,
                                         React.createElement(Link, { activeClassName: "active", to: "/button-group" }, "ButtonGroup")),
                                     React.createElement("li", null,
+                                        React.createElement(Link, { activeClassName: "active", to: "/confirm" }, "Confirm")),
+                                    React.createElement("li", null,
                                         React.createElement(Link, { activeClassName: "active", to: "/checkbox" }, "Checkbox")),
+                                    React.createElement("li", null,
+                                        React.createElement(Link, { activeClassName: "active", to: "/dialog" }, "Dialog")),
                                     React.createElement("li", null,
                                         React.createElement(Link, { activeClassName: "active", to: "/dropdown" }, "Dropdown")),
                                     React.createElement("li", null,
@@ -88,6 +94,8 @@ class App extends React.Component {
                                 React.createElement(Route, { path: '/button', component: ButtonExample }),
                                 React.createElement(Route, { path: '/button-group', component: ButtonGroupExample }),
                                 React.createElement(Route, { path: '/checkbox', component: CheckboxExample }),
+                                React.createElement(Route, { path: '/confirm', component: ConfirmExample }),
+                                React.createElement(Route, { path: '/dialog', component: DialogExample }),
                                 React.createElement(Route, { path: '/dropdown', component: DropdownExample }),
                                 React.createElement(Route, { path: '/input', component: InputExample }),
                                 React.createElement(Route, { path: '/modal', component: ModalExample }),

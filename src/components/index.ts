@@ -5,6 +5,9 @@ import Breadcrumb from './Breadcrumb/Breadcrumb';
 import Button from './Button/Button';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
 import Checkbox from './Checkbox/Checkbox';
+import confirm from './Confirm/Confirm';
+import {dialog} from './Dialog/Dialog';
+import DialogContainer from './Dialog/DialogContainer';
 import Dropdown from './Dropdown/Dropdown';
 import DropdownItem from './DropdownItem/DropdownItem';
 import Input from './Input/Input';
@@ -37,6 +40,9 @@ export {
     Button,
     ButtonGroup,
     Checkbox,
+    confirm,
+    dialog,
+    DialogContainer,
     Dropdown,
     DropdownItem,
     Input,

@@ -1,5 +1,5 @@
 import { NEW_TOAST } from './../const/events';
-import { eventHandler } from "./eventHandler";
+import { eventHandler } from "../../../utills/eventHandler";
 
 // const toast = (content, config:object|undefined = undefined) => {
 //     eventHandler.emit(NEW_TOAST, content, config)

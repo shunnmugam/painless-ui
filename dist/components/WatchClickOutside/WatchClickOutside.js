@@ -20,11 +20,11 @@ class WatchClickOutside extends Component {
         this.refs = React.createRef();
     }
     componentWillMount() {
-        window.addEventListener('click', this.handleClick);
+        document.addEventListener('click', this.handleClick);
     }
     componentWillUnmount() {
         // remember to remove all events to avoid memory leaks
-        window.removeEventListener('click', this.handleClick);
+        document.removeEventListener('click', this.handleClick);
     }
     render() {
         return (React.createElement("div", { ref: "container", style: this.props.style || {} }, this.props.children));

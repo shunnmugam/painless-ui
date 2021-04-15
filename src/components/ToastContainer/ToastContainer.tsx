@@ -1,7 +1,7 @@
 import React from 'react';
 import './ToastContainer.css';
-import { eventHandler } from './util/eventHandler';
-import { NEW_TOAST } from './const/events';
+import { eventHandler } from '../../utills/eventHandler';
+import { NEW_TOAST } from '../../const/events';
 import Toast from '../Toast/Toast';
 import toast from './util/toast';
 interface ToastContainerProps {
