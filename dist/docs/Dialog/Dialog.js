@@ -18,8 +18,9 @@ const DialogExample = () => {
         React.createElement("p", null,
             "To view function options click ",
             React.createElement("a", { href: "#", onClick: (e) => {
+                    var _a;
                     e.preventDefault();
-                    document.getElementById('dialog-options')?.scrollIntoView();
+                    (_a = document.getElementById('dialog-options')) === null || _a === void 0 ? void 0 : _a.scrollIntoView();
                 } }, "here")),
         React.createElement("code", null, `dialog(dialogContent:any,containerId:string,options:object)`),
         React.createElement("h3", null, "Simple Example"),
